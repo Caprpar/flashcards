@@ -1,0 +1,24 @@
+:root {
+  --black: #1C1818;
+  --dark: #023C40;
+  --dim-dark: #4D868A;
+  --red: #CC4760;
+  --green: #13C161;
+  --light: #F3FFFB;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light);
+  height: 100dvh;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
