@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch} from "vue";
+import { ref, computed} from "vue";
 import { useRoute } from "vue-router"
 import { onBeforeRouteUpdate } from "vue-router"
 
@@ -10,13 +10,22 @@ const currentCard= ref([])
 let deckId = 1
 let cardId = 3
 
+// TODO Hämda värden från adressfältet för att identifiera aktuellt kort
+
+// currentDeck.value = computed(() => {
+//   decks.value[deckId]
+// })
+// currentCard.value = computed(() => {
+//   currentDeck.value.cards[cardId]
+// })
+
 async function getDecks() {
   const response = await fetch("/decks.json");
   let data = await response.json();
   decks.value = data;
 }
-getDecks();
 
+getDecks();
 onBeforeRouteUpdate(async (to, from) => {
   deckId = to.params.deckId
   cardId = to.params.cardNr
