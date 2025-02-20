@@ -1,27 +1,52 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch} from "vue";
+import { useRoute } from "vue-router"
+import { onBeforeRouteUpdate } from "vue-router"
+
+const route = useRoute()
+const decks = ref([]);
+const currentDeck = ref([])
+const currentCard= ref([])
+let deckId = 1
+let cardId = 3
 
 async function getDecks() {
   const response = await fetch("/decks.json");
   let data = await response.json();
   decks.value = data;
 }
-
-const decks = ref([]);
 getDecks();
 
-console.log(decks.value);
+onBeforeRouteUpdate(async (to, from) => {
+  deckId = to.params.deckId
+  cardId = to.params.cardNr
+  currentDeck.value = decks.value[deckId]
+  currentCard.value = currentDeck.value.cards[cardId]
+
+  console.log(currentDeck.value, currentCard.value)
+
+})
+
+
 </script>
 
 <template>
-  <h1>hej från flashcard</h1>
-  <ol>
-    <li v-for="deck in decks">{{ deck.deckName }}</li>
-  </ol>
-  <div class="swiper">
-    <div class="swipe-wrapper">
-      <div class="swiper-slide">hej</div>
-      <div class="swiper-slide">hå</div>
-    </div>
+  <!-- Get card from url parameters -->
+   <h1>{{currentDeck.title}}</h1>
+  <div class="card" id="front">
+    fråga: {{currentCard.question}}
+  </div>
+  <div class="card" id="back">
+    svar: {{currentCard.answer}}
   </div>
 </template>
+
+<style scoped>
+  .card {
+    width: 90%;
+    height: 200px;
+    background-color: #f9ffef;
+    box-shadow: 0 0 0 0 #000;
+    border-radius: 10px;
+  }
+</style>
