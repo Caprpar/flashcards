@@ -1,15 +1,13 @@
-<script>
+<script setup>
 import { RouterView } from "vue-router";
 import FlashCard from "./components/FlashCard.vue";
+import CardView from "./components/CardView.vue";
 
-export default {
-  components: {
-    FlashCard,
-  },
-};
 </script>
 
 <template>
+  <h1>hej</h1>
+  <FlashCard />
   <RouterView />
 </template>
 
