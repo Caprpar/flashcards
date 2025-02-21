@@ -37,3 +37,4 @@ onMounted(fetchDecks);
   max-width: 20em;
 }
 </style>
+:
