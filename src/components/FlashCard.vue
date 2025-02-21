@@ -1,42 +1,41 @@
 <script setup>
-import { ref, computed} from "vue";
 import { useRoute } from "vue-router"
+import { ref, watchEffect, onMounted} from "vue";
 import { onBeforeRouteUpdate } from "vue-router"
 
 const route = useRoute()
 const decks = ref([]);
 const currentDeck = ref([])
 const currentCard= ref([])
-let deckId = 1
-let cardId = 3
+let deckId = null
+let cardNr = null
 
-// TODO Hämda värden från adressfältet för att identifiera aktuellt kort
-
-// currentDeck.value = computed(() => {
-//   decks.value[deckId]
-// })
-// currentCard.value = computed(() => {
-//   currentDeck.value.cards[cardId]
-// })
-
+/** Fetch decks fron public/decks.json */
 async function getDecks() {
   const response = await fetch("/decks.json");
   let data = await response.json();
   decks.value = data;
 }
 
-getDecks();
-onBeforeRouteUpdate(async (to, from) => {
-  deckId = to.params.deckId
-  cardId = to.params.cardNr
-  currentDeck.value = decks.value[deckId]
-  currentCard.value = currentDeck.value.cards[cardId]
-
-  console.log(currentDeck.value, currentCard.value)
-
+// Update deckId and cardId when page refreshes
+onMounted(async () => {
+  await getDecks()
+  watchEffect(
+    () => [route.params.deckId, route.params.cardNr],
+    currentDeck.value = decks.value[route.params.deckId],
+    currentCard.value = currentDeck.value.cards[route.params.cardNr],
+    console.log(currentDeck.value),
+    console.log(currentCard.value)
+  )
 })
 
-
+// Update deckId and cardId when url changes
+onBeforeRouteUpdate(async (to, from) => {
+  deckId = to.params.deckId
+  cardNr = to.params.cardNr
+  currentDeck.value = decks.value[deckId]
+  currentCard.value = currentDeck.value.cards[cardNr]
+})
 </script>
 
 <template>
@@ -52,8 +51,8 @@ onBeforeRouteUpdate(async (to, from) => {
 
 <style scoped>
   .card {
-    width: 90%;
-    height: 200px;
+    width: clamp(9em, 50vw, 33em);
+    height: min(24em, 93vw);
     background-color: #f9ffef;
     box-shadow: 0 0 0 0 #000;
     border-radius: 10px;
