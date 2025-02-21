@@ -15,14 +15,13 @@ onMounted(fetchDecks);
 <template>
   <BContainer>
     <!-- <FlashCard /> -->
-    <router-link
-      :key="deck.id"
-      id="nodeco"
-      v-for="(deck, index) in decks"
-      :to="`/collection/${index}/0`"
-    >
-      <CardCollection :deck="deck" />
-    </router-link>
+    <BRow>
+      <BCol v-for="(deck, index) in decks" class="">
+        <router-link :key="deck.id" id="nodeco" :to="`/collection/${index}/0`">
+          <CardCollection :deck="deck" />
+        </router-link>
+      </BCol>
+    </BRow>
   </BContainer>
 </template>
 
@@ -34,7 +33,7 @@ onMounted(fetchDecks);
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   max-width: 20em;
 }
 </style>
