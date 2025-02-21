@@ -20,6 +20,7 @@ async function getDecks() {
 // Update deckId and cardId when page refreshes
 onMounted(async () => {
   await getDecks()
+
   watchEffect(
     () => [route.params.deckId, route.params.cardNr],
     currentDeck.value = decks.value[route.params.deckId],
@@ -39,20 +40,33 @@ onBeforeRouteUpdate(async (to, from) => {
 </script>
 
 <template>
-  <!-- Get card from url parameters -->
-   <h1>{{currentDeck.title}}</h1>
-  <div class="card" id="front">
-    fråga: {{currentCard.question}}
+  <div id="center">
+
+    <!-- Get card from url parameters -->
+    <h1>{{currentDeck.title}}</h1>
+    <div class="card" id="front">
+      fråga: {{currentCard.question}}
   </div>
   <div class="card" id="back">
     svar: {{currentCard.answer}}
   </div>
+</div>
 </template>
 
 <style scoped>
+  #center {
+    width: 100%;
+    border: solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .card {
-    width: clamp(9em, 50vw, 33em);
-    height: min(24em, 93vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(9em, 95%, 33em);
+    height: min(31em, 143vw);
     background-color: #f9ffef;
     box-shadow: 0 0 0 0 #000;
     border-radius: 10px;
