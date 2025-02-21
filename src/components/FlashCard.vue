@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { ref, watchEffect, onMounted } from "vue";
+import { ref, watchEffect, onMounted, onBeforeUnmount} from "vue";
 import { onBeforeRouteUpdate } from "vue-router";
 
 const route = useRoute();
@@ -19,10 +19,15 @@ async function getDecks() {
 }
 
 /** */
-function revealAnswer(event){
-  console.log(event)
+function revealAnswer(){
   hideAnswer.value = false
   console.log("reveal")
+}
+
+function handleKeyDown(event){
+  if (event.code === "space" || event.key === " "){
+    revealAnswer()
+  }
 }
 
 // Update deckId and cardId when page refreshes
@@ -36,7 +41,16 @@ onMounted(async () => {
     console.log(currentDeck.value),
     console.log(currentCard.value)
   );
+
+  window.addEventListener("keydown", handleKeyDown)
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", handleKeyDown)
+
+})
+
+
 
 // Update deckId and cardId when url changes
 onBeforeRouteUpdate(async (to, from) => {
@@ -48,7 +62,7 @@ onBeforeRouteUpdate(async (to, from) => {
 
 </script>
 <template>
-  <div id="center" @keydown.space="(event) => revealAnswer(event)">
+  <div id="center" tabindex="0">
     <!-- Get card from url parameters -->
     <h1>{{ currentDeck.title }}</h1>
     <div v-if="hideAnswer" class="card" id="front">fråga: {{ currentCard.question }}</div>
