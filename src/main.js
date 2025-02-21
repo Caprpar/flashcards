@@ -1,11 +1,6 @@
 import { createApp } from "vue";
 import router from "./router";
 // import "../assets/style.css";
-
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 import App from "./App.vue";
 // import "./assets/main.scss";  //? configureras i vite.config.js
 import "bootstrap/dist/css/bootstrap.css";
