@@ -62,7 +62,7 @@ onBeforeRouteUpdate(async (to, from) => {
 
 </script>
 <template>
-  <div id="center" tabindex="0" @click="revealAnswer">
+  <div id="center" tabindex="0">
     <!-- Get card from url parameters -->
     <h1>{{ currentDeck.title }}</h1>
     <div v-if="hideAnswer" class="card" id="front">fråga: {{ currentCard.question }}</div>
