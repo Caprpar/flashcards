@@ -21,7 +21,7 @@ onMounted(fetchDecks);
       v-for="(deck, index) in decks"
       :to="`/collection/${index}/0`"
     >
-      <CardCollection :title="deck.title" :count="deck.cards.length" />
+      <CardCollection :deck="deck" />
     </router-link>
   </BContainer>
 </template>

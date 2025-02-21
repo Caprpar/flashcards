@@ -1,8 +1,8 @@
 <template>
   <div class="card-collection">
     <div class="cardcollection">
-      <h2>{{ title }}</h2>
-      <p>{{ count }} cards</p>
+      <h2>{{ deck.title }}</h2>
+      <p>{{ deck.cards.length }} cards</p>
     </div>
   </div>
 </template>
@@ -13,18 +13,10 @@ import { useRouter } from "vue-router";
 
 // Define props
 const props = defineProps({
-  id: {
-    type: String,
-    required: false,
-  },
-  title: {
-    type: String,
+  deck: {
+    type: Object,
     required: true,
-  },
-  count: {
-    type: Number,
-    required: true,
-  },
+  }
 });
 
 const decksCard = ref([]);
@@ -43,18 +35,19 @@ function handleClick() {
 
 <style scoped>
 .cardcollection > h2 {
-  /* margin-top: 10px; */
-  /* padding-top: 40px;
-  padding-bottom: 0; */
   padding: 30px 0px 0px 10px;
   font-size: 1rem;
 }
+
 .cardcollection > p {
-  /* padding-top: 0; */
   padding-left: 10px;
 }
 
+.cardcollection:hover {
+  transform: scale(1.05);
+}
 .cardcollection {
+  transition: .3s;
   background-image: url("../assets/folder.svg");
   background-repeat: no-repeat;
   background-size: contain; /* Ensures the image fits */
