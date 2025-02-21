@@ -13,16 +13,17 @@ onMounted(fetchDecks);
 </script>
 
 <template>
-  <BContainer>
+  <div class="container">
     <!-- <FlashCard /> -->
-    <BRow>
-      <BCol v-for="(deck, index) in decks" class="">
-        <router-link :key="deck.id" id="nodeco" :to="`/collection/${index}/0`">
-          <CardCollection :deck="deck" />
-        </router-link>
-      </BCol>
-    </BRow>
-  </BContainer>
+    <router-link
+      :key="deck.id"
+      id="nodeco"
+      v-for="(deck, index) in decks"
+      :to="`/collection/${index}/0`"
+    >
+      <CardCollection :deck="deck" />
+    </router-link>
+  </div>
 </template>
 
 <style scoped>
