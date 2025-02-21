@@ -19,7 +19,8 @@ async function getDecks() {
 }
 
 /** */
-function revealAnswer(){
+function revealAnswer(event){
+  console.log(event)
   hideAnswer.value = false
   console.log("reveal")
 }
@@ -46,9 +47,8 @@ onBeforeRouteUpdate(async (to, from) => {
 });
 
 </script>
-
 <template>
-  <div id="center" @click="revealAnswer">
+  <div id="center" @keydown.space="(event) => revealAnswer(event)">
     <!-- Get card from url parameters -->
     <h1>{{ currentDeck.title }}</h1>
     <div v-if="hideAnswer" class="card" id="front">fråga: {{ currentCard.question }}</div>
