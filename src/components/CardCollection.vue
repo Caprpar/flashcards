@@ -1,13 +1,16 @@
 <template>
-  <div class="cardcollection" @click="handleClick">
-    <h2>test{{ title }}</h2>
-    <p>{{ count }} cards</p>
+  <div class="card-collection">
+    <div class="cardcollection">
+      <h2>{{ title }}</h2>
+      <p>{{ count }} cards</p>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from "vue";
+import { ref, defineProps, defineEmits, onMounted } from "vue";
 import { useRouter } from "vue-router";
+
 // Define props
 const props = defineProps({
   id: {
@@ -24,6 +27,7 @@ const props = defineProps({
   },
 });
 
+const decksCard = ref([]);
 const router = useRouter();
 
 // Define emits to send events to the parent
@@ -36,12 +40,14 @@ function handleClick() {
   router.push(`/collection/:deckId/:cardNr`); // Navigera till en dynamisk sida
 }
 </script>
+
 <style scoped>
 .cardcollection > h2 {
   /* margin-top: 10px; */
   /* padding-top: 40px;
   padding-bottom: 0; */
   padding: 30px 0px 0px 10px;
+  font-size: 1rem;
 }
 .cardcollection > p {
   /* padding-top: 0; */
@@ -55,7 +61,6 @@ function handleClick() {
   background-position: center; /* Centers the image */
   width: 150px; /* Set a width */
   height: 150px; /* Set a height */
-  color: red;
-  margin-left: 20px;
+  color: #e1faf9;
 }
 </style>

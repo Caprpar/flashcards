@@ -2,7 +2,7 @@
 import { RouterView } from "vue-router";
 import FlashCard from "./components/FlashCard.vue";
 
-import CardCollection from "./views/EditCollectionView.vue";
+import CardCollection from "./components/CardCollection.vue";
 import CardView from "./views/CardView.vue";
 </script>
 
