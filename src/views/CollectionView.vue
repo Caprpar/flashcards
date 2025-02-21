@@ -15,7 +15,7 @@ onMounted(fetchDecks);
 <template>
   <div class="container">
     <!-- <FlashCard /> -->
-    <router-link
+    <router-link :key="deck.id"
       id="nodeco"
       v-for="(deck, index) in decks"
       :to="`/collection/${index}/0`"
@@ -34,5 +34,6 @@ onMounted(fetchDecks);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  max-width: 20em;
 }
 </style>

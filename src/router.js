@@ -12,7 +12,7 @@ export default createRouter({
     },
     {
       component: CollectionView,
-      path: "/collection",
+      path: "/",
     },
   ],
 });
