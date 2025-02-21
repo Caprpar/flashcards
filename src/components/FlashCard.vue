@@ -71,7 +71,7 @@ onBeforeRouteUpdate(async (to, from) => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #center {
   width: 100%;
   display: flex;
@@ -85,6 +85,7 @@ onBeforeRouteUpdate(async (to, from) => {
   width: clamp(9em, 95%, 33em);
   height: min(31em, 143vw);
   background-color: #f9ffef;
+  // background-color: $light;
   box-shadow: 0 0 0 0 #000;
   border-radius: 10px;
 }
