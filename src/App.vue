@@ -13,4 +13,5 @@ import CardView from "./views/CardView.vue";
 
 <style lang="scss" scoped>
 // @use "sass:map";
+
 </style>
