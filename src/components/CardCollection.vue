@@ -1,6 +1,6 @@
 <template>
   <div class="cardcollection" @click="handleClick">
-    <h2>{{ title }}</h2>
+    <h2>test{{ title }}</h2>
     <p>{{ count }} cards</p>
   </div>
 </template>
@@ -37,8 +37,25 @@ function handleClick() {
 }
 </script>
 <style scoped>
+.cardcollection > h2 {
+  /* margin-top: 10px; */
+  /* padding-top: 40px;
+  padding-bottom: 0; */
+  padding: 30px 0px 0px 10px;
+}
+.cardcollection > p {
+  /* padding-top: 0; */
+  padding-left: 10px;
+}
+
 .cardcollection {
-  background-color: #f0f0f0;
-  background-image: url();
+  background-image: url("../assets/folder.svg");
+  background-repeat: no-repeat;
+  background-size: contain; /* Ensures the image fits */
+  background-position: center; /* Centers the image */
+  width: 150px; /* Set a width */
+  height: 150px; /* Set a height */
+  color: red;
+  margin-left: 20px;
 }
 </style>
