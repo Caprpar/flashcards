@@ -34,8 +34,7 @@ onMounted(fetchDecks);
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   max-width: 20em;
 }
 </style>
-:
