@@ -42,6 +42,7 @@ onMounted(async () => {
     console.log(currentCard.value)
   );
 
+  // Create eventlistener to any keydown
   window.addEventListener("keydown", handleKeyDown)
 });
 
