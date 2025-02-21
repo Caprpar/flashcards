@@ -1,22 +1,15 @@
 <script setup>
 import { RouterView } from "vue-router";
+import FlashCard from "./components/FlashCard.vue";
+
+import CardCollection from "./views/EditCollectionView.vue";
+import CardView from "./views/CardView.vue";
 </script>
 
 <template>
-  <div>
-    <h1>hej</h1>
-  </div>
   <RouterView />
 </template>
 
 <style lang="scss" scoped>
 // @use "sass:map";
-
-div {
-  background-color: $secondary;
-
-  h1 {
-    color: $warning;
-  }
-}
 </style>
