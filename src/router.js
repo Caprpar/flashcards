@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import CardView from "./views/CardView.vue";
-import DeckView from "./views/DeckView.vue";
+import CollectionView from "./views/CollectionView.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -12,7 +12,7 @@ export default createRouter({
       // path: "/:deck",
     },
     {
-      component: DeckView,
+      component: CollectionView,
       path: "/collection",
     },
   ],
