@@ -1,7 +1,7 @@
 [
   {
-    "deckName": "Matte - 1 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 1 Multiplikation",
+    "cards": [
       { "question": "1 x 1", "answer": "1", "isCorrect": false },
       { "question": "1 x 2", "answer": "2", "isCorrect": false },
       { "question": "1 x 3", "answer": "3", "isCorrect": false },
@@ -15,8 +15,8 @@
     ]
   },
   {
-    "deckName": "Matte - 2 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 2 Multiplikation",
+    "cards": [
       { "question": "2 x 1", "answer": "2", "isCorrect": false },
       { "question": "2 x 2", "answer": "4", "isCorrect": false },
       { "question": "2 x 3", "answer": "6", "isCorrect": false },
@@ -30,8 +30,8 @@
     ]
   },
   {
-    "deckName": "Matte - 3 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 3 Multiplikation",
+    "cards": [
       { "question": "3 x 1", "answer": "3", "isCorrect": false },
       { "question": "3 x 2", "answer": "6", "isCorrect": false },
       { "question": "3 x 3", "answer": "9", "isCorrect": false },
@@ -45,8 +45,8 @@
     ]
   },
   {
-    "deckName": "Matte - 4 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 4 Multiplikation",
+    "cards": [
       { "question": "4 x 1", "answer": "4", "isCorrect": false },
       { "question": "4 x 2", "answer": "8", "isCorrect": false },
       { "question": "4 x 3", "answer": "12", "isCorrect": false },
@@ -60,8 +60,8 @@
     ]
   },
   {
-    "deckName": "Matte - 5 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 5 Multiplikation",
+    "cards": [
       { "question": "5 x 1", "answer": "5", "isCorrect": false },
       { "question": "5 x 2", "answer": "10", "isCorrect": false },
       { "question": "5 x 3", "answer": "15", "isCorrect": false },
@@ -75,8 +75,8 @@
     ]
   },
   {
-    "deckName": "Matte - 6 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 6 Multiplikation",
+    "cards": [
       { "question": "6 x 1", "answer": "6", "isCorrect": false },
       { "question": "6 x 2", "answer": "12", "isCorrect": false },
       { "question": "6 x 3", "answer": "18", "isCorrect": false },
@@ -90,8 +90,8 @@
     ]
   },
   {
-    "deckName": "Matte - 7 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 7 Multiplikation",
+    "cards": [
       { "question": "7 x 1", "answer": "7", "isCorrect": false },
       { "question": "7 x 2", "answer": "14", "isCorrect": false },
       { "question": "7 x 3", "answer": "21", "isCorrect": false },
@@ -105,8 +105,8 @@
     ]
   },
   {
-    "deckName": "Matte - 8 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 8 Multiplikation",
+    "cards": [
       { "question": "8 x 1", "answer": "8", "isCorrect": false },
       { "question": "8 x 2", "answer": "16", "isCorrect": false },
       { "question": "8 x 3", "answer": "24", "isCorrect": false },
@@ -120,8 +120,8 @@
     ]
   },
   {
-    "deckName": "Matte - 9 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 9 Multiplikation",
+    "cards": [
       { "question": "9 x 1", "answer": "9", "isCorrect": false },
       { "question": "9 x 2", "answer": "18", "isCorrect": false },
       { "question": "9 x 3", "answer": "27", "isCorrect": false },
@@ -135,8 +135,8 @@
     ]
   },
   {
-    "deckName": "Matte - 10 Multiplikation",
-    "flashcards": [
+    "title": "Matte - 10 Multiplikation",
+    "cards": [
       { "question": "10 x 1", "answer": "10", "isCorrect": false },
       { "question": "10 x 2", "answer": "20", "isCorrect": false },
       { "question": "10 x 3", "answer": "30", "isCorrect": false },
