@@ -2,9 +2,11 @@
 import { useRoute } from "vue-router";
 import { ref, watchEffect, onMounted, onBeforeUnmount} from "vue";
 import { onBeforeRouteUpdate } from "vue-router";
+import { useFlashcard } from "../stores/flashcards";
 
+const flashcard = useFlashcard()
 const route = useRoute();
-const decks = ref([]);
+const decks = ref(flashcard.getDecks());
 const currentDeck = ref([]);
 const currentCard = ref([]);
 const hideAnswer = ref(true);
