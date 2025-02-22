@@ -6,19 +6,12 @@ import { useFlashcard } from "../stores/flashcards";
 
 const flashcard = useFlashcard()
 const route = useRoute();
-const decks = ref(flashcard.getDecks());
+// const decks = flashcard.decks
 const currentDeck = ref([]);
 const currentCard = ref([]);
 const hideAnswer = ref(true);
 let deckId = null;
 let cardNr = null;
-
-/** Fetch decks fron public/decks.json */
-async function getDecks() {
-  const response = await fetch("/decks.json");
-  let data = await response.json();
-  decks.value = data;
-}
 
 /** */
 function revealAnswer(){
@@ -34,11 +27,11 @@ function handleKeyDown(event){
 
 // Update deckId and cardId when page refreshes
 onMounted(async () => {
-  await getDecks();
+  await flashcard.fetchDecks()
 
   watchEffect(
     () => [route.params.deckId, route.params.cardNr],
-    (currentDeck.value = decks.value[route.params.deckId]),
+    (currentDeck.value = flashcard.decks[route.params.deckId]),
     (currentCard.value = currentDeck.value.cards[route.params.cardNr]),
     console.log(currentDeck.value),
     console.log(currentCard.value)
@@ -50,16 +43,13 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   window.removeEventListener("keydown", handleKeyDown)
-
 })
-
-
 
 // Update deckId and cardId when url changes
 onBeforeRouteUpdate(async (to, from) => {
   deckId = to.params.deckId;
   cardNr = to.params.cardNr;
-  currentDeck.value = decks.value[deckId];
+  currentDeck.value = flashcard.decks[deckId];
   currentCard.value = currentDeck.value.cards[cardNr];
 });
 
