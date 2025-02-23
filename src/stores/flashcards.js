@@ -34,6 +34,7 @@ export const useFlashcard = defineStore("flashcard", {
       return deck.id;
     },
     dummyDeck() {
+      let decks = [];
       const tableAmounts = 10;
       const tableLimit = 12;
 
