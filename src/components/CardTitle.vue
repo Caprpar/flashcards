@@ -86,6 +86,7 @@ onBeforeRouteUpdate(async (to, from) => {
   box-shadow: 0px 5px 11px 4px hsl(0, 0%, 84%);
 }
 #count {
+
   position: absolute;
   top: 3%;
   right: 4%;
