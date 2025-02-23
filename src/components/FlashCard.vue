@@ -83,7 +83,6 @@ onBeforeRouteUpdate(async (to, from) => {
   width: clamp(9em, 95%, 33em);
   height: min(31em, 143vw);
   background-color: var(--light);
-  box-shadow: 0 0 0 0 #000;
   border-radius: 10px;
   box-shadow: 0px 5px 11px 4px hsl(0, 0%, 84%);
 }

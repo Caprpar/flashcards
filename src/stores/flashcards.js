@@ -33,8 +33,8 @@ export const useFlashcard = defineStore("flashcard", {
       this.decks.push(deck);
       return deck.id;
     },
+    /**Genrates multiplication table from 1-12 and adds to this.decks */
     dummyDeck() {
-      let decks = [];
       const tableAmounts = 10;
       const tableLimit = 12;
 
