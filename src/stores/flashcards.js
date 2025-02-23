@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { v4 as uuidv4 } from "uuid";
 
 export const useFlashcard = defineStore("flashcard", {
   state: () => ({
@@ -10,27 +11,49 @@ export const useFlashcard = defineStore("flashcard", {
       const response = await fetch("/decks.json");
       this.decks = await response.json();
     },
-    createCard(title, question, answer) {
+    createCard(title, question = "", answer) {
       return {
         title,
         question,
         answer,
         needsPractice: false,
-        id: Date.now(),
+        id: uuidv4(),
       };
     },
     addToDeck(card, deckId) {
-      this.decks.filter((deck) => deck.id === deckId).cards.push(card);
+      const deck = this.decks.filter((deck) => deck.id === deckId);
+      deck[0].cards.push(card);
     },
-    createDeck(title, cards) {
-      this.decks.push({
+    createDeck(title, cards = []) {
+      const deck = {
         title,
         cards,
-        id: Date.now(),
-      });
+        id: uuidv4(),
+      };
+      this.decks.push(deck);
+      return deck.id;
+    },
+    dummyDeck() {
+      const tableAmounts = 10;
+      const tableLimit = 12;
+
+      for (let x = 1; x <= tableAmounts; x++) {
+        const deckTitle = `${x}:ans gånger tabell`;
+        const deckId = this.createDeck(deckTitle);
+
+        for (let y = 1; y <= tableLimit; y++) {
+          const title = `${x} x ${y} = ?`;
+          const answer = x * y;
+          const card = this.createCard(title, "", answer);
+          this.addToDeck(card, deckId);
+        }
+      }
+      return this.decks;
     },
   },
   getters: {
-    // getters
+    getDecks() {
+      return this.decks;
+    },
   },
 });

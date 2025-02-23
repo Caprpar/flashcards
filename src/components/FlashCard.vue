@@ -5,6 +5,8 @@ import { onBeforeRouteUpdate } from "vue-router";
 import { useFlashcard } from "../stores/flashcards";
 
 const flashcard = useFlashcard();
+const dummyDeck = flashcard.dummyDeck();
+console.table(dummyDeck);
 const route = useRoute();
 const currentDeck = ref([]);
 const currentCard = ref([]);
@@ -24,9 +26,9 @@ function handleKeyDown(event) {
   }
 }
 
-// Update deckId and cardId when page refreshes
+// Update deckId and cardId from url when page refreshes
 onMounted(async () => {
-  await flashcard.fetchDecks();
+  // await flashcard.fetchDecks();
 
   watchEffect(
     () => [route.params.deckId, route.params.cardNr],
@@ -58,10 +60,10 @@ onBeforeRouteUpdate(async (to, from) => {
     <!-- Get card from url parameters -->
     <h1>{{ currentDeck.title }}</h1>
     <div v-if="hideAnswer" class="card" id="front">
-      fråga: {{ currentCard.question }} <span id="count">1/3</span>
+      {{ currentCard.title }} <span id="count">1/3</span>
     </div>
     <div v-else class="card" id="back">
-      svar: {{ currentCard.answer }} <span id="count">1/3</span>
+      {{ currentCard.answer }} <span id="count">1/3</span>
     </div>
   </div>
 </template>
