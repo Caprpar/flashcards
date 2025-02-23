@@ -30,26 +30,27 @@ export const useFlashcard = defineStore("flashcard", {
         cards,
         id: uuidv4(),
       };
-      this.decks.push(deck);
-      return deck.id;
+      // this.decks.push(deck);
+      return deck;
     },
-    /**Genrates multiplication table from 1-12 and adds to this.decks */
     dummyDeck() {
+      let decks = [];
       const tableAmounts = 10;
       const tableLimit = 12;
 
       for (let x = 1; x <= tableAmounts; x++) {
         const deckTitle = `${x}:ans gånger tabell`;
-        const deckId = this.createDeck(deckTitle);
+        const deck = this.createDeck(deckTitle);
 
         for (let y = 1; y <= tableLimit; y++) {
           const title = `${x} x ${y} = ?`;
           const answer = x * y;
           const card = this.createCard(title, "", answer);
-          this.addToDeck(card, deckId);
+          deck.cards.push(card);
         }
+        decks.push(deck);
       }
-      return this.decks;
+      return decks;
     },
   },
   getters: {
