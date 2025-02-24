@@ -17,10 +17,6 @@ const hideAnswer = ref(true);
 const cardIndex = ref(0)
 const cardAmount = ref(0)
 
-let deckId = null;
-let cardNr = null;
-
-/** */
 function revealAnswer() {
   hideAnswer.value = false;
   console.log("reveal");
@@ -32,15 +28,29 @@ function handleKeyDown(event) {
   }
 }
 
+/** When page reloads or new url is given, use this to update current card
+ *
+ * @param deckId - current active deck
+ * @param cardIndex - current card index
+ */
+function updateCurrentCard(deckId, cardIndex){
+  currentDeck.value = flashcard.decks[deckId]
+  currentCard.value = currentDeck.value.cards[cardIndex]
+  updateCount(flashcard.decks[deckId], cardIndex)
+}
+
+function updateCount(deck, cardNumber){
+  cardAmount.value = deck.cards.length
+  cardIndex.value = cardNumber + 1
+  console.log(cardIndex)
+
+}
 // Update deckId and cardId from url when page refreshes
 onMounted(async () => {
 
   watchEffect(
     () => [route.params.deckId, route.params.cardNr],
-    (currentDeck.value = flashcard.decks[route.params.deckId -1]),
-    (currentCard.value = currentDeck.value.cards[route.params.cardNr -1]),
-    console.log(currentDeck.value),
-    console.table("card:",currentCard.value)
+    updateCurrentCard(route.params.deckId -1 , route.params.cardNr - 1),
   );
 
   // Create eventlistener to any keydown
@@ -54,10 +64,10 @@ onBeforeUnmount(() => {
 
 // Update deckId and cardId when url changes
 onBeforeRouteUpdate(async (to, from) => {
-  deckId = to.params.deckId - 1;
-  cardNr = to.params.cardNr - 1;
-  currentDeck.value = flashcard.decks[deckId];
-  currentCard.value = currentDeck.value.cards[cardNr];
+  const deckId = to.params.deckId - 1;
+  const cardNr = to.params.cardNr - 1;
+  updateCurrentCard(deckId, cardNr)
+
 });
 </script>
 <template>
@@ -65,7 +75,7 @@ onBeforeRouteUpdate(async (to, from) => {
     <!-- Get card from url parameters -->
     <h1>{{ currentDeck.title }}</h1>
     <div v-if="hideAnswer" class="card" id="front">
-      {{ currentCard.title }} <span id="count">1/3</span>
+      {{ currentCard.title }} <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
     </div>
     <div v-else class="card" id="back">
       {{ currentCard.answer }} <span id="count">1/3</span>
