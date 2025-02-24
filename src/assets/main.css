@@ -1,0 +1,11 @@
+/* Customize Bootstrap colors */
+:root {
+  --primary: #023c40;
+  --secondary: #4d868a;
+  --success: #13c161;
+  --info: #3f7679;
+  --warning: #ac5b2c;
+  --danger: #cc4760;
+  --light: hsl(60, 100%, 98%);
+  --dark: #1c1818;
+}
