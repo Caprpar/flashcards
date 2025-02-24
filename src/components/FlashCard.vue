@@ -2,11 +2,12 @@
 import { useRoute } from "vue-router";
 import { ref, watchEffect, onMounted, onBeforeUnmount } from "vue";
 import { onBeforeRouteUpdate } from "vue-router";
+
 import { useFlashcard } from "../stores/flashcards";
 
 const flashcard = useFlashcard();
 const dummyDeck = flashcard.dummyDeck();
-console.table(dummyDeck);
+console.log(dummyDeck);
 const route = useRoute();
 const currentDeck = ref([]);
 const currentCard = ref([]);
@@ -35,7 +36,7 @@ onMounted(async () => {
     (currentDeck.value = flashcard.decks[route.params.deckId]),
     (currentCard.value = currentDeck.value.cards[route.params.cardNr]),
     console.log(currentDeck.value),
-    console.log(currentCard.value)
+    console.table("card:",currentCard.value)
   );
 
   // Create eventlistener to any keydown
