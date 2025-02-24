@@ -6,12 +6,17 @@ import { onBeforeRouteUpdate } from "vue-router";
 import { useFlashcard } from "../stores/flashcards";
 
 const flashcard = useFlashcard();
-const dummyDeck = flashcard.dummyDeck();
-console.log(dummyDeck);
+// const dummyDeck = flashcard.dummyDeck();
+console.table(flashcard.decks);
 const route = useRoute();
 const currentDeck = ref([]);
 const currentCard = ref([]);
 const hideAnswer = ref(true);
+
+// Variables for count
+const cardIndex = ref(0)
+const cardAmount = ref(0)
+
 let deckId = null;
 let cardNr = null;
 
@@ -29,12 +34,11 @@ function handleKeyDown(event) {
 
 // Update deckId and cardId from url when page refreshes
 onMounted(async () => {
-  // await flashcard.fetchDecks();
 
   watchEffect(
     () => [route.params.deckId, route.params.cardNr],
-    (currentDeck.value = flashcard.decks[route.params.deckId]),
-    (currentCard.value = currentDeck.value.cards[route.params.cardNr]),
+    (currentDeck.value = flashcard.decks[route.params.deckId -1]),
+    (currentCard.value = currentDeck.value.cards[route.params.cardNr -1]),
     console.log(currentDeck.value),
     console.table("card:",currentCard.value)
   );
@@ -50,8 +54,8 @@ onBeforeUnmount(() => {
 
 // Update deckId and cardId when url changes
 onBeforeRouteUpdate(async (to, from) => {
-  deckId = to.params.deckId;
-  cardNr = to.params.cardNr;
+  deckId = to.params.deckId - 1;
+  cardNr = to.params.cardNr - 1;
   currentDeck.value = flashcard.decks[deckId];
   currentCard.value = currentDeck.value.cards[cardNr];
 });
