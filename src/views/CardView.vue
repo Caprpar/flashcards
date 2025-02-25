@@ -3,22 +3,28 @@ import FlashCard from "../components/FlashCard.vue";
 import FlashcardButton from "../components/FlashcardButton.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useFlashcard } from "../stores/flashcards";
 
 // Define the navigation methods directly
 
 const router = useRouter();
 const cardNr = ref(1);
+const flashcard = useFlashcard();
 
 function goPrevious() {
-  cardNr.value = cardNr.value - 1;
-  console.log("Previous");
+  if (cardNr.value > 1) {
+    cardNr.value--;
+    console.log("Previous");
+  }
 
   // Add your logic for going to the previous item
 }
 
 function goNext() {
-  cardNr.value = cardNr.value + 1;
-  console.log("Next");
+  if (cardNr.value < 10) {
+    cardNr.value++;
+    console.log("Next");
+  }
 
   // Add your logic for going to the next item
 }
