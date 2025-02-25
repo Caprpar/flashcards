@@ -1,46 +1,81 @@
 <template>
   <div>
     <h1>Multiplikationsträning</h1>
-    <div class="deck" v-for="(deck, index) in data" :key="index">
-      {{ deck.deckName }}
-      <div class="card" v-for="(card, i) in deck.flashcards" :key="i">
-        <p>Q : {{ card.question }}</p>
-        <p>A : {{ card.answer }}</p>
+    <div class="deck" v-for="(deck, deckIndex) in data" :key="deckIndex">
+      <h2>{{ deck.title }}</h2>
+      <div class="card" v-for="(card, cardIndex) in deck.cards" :key="card.id">
+        <input v-model="card.title" @change="savaedDecks" />
+        <input v-model="card.answer" @change="savaedDecks" />
+        <button @click="removeCard(deckIndex, card.id)">Delete</button>
       </div>
-      {{ console.log(deck.flashcards) }}
+      <button @click="addCard(deckIndex)">Add new card</button>
     </div>
   </div>
 </template>
+
 <script setup>
-import { defineProps, ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted } from "vue";
+import { v4 as uuidv4 } from "uuid";
+import { useFlashcard } from "../stores/flashcards";
 
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  cardCount: {
-    type: Number,
-    required: true,
-  },
-  link: {
-    type: String,
-    required: true,
-  },
-});
+const flashcard = useFlashcard();
+
 const data = ref([]);
-const router = useRouter();
 
-function showCards() {
-  // Navigation to the cards page
-  router.push(props.link);
+// Save decks to localStorage
+function savaedDecks() {
+  localStorage.setItem("decks", JSON.stringify(data.value));
 }
-async function fetchDecks() {
-  const response = await fetch("/decks.json");
-  data.value = await response.json();
-  console.log(data.value);
+
+// Fetch decks from localStorage or dummyDecks.json
+async function getDecks() {
+  const savaedDecks = localStorage.getItem("decks");
+  if (savaedDecks) {
+    data.value = JSON.parse(savaedDecks);
+  } else {
+    const response = await fetch("/dummyDecks.json");
+    data.value = await response.json();
+    savaedDecks();
+  }
 }
-onMounted(fetchDecks);
+
+// Add a new card to a deck
+function addCard(deckIndex) {
+  const deck = data.value[deckIndex];
+  if (deck) {
+    deck.cards.push({
+      title: "Ny fråga",
+      question: "",
+      answer: 0,
+      needsPractice: false,
+      id: uuidv4(),
+    });
+    savaedDecks();
+  }
+}
+
+// Remove a card from a deck
+function removeCard(deckIndex, cardId) {
+  const deck = data.value[deckIndex];
+  if (deck) {
+    deck.cards = deck.cards.filter((card) => card.id !== cardId);
+    savaedDecks();
+  }
+}
+
+// Fetch decks on component mount
+onMounted(getDecks);
 </script>
-<style></style>
+
+<style>
+.deck {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.card {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+</style>
