@@ -1,77 +1,38 @@
 <script setup>
-import FlashCard from "../components/FlashCard.vue";
-import FlashcardButton from "../components/FlashcardButton.vue";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { useFlashcard } from "../stores/flashcards";
-
-// Define the navigation methods directly
-
-const router = useRouter();
-const cardNr = ref(1);
-const flashcard = useFlashcard();
-
-function goPrevious() {
-  if (cardNr.value > 1) {
-    cardNr.value--;
-    console.log("Previous");
-  }
-
-  // Add your logic for going to the previous item
-}
-
-function goNext() {
-  if (cardNr.value < 10) {
-    cardNr.value++;
-    console.log("Next");
-  }
-
-  // Add your logic for going to the next item
-}
+import FlashCard from '../components/FlashCard.vue';
+import FlashcardButton from '../components/FlashcardButton.vue';
 </script>
 <template>
-  <div class="flashcard">
-    <router-link :to="`${cardNr}`">
-      <button class="arrow" @click="goPrevious">⬅️</button>
-    </router-link>
-
+  <div class="card-view-container">
     <FlashCard />
-    <router-link :to="`${cardNr}`">
-      <button class="arrow" @click="goNext">➡️</button>
-    </router-link>
-  </div>
-  <div class="center">
-    <div class="buttons">
-      <FlashcardButton color="var(--success)" text="Rätt" />
-      <FlashcardButton color="var(--danger)" text="Fel" />
+    <div class="buttons-container">
+      <FlashcardButton
+        color="var(--success)"
+        text="Rätt"
+      />
+      <FlashcardButton
+        color="var(--danger)"
+        text="Fel"
+      />
     </div>
   </div>
 </template>
 
-<style>
-.center {
-  width: 100%;
+<style scoped>
+.card-view-container {
+  padding-top: 2em;
+  /* width: clamp(9em, 95%, 33em); */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 90vh;
 }
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  width: clamp(9em, 95%, 33em);
-  margin-top: 20px;
-}
-.flashcard {
-  width: 100%;
+.buttons-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-.arrow {
-  font-size: 24px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 8px;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 </style>
