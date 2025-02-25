@@ -7,6 +7,7 @@ import { useFlashcard } from "../stores/flashcards";
 
 const emit = defineEmits(["on-deck-update"])
 
+
 const flashcard = useFlashcard();
 // console.table(flashcard.decks);
 const route = useRoute();
@@ -21,7 +22,6 @@ const cardAmount = ref(0);
 function handleKeyDown(event) {
   if (event.code === "space" || event.key === " ") {
     hideAnswer.value = !hideAnswer.value; // toggle
-    console.log("reveal");
     }
 }
 
@@ -62,6 +62,9 @@ onBeforeUnmount(() => {
 
 // Update deckId and cardId when url changes
 onBeforeRouteUpdate(async (to, from) => {
+  // Hides answer when player press next or previous button
+  hideAnswer.value =  true
+
   const deckId = to.params.deckId - 1;
   const cardNr = to.params.cardNr - 1;
   updateCurrentCard(deckId, cardNr);
@@ -74,7 +77,7 @@ onBeforeRouteUpdate(async (to, from) => {
 <template>
   <div id="center" tabindex="0">
     <!-- Get card from url parameters -->
-    <h1>{{ currentDeck.question }}</h1>
+    <h1>{{ currentDeck.title }}</h1>
     <div v-if="hideAnswer" class="card" id="front">
       {{ currentCard.question }}
       <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
