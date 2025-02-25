@@ -92,7 +92,6 @@
     </div>
     <div v-else class="card" id="back">
       {{ currentCard.answer }}
-      <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
     </div>
   </div>
 </template>
