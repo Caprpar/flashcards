@@ -3,27 +3,41 @@ import { v4 as uuidv4 } from "uuid";
 
 export const useFlashcard = defineStore("flashcard", {
   state: () => ({
+    /** The global variable that contains all current user decks*/
     decks: [],
-    currentDeck: {},
   }),
   actions: {
     async fetchDecks() {
       const response = await fetch("/decks.json");
       this.decks = await response.json();
     },
-    createCard(title, question = "", answer) {
+    /** Creates a card
+     * @param {String} title - Title to card question
+     * @param {String} question - The actual question
+     * @param {String} answer - Flashcards answer
+     * @returns Card object
+     */
+    createCard(question, answer) {
       return {
-        title,
         question,
         answer,
         needsPractice: false,
         id: uuidv4(),
       };
     },
+    /** Add new card object to a deck using deck ID
+     * @param {Object} card - has keys question, answer, needsPractice, id
+     * @param {*} deckId - Deck id to which deck the card should be added to
+     */
     addToDeck(card, deckId) {
       const deck = this.decks.filter((deck) => deck.id === deckId);
       deck[0].cards.push(card);
     },
+    /** Creates a deck from array of cards with title
+     * @param {String} title The name of the deck
+     * @param {Array} cards Array of card objects
+     * @returns deck object.
+     */
     createDeck(title, cards = []) {
       const deck = {
         title,
@@ -33,6 +47,9 @@ export const useFlashcard = defineStore("flashcard", {
       // this.decks.push(deck);
       return deck;
     },
+    /** Generates a multiplication dummydeck 10 decks with 12 cards in each deck
+     * @returns deck object
+     */
     dummyDeck() {
       let decks = [];
       const tableAmounts = 10;
@@ -43,9 +60,9 @@ export const useFlashcard = defineStore("flashcard", {
         const deck = this.createDeck(deckTitle);
 
         for (let y = 1; y <= tableLimit; y++) {
-          const title = `${x} x ${y} = ?`;
+          const question = `${x} x ${y} = ?`;
           const answer = x * y;
-          const card = this.createCard(title, "", answer);
+          const card = this.createCard(question, answer);
           deck.cards.push(card);
         }
         decks.push(deck);
@@ -54,6 +71,9 @@ export const useFlashcard = defineStore("flashcard", {
     },
   },
   getters: {
+    /** Get the updated deck object
+     * @returns Object - current user decks
+     */
     getDecks() {
       return this.decks;
     },

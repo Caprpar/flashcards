@@ -10,24 +10,25 @@ import { useFlashcard } from "../stores/flashcards";
 const router = useRouter();
 const cardNr = ref(1);
 const flashcard = useFlashcard();
+const currentDeck = ref(null)
 
 function goPrevious() {
   if (cardNr.value > 1) {
     cardNr.value--;
-    console.log("Previous");
   }
-
-  // Add your logic for going to the previous item
 }
 
 function goNext() {
-  if (cardNr.value < 10) {
+  const cardAmount = currentDeck.value.cards.length
+  if (cardNr.value < cardAmount) {
     cardNr.value++;
-    console.log("Next");
   }
-
-  // Add your logic for going to the next item
 }
+
+function updateDeck(deck){
+  currentDeck.value = deck
+}
+
 </script>
 <template>
   <div class="flashcard">
@@ -35,7 +36,7 @@ function goNext() {
       <button class="arrow" @click="goPrevious">⬅️</button>
     </router-link>
 
-    <FlashCard />
+    <FlashCard @on-deck-update="updateDeck" />
     <router-link :to="`${cardNr}`">
       <button class="arrow" @click="goNext">➡️</button>
     </router-link>
