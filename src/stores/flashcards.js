@@ -12,11 +12,10 @@ export const useFlashcard = defineStore("flashcard", {
       this.decks = await response.json();
     },
     /** Creates a card
-     * @param {String} title - Title to card question
      * @param {String} question - The actual question
      * @param {String} answer - Flashcards answer
-     * @returns Card object
-     */
+     * @returns Card object containing keys: question, answer, needsPractice, id
+     * */
     createCard(question, answer) {
       return {
         question,
@@ -46,6 +45,12 @@ export const useFlashcard = defineStore("flashcard", {
       };
       // this.decks.push(deck);
       return deck;
+    },
+    retriveFromLocal() {
+      this.decks = JSON.parse(localStorage.getItem("decks"))
+    },
+    saveToLocal(){
+      localStorage.setItem("decks", JSON.stringify(this.decks))
     },
     /** Generates a multiplication dummydeck 10 decks with 12 cards in each deck
      * @returns deck object
