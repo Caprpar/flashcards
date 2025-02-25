@@ -23,13 +23,16 @@ async function fetchDecks() {
 <template>
   <div class="container">
     <!-- <FlashCard /> -->
+     <router-link to="/collection">
+       <CardCollection :image="'../assets/addDeck.svg'"/>
+     </router-link>
     <router-link
       :key="deck.id"
       id="nodeco"
       v-for="(deck, index) in decks"
       :to="`/collection/${index + 1}/1`"
     >
-      <CardCollection :deck="deck" />
+      <CardCollection :image="'../assets/folder.svg'" :deck="deck" />
     </router-link>
   </div>
 </template>
