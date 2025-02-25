@@ -74,9 +74,9 @@ onBeforeRouteUpdate(async (to, from) => {
 <template>
   <div id="center" tabindex="0">
     <!-- Get card from url parameters -->
-    <h1>{{ currentDeck.title }}</h1>
+    <h1>{{ currentDeck.question }}</h1>
     <div v-if="hideAnswer" class="card" id="front">
-      {{ currentCard.title }}
+      {{ currentCard.question }}
       <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
     </div>
     <div v-else class="card" id="back">
