@@ -1,23 +1,38 @@
 <script setup>
 import FlashCard from "../components/FlashCard.vue";
 import FlashcardButton from "../components/FlashcardButton.vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 // Define the navigation methods directly
+
+const router = useRouter();
+const cardNr = ref(1);
+
 function goPrevious() {
+  cardNr.value = cardNr.value - 1;
   console.log("Previous");
+
   // Add your logic for going to the previous item
 }
 
 function goNext() {
+  cardNr.value = cardNr.value + 1;
   console.log("Next");
+
   // Add your logic for going to the next item
 }
 </script>
 <template>
   <div class="flashcard">
-    <button class="arrow" @click="goPrevious">⬅️</button>
+    <router-link :to="`${cardNr}`">
+      <button class="arrow" @click="goPrevious">⬅️</button>
+    </router-link>
+
     <FlashCard />
-    <button class="arrow" @click="goNext">➡️</button>
+    <router-link :to="`${cardNr}`">
+      <button class="arrow" @click="goNext">➡️</button>
+    </router-link>
   </div>
   <div class="center">
     <div class="buttons">
