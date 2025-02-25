@@ -8,7 +8,7 @@
            <p> A : {{ card.answer }}</p>
         </div>
         {{ console.log(deck.flashcards) }}
-        </div>         
+        </div>
     </div>
 </template>
 <script setup>

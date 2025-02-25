@@ -1,13 +1,14 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { ref, watchEffect, onMounted, onBeforeUnmount } from "vue";
+import { ref, watchEffect, onMounted, onBeforeUnmount, defineEmits } from "vue";
 import { onBeforeRouteUpdate } from "vue-router";
 
 import { useFlashcard } from "../stores/flashcards";
 
+const emit = defineEmits(["on-deck-update"])
+
 const flashcard = useFlashcard();
-// const dummyDeck = flashcard.dummyDeck();
-console.table(flashcard.decks);
+// console.table(flashcard.decks);
 const route = useRoute();
 const currentDeck = ref([]);
 const currentCard = ref([]);
@@ -17,17 +18,11 @@ const hideAnswer = ref(true);
 const cardIndex = ref(0);
 const cardAmount = ref(0);
 
-// function revealAnswer() {
-//   hideAnswer.value = !hideAnswer.value;
-//   console.log("reveal");
-// }
-
 function handleKeyDown(event) {
   if (event.code === "space" || event.key === " ") {
     hideAnswer.value = !hideAnswer.value; // toggle
     console.log("reveal");
-    // revealAnswer();
-  }
+    }
 }
 
 /** When page reloads or new url is given, use this to update current card
@@ -44,14 +39,16 @@ function updateCurrentCard(deckId, cardIndex) {
 function updateCount(deck, cardNumber) {
   cardAmount.value = deck.cards.length;
   cardIndex.value = cardNumber + 1;
-  console.log(cardIndex);
 }
 
 // Update deckId and cardId from url when page refreshes
 onMounted(async () => {
   watchEffect(
     () => [route.params.deckId, route.params.cardNr],
-    updateCurrentCard(route.params.deckId - 1, route.params.cardNr - 1)
+    updateCurrentCard(route.params.deckId - 1, route.params.cardNr - 1),
+
+    // Send current deck to parrent
+    emit("on-deck-update", currentDeck.value),
   );
 
   // Create eventlistener to any keydown
@@ -68,7 +65,11 @@ onBeforeRouteUpdate(async (to, from) => {
   const deckId = to.params.deckId - 1;
   const cardNr = to.params.cardNr - 1;
   updateCurrentCard(deckId, cardNr);
+
+  // Send current deck to parrent
+  emit("on-deck-update", currentDeck.value)
 });
+
 </script>
 <template>
   <div id="center" tabindex="0">
