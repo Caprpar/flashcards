@@ -27,7 +27,7 @@ async function fetchDecks() {
       :key="deck.id"
       id="nodeco"
       v-for="(deck, index) in decks"
-      :to="`/collection/${index}/0`"
+      :to="`/collection/${index + 1}/1`"
     >
       <CardCollection :deck="deck" />
     </router-link>
