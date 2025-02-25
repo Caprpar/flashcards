@@ -46,6 +46,7 @@ function updateCount(deck, cardNumber) {
   cardIndex.value = cardNumber + 1;
   console.log(cardIndex);
 }
+
 // Update deckId and cardId from url when page refreshes
 onMounted(async () => {
   watchEffect(
