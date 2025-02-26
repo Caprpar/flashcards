@@ -11,7 +11,11 @@ const flashcards = useFlashcard();
 
 // Inits all decks
 // Skapa kortlekar => [] dummy
+<<<<<<< HEAD
 flashcards.decks = flashcards.dummyDeck();
+=======
+// console.log(flashcards.decks)
+>>>>>>> 5b6cea0 (add indicator if user has answerd on card)
 
 // console.log(flashcards.decks);
 // console.log(flashcards.decks);console.log(flashcards.decks);
@@ -20,6 +24,7 @@ if (!localStorage.getItem("decks")) {
   localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()));
   alert("Gave localstorage dummydeck");
 }
+flashcards.decks = flashcards.dummyDeck();
 </script>
 
 <template>

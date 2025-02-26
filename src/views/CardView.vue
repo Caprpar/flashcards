@@ -39,6 +39,10 @@ function updateDeck(deck){
     </router-link>
   </div>
   <div class="center">
+    <div id="answer-indicator">
+      <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot answerd' : 'dot notAnswerd'"></div>
+
+    </div>
     <div class="buttons">
       <FlashcardButton color="var(--success)" text="Rätt" />
       <FlashcardButton color="var(--danger)" text="Fel" />
@@ -47,6 +51,31 @@ function updateDeck(deck){
 </template>
 
 <style>
+
+#answer-indicator {
+  margin-top: 1em;
+  justify-content: space-around;
+  display: flex;
+  width: 28em;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: hsl(0, 0%, 50%);
+  border-radius: 100px;
+}
+
+.current {
+  border: solid;
+}
+.answerd {
+  background-color: #4ab341;
+}
+.notAnswerd {
+  background-color: #b34141;
+}
+
 .center {
   width: 100%;
   display: flex;
