@@ -1,8 +1,8 @@
 <template>
   <div class="card-collection">
     <div class="cardcollection">
-      <h2>{{ deck.title }}</h2>
-      <p>{{ deck.cards.length }} cards</p>
+      <h2 v-if="deck" >{{ deck.title }}</h2>
+      <p v-if="deck">{{ deck.cards.length }} cards</p>
     </div>
   </div>
 </template>
@@ -15,9 +15,15 @@ import { useRouter } from "vue-router";
 const props = defineProps({
   deck: {
     type: Object,
-    required: true,
+    required: false,
+  },
+  image: {
+    type: String,
+    required: false,
   }
 });
+
+console.log(props.image)
 
 const decksCard = ref([]);
 const router = useRouter();
