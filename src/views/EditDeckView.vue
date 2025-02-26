@@ -1,4 +1,60 @@
 <template>
+  <div class="container my-4">
+    <h1 class="text-center mb-4">Multiplikationsträning</h1>
+    <div
+      class="deck mb-5 p-3 border rounded shadow-sm"
+      v-for="(deck, deckIndex) in flashcard.decks"
+      :key="deckIndex"
+    >
+      <h2 class="text-center mb-3">{{ deck.title }}</h2>
+      <div
+        class="card mb-3 p-3 border rounded"
+        v-for="(card, cardIndex) in deck.cards"
+        :key="card.id"
+      >
+        <p class="mb-2">Card: {{ cardIndex + 1 }}</p>
+        <div class="mb-3">
+          <label for="question-{{ card.id }}" class="form-label"
+            >Question</label
+          >
+          <input
+            id="question-{{ card.id }}"
+            v-model="card.question"
+            @change="savedDecks"
+            class="form-control"
+            type="text"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="answer-{{ card.id }}" class="form-label">Answer</label>
+          <input
+            id="answer-{{ card.id }}"
+            v-model="card.answer"
+            @change="savedDecks"
+            class="form-control"
+            type="text"
+          />
+        </div>
+        <b-button
+          variant="danger"
+          class="w-100 w-sm-25"
+          @click="removeCard(deckIndex, card.id)"
+        >
+          Delete
+        </b-button>
+      </div>
+      <b-button
+        variant="primary"
+        class="w-100 mt-3"
+        @click="addCard(deckIndex)"
+      >
+        Add New Card
+      </b-button>
+    </div>
+  </div>
+</template>
+
+<!-- <template>
   <div>
     <h1>Multiplikationsträning</h1>
     <div
@@ -11,12 +67,20 @@
         <p>Card: {{ cardIndex + 1 }}</p>
         <input v-model="card.question" @change="savedDecks" />
         <input v-model="card.answer" @change="savedDecks" />
-        <button @click="removeCard(deckIndex, card.id)">Delete</button>
+        <b-button
+          variant="danger"
+          class="w-25"
+          @click="removeCard(deckIndex, card.id)"
+        >
+          Delete</b-button
+        >
       </div>
-      <button @click="addCard(deckIndex)">Add new card</button>
+      <b-button variant="primary" @click="addCard(deckIndex)">
+        Add New Card
+      </b-button>
     </div>
   </div>
-</template>
+</template> -->
 
 <script setup>
 import { ref, onMounted } from "vue";

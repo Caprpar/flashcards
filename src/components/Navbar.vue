@@ -25,9 +25,13 @@
   <transition name="slide">
     <div v-if="isMenuOpen" class="mobile-menu custom-navbar">
       <b-nav vertical>
-        <b-nav-item href="#" class="text-white">Link 1</b-nav-item>
-        <b-nav-item href="#" class="text-white">Link 2</b-nav-item>
-        <b-nav-item href="#" class="text-white">Link 3</b-nav-item>
+        <b-nav-item :to="'/'" class="text-white">Home</b-nav-item>
+        <b-nav-item :to="'/createDeck'" class="text-white">
+          Add Deck</b-nav-item
+        >
+        <b-nav-item :to="'/edit'" class="text-white"
+          >Customize Cards</b-nav-item
+        >
       </b-nav>
     </div>
   </transition>
