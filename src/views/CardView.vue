@@ -5,9 +5,6 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useFlashcard } from "../stores/flashcards";
 
-// Define the navigation methods directly
-
-const router = useRouter();
 const cardNr = ref(1);
 const flashcard = useFlashcard();
 const currentDeck = ref(null)
