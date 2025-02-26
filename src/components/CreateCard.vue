@@ -2,10 +2,20 @@
 import { ref } from "vue";
 import { v4 as uuidv4 } from "uuid";
 
+const deckCreated = ref(false);
+const deckName = ref("");
 const question = ref("");
 const answer = ref("");
-const deck = ref([]);
+const cards = ref([]);
 
+function nameDeck() {
+  const deck = {
+    title: deckName.value,
+    cards: null,
+    id: uuidv4(),
+  };
+  deckCreated.value = true;
+}
 function createCard() {
   if (question.value && answer.value) {
     const card = {
@@ -14,10 +24,10 @@ function createCard() {
       needsPractice: true,
       id: uuidv4(),
     };
-    deck.value.push(card);
+    cards.value.push(card);
     question.value = "";
     answer.value = "";
-    console.log(deck.value);
+    console.log(cards.value);
   } else {
     // flash border on empty textarea
   }
@@ -25,7 +35,11 @@ function createCard() {
 function createDeck() {}
 </script>
 <template>
-  <form action="">
+  <div v-if="!deckCreated" class="flex-container">
+    <input v-model="deckName" placeholder="deck name here" />
+    <button @click="nameDeck"></button>
+  </div>
+  <form action="" v-if="deckCreated">
     <div class="flex-container">
       <div class="text-div">
         <h2>Question</h2>
