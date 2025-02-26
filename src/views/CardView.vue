@@ -1,10 +1,11 @@
 <script setup>
 import FlashCard from "../components/FlashCard.vue";
 import FlashcardButton from "../components/FlashcardButton.vue";
-import { ref } from "vue";
+import { ref , watch, watchEffect} from "vue";
 import { useRouter } from "vue-router";
 import { useFlashcard } from "../stores/flashcards";
 
+const route = useRouter()
 const cardNr = ref(1);
 const flashcard = useFlashcard();
 const currentDeck = ref(flashcard.decks)
@@ -26,6 +27,26 @@ function updateDeck(deck){
   currentDeck.value = deck
 }
 
+function dotStyle(currentCard, index){
+  const cardIndex = 1 + currentDeck.value.cards.indexOf(currentDeck.value.cards.filter(card => card.id === currentCard.id))
+  let styleSettings = "dot "
+  if (cardIndex === route.param.cardNr) {
+    styleSettings += "current "
+  }
+  if (currentCard.hasAnswer) {
+    styleSettings += "correct "
+  }
+  else if (!currentCard.hasAnswer){
+    styleSettings += "wrong "
+  }
+  return styleSettings
+  // if cardIndex = urlIndex => +current
+  // if answerd and correct + correct
+  // if answerd and incorrect + incorrect
+  // else +notAnswered
+
+}
+
 </script>
 <template>
   <div class="flashcard">
@@ -40,7 +61,8 @@ function updateDeck(deck){
   </div>
   <div class="center">
     <div id="answer-indicator">
-      <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot answerd' : 'dot notAnswerd'"></div>
+      <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
+      <div v-for="(card, index) in currentDeck.cards" :class="dotStyle(card, index)"></div>
     </div>
     <div class="buttons">
       <FlashcardButton color="var(--success)" text="Rätt" />
@@ -61,19 +83,21 @@ function updateDeck(deck){
 .dot {
   height: 10px;
   width: 10px;
-  background-color: hsl(0, 0%, 50%);
+  background-color: #adadad;
   border-radius: 100px;
 }
 
 .current {
-  border: solid;
+  width: 12px;
+  height: 12px;
 }
-.answerd {
-  background-color: #4ab341;
+.correct {
+  background-color: #47973e;
 }
-.notAnswerd {
-  background-color: #b34141;
+.wrong {
+  background-color: #973e3e;
 }
+
 
 .center {
   width: 100%;

@@ -15,6 +15,8 @@ const currentDeck = ref([]);
 const currentCard = ref([]);
 const hideAnswer = ref(true);
 
+const card = flashcard.createCard("vem är kungen", "carl")
+
 // Variables for count
 const cardIndex = ref(0);
 const cardAmount = ref(0);
