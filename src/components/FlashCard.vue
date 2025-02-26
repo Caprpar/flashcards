@@ -15,6 +15,8 @@ const currentDeck = ref([]);
 const currentCard = ref([]);
 const hideAnswer = ref(true);
 
+const card = flashcard.createCard("vem är kungen", "carl")
+
 // Variables for count
 const cardIndex = ref(0);
 const cardAmount = ref(0);
@@ -31,7 +33,9 @@ function handleKeyDown(event) {
  * @param cardIndex - current card index
  */
 function updateCurrentCard(deckId, cardIndex) {
-  currentDeck.value = flashcard.decks[deckId];
+  // currentDeck.value = flashcard.decks[deckId];
+  currentDeck.value = JSON.parse(localStorage.getItem("decks"))[deckId];
+
   currentCard.value = currentDeck.value.cards[cardIndex];
   updateCount(flashcard.decks[deckId], cardIndex);
 }
