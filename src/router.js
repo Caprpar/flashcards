@@ -18,7 +18,9 @@ export default createRouter({
     },
     {
       component: EditDeckView,
-      path: "/edit",
+      path: "/edit"
+    },
+    {
       component: CreateDeckView,
       path: "/createDeck",
     },
