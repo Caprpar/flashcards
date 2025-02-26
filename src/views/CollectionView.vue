@@ -33,7 +33,7 @@ async function fetchDecks() {
       v-for="(deck, index) in decks"
       :to="`/collection/${index + 1}/1`"
     >
-      <CardCollection :deck="deck" />
+      <CardCollection :image="'../assets/folder.svg'" :deck="deck" />
     </router-link>
   </div>
 </template>

@@ -13,7 +13,7 @@ const flashcards = useFlashcard();
 // Skapa kortlekar => [] dummy
 flashcards.decks = flashcards.dummyDeck();
 console.log(flashcards.decks)
-console.log(flashcards.decks);
+
 </script>
 
 <template>
