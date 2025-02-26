@@ -98,7 +98,19 @@ function goNext() {
         class="arrow-button left-arrow"
         @click="goPrevious"
       >
-        &#9664;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          class="bi bi-arrow-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+          />
+        </svg>
       </button>
     </router-link>
     <div
@@ -120,10 +132,22 @@ function goNext() {
 
     <router-link :to="`${cardNr}`">
       <button
-        class="arrow-button right-arrow"
+        class="arrow-button"
         @click="goNext"
       >
-        &#9654;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          class="bi bi-arrow-right"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
+          />
+        </svg>
       </button>
     </router-link>
   </div>
@@ -143,6 +167,7 @@ function goNext() {
   background-color: var(--light);
   border-radius: 10px;
   box-shadow: 0px 5px 11px 4px hsl(0, 0%, 84%);
+  width: 100%;
   flex-grow: 1;
 }
 .flashcard-content {
@@ -161,7 +186,7 @@ function goNext() {
   background-color: var(--light);
   color: #5f5f5f;
   border: none;
-  padding: 2em;
+  padding: 1.5em;
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 24px;
