@@ -6,9 +6,8 @@ import { useFlashcard } from "../stores/flashcards";
 import { onMounted, ref } from "vue";
 
 const flashcard = useFlashcard();
-// Gives deck a dummyDeck with multiplication 1-12
-flashcard.decks = flashcard.dummyDeck();
-const decks = ref(flashcard.decks);
+// Gives decks a dummyDeck with multiplication 1-12
+const decks = ref(JSON.parse(localStorage.getItem("decks")));
 
 onMounted(() => {
   // const decks = ref(flashcard.dummyDeck());
@@ -39,6 +38,7 @@ async function fetchDecks() {
 </template>
 
 <style scoped>
+
 #nodeco {
   text-decoration: none;
 }
