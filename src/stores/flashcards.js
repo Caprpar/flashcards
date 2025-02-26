@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 export const useFlashcard = defineStore("flashcard", {
   state: () => ({
     /** The global variable that contains all current user decks*/
-    // decks: JSON.parse(localStorage.getItem("decks")),
     decks: [],
   }),
   actions: {

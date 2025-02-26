@@ -7,7 +7,7 @@ import { useFlashcard } from "../stores/flashcards";
 
 const cardNr = ref(1);
 const flashcard = useFlashcard();
-const currentDeck = ref(null)
+const currentDeck = ref(flashcard.decks)
 
 function goPrevious() {
   if (cardNr.value > 1) {
@@ -41,7 +41,6 @@ function updateDeck(deck){
   <div class="center">
     <div id="answer-indicator">
       <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot answerd' : 'dot notAnswerd'"></div>
-
     </div>
     <div class="buttons">
       <FlashcardButton color="var(--success)" text="Rätt" />

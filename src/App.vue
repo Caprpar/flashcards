@@ -9,22 +9,14 @@ import CardView from "./views/CardView.vue";
 import { useFlashcard } from "./stores/flashcards";
 const flashcards = useFlashcard();
 
-// Inits all decks
-// Skapa kortlekar => [] dummy
-<<<<<<< HEAD
-flashcards.decks = flashcards.dummyDeck();
-=======
-// console.log(flashcards.decks)
->>>>>>> 5b6cea0 (add indicator if user has answerd on card)
-
-// console.log(flashcards.decks);
-// console.log(flashcards.decks);console.log(flashcards.decks);
 // If localstorage is empty, give it dummyDecks
 if (!localStorage.getItem("decks")) {
   localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()));
   alert("Gave localstorage dummydeck");
 }
-flashcards.decks = flashcards.dummyDeck();
+flashcards.decks = JSON.parse(localStorage.getItem("decks"));
+
+
 </script>
 
 <template>
