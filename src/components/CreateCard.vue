@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { v4 as uuidv4 } from "uuid";
+import { useFlashCard } from "../stores/flashcards";
+const flashcards = useFlashCard();
 
 const deckCreated = ref(false);
 const newDeck = ref(null);
@@ -25,7 +27,6 @@ function nameDeck() {
 }
 
 // check if deck name is taken
-
 function nameAvailable(name) {
   const decks = JSON.parse(localStorage.getItem("decks"));
 
@@ -45,12 +46,7 @@ function nameAvailable(name) {
 // add a card to cards if there´s a question and answer
 function createCard() {
   if (question.value && answer.value) {
-    const card = {
-      question: question.value,
-      answer: answer.value,
-      needsPractice: true,
-      id: uuidv4(),
-    };
+    const card = flashcards.createCard(question.value, answer.value);
     cards.value.push(card);
     question.value = "";
     answer.value = "";
