@@ -17,8 +17,8 @@ console.log(flashcards.decks)
 // If localstorage is empty, give it dummyDecks
 if (!localStorage.getItem("deck")){
   localStorage.setItem("deck", JSON.stringify(flashcards.dummyDeck()))
+  alert("Gave localstorage dummydeck")
 }
-
 </script>
 
 <template>
