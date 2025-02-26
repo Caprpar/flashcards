@@ -1,6 +1,7 @@
 <script setup>
 // import FlashCard from '../components/FlashCard.vue';
 import CardCollection from "../components/CardCollection.vue";
+import CreateDeck from "../components/CreateDeck.vue";
 import { useFlashcard } from "../stores/flashcards";
 import { onMounted, ref } from "vue";
 
@@ -23,9 +24,9 @@ async function fetchDecks() {
 <template>
   <div class="container">
     <!-- <FlashCard /> -->
-     <router-link to="/collection">
-       <CardCollection :image="'../assets/addDeck.svg'"/>
-     </router-link>
+    <router-link to="/createDeck">
+      <CreateDeck />
+    </router-link>
     <router-link
       :key="deck.id"
       id="nodeco"
