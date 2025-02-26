@@ -22,6 +22,7 @@ export const useFlashcard = defineStore("flashcard", {
         question,
         answer,
         needsPractice: false,
+        hasAnswer: false,
         id: uuidv4(),
       };
     },
