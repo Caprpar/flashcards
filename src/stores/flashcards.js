@@ -59,7 +59,7 @@ export const useFlashcard = defineStore("flashcard", {
     dummyDeck() {
       let decks = [];
       const tableAmounts = 10;
-      const tableLimit = 12;
+      const tableLimit = 30;
 
       for (let x = 1; x <= tableAmounts; x++) {
         const deckTitle = `${x}:ans gånger tabell`;

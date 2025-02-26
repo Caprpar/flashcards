@@ -2,10 +2,10 @@
 import FlashCard from "../components/FlashCard.vue";
 import FlashcardButton from "../components/FlashcardButton.vue";
 import { ref , watch, watchEffect} from "vue";
-import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { useFlashcard } from "../stores/flashcards";
 
-const route = useRouter()
+const route = useRoute()
 const cardNr = ref(1);
 const flashcard = useFlashcard();
 const currentDeck = ref(flashcard.decks)
@@ -28,25 +28,23 @@ function updateDeck(deck){
 }
 
 function dotStyle(currentCard, index){
-  const cardIndex = 1 + currentDeck.value.cards.indexOf(currentDeck.value.cards.filter(card => card.id === currentCard.id))
+  const cardIndex = 1 + currentDeck.value.cards.indexOf(currentCard)
   let styleSettings = "dot "
-  if (cardIndex === route.param.cardNr) {
-    styleSettings += "current "
-  }
-  if (currentCard.hasAnswer) {
+  watchEffect(() => {
+    const cardNr = parseInt(route.params.cardNr)
+    if (cardIndex === cardNr) {
+      styleSettings += "current "
+    }
+  })
+  if (currentCard.hasAnswer && !currentCard.needsPractice) {
     styleSettings += "correct "
   }
-  else if (!currentCard.hasAnswer){
+  else if (currentCard.hasAnswer && currentCard.needsPractice){
     styleSettings += "wrong "
   }
   return styleSettings
-  // if cardIndex = urlIndex => +current
-  // if answerd and correct + correct
-  // if answerd and incorrect + incorrect
-  // else +notAnswered
 
 }
-
 </script>
 <template>
   <div class="flashcard">
@@ -76,6 +74,7 @@ function dotStyle(currentCard, index){
 #answer-indicator {
   margin-top: 1em;
   justify-content: space-around;
+  align-items: center;
   display: flex;
   width: 28em;
 }
@@ -88,14 +87,16 @@ function dotStyle(currentCard, index){
 }
 
 .current {
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
 }
 .correct {
-  background-color: #47973e;
+  /* background-color: #47973e; */
+  background-color: var(--success);
 }
 .wrong {
   background-color: #973e3e;
+  background-color: var(--danger);
 }
 
 
