@@ -33,7 +33,9 @@ function handleKeyDown(event) {
  * @param cardIndex - current card index
  */
 function updateCurrentCard(deckId, cardIndex) {
-  currentDeck.value = flashcard.decks[deckId];
+  // currentDeck.value = flashcard.decks[deckId];
+  currentDeck.value = JSON.parse(localStorage.getItem("decks"))[deckId];
+
   currentCard.value = currentDeck.value.cards[cardIndex];
   updateCount(flashcard.decks[deckId], cardIndex);
 }

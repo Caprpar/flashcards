@@ -48,10 +48,10 @@ export const useFlashcard = defineStore("flashcard", {
       return deck;
     },
     retriveFromLocal() {
-      this.decks = JSON.parse(localStorage.getItem("decks"))
+      this.decks = JSON.parse(localStorage.getItem("decks"));
     },
-    saveToLocal(){
-      localStorage.setItem("decks", JSON.stringify(this.decks))
+    saveToLocal() {
+      localStorage.setItem("decks", JSON.stringify(this.decks));
     },
     /** Generates a multiplication dummydeck 10 decks with 12 cards in each deck
      * @returns deck object
@@ -59,7 +59,7 @@ export const useFlashcard = defineStore("flashcard", {
     dummyDeck() {
       let decks = [];
       const tableAmounts = 10;
-      const tableLimit = 30;
+      const tableLimit = 12;
 
       for (let x = 1; x <= tableAmounts; x++) {
         const deckTitle = `${x}:ans gånger tabell`;
