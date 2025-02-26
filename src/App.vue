@@ -12,12 +12,13 @@ const flashcards = useFlashcard();
 // Inits all decks
 // Skapa kortlekar => [] dummy
 flashcards.decks = flashcards.dummyDeck();
-console.log(flashcards.decks)
 
+// console.log(flashcards.decks);
+// console.log(flashcards.decks);console.log(flashcards.decks);
 // If localstorage is empty, give it dummyDecks
-if (!localStorage.getItem("decks")){
-  localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()))
-  alert("Gave localstorage dummydeck")
+if (!localStorage.getItem("decks")) {
+  localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()));
+  alert("Gave localstorage dummydeck");
 }
 </script>
 

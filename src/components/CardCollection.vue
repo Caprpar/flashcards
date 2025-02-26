@@ -1,7 +1,7 @@
 <template>
   <div class="card-collection">
     <div class="cardcollection">
-      <h2 v-if="deck" >{{ deck.title }}</h2>
+      <h2 v-if="deck">{{ deck.title }}</h2>
       <p v-if="deck">{{ deck.cards.length }} cards</p>
     </div>
   </div>
@@ -20,10 +20,10 @@ const props = defineProps({
   image: {
     type: String,
     required: false,
-  }
+  },
 });
 
-console.log(props.image)
+console.log(props.image);
 
 const decksCard = ref([]);
 const router = useRouter();
@@ -53,7 +53,7 @@ function handleClick() {
   transform: scale(1.05);
 }
 .cardcollection {
-  transition: .3s;
+  transition: 0.3s;
   background-image: url("../assets/folder.svg");
   background-repeat: no-repeat;
   background-size: contain; /* Ensures the image fits */
