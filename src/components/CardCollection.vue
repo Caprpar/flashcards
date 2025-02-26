@@ -1,6 +1,6 @@
 <template>
   <div class="card-collection">
-    <div class="cardcollection" :style="`background-image: url(${image});`" >
+    <div class="cardcollection">
       <h2 v-if="deck" >{{ deck.title }}</h2>
       <p v-if="deck">{{ deck.cards.length }} cards</p>
     </div>
@@ -54,7 +54,7 @@ function handleClick() {
 }
 .cardcollection {
   transition: .3s;
-  /* background-image: url("../assets/folder.svg"); */
+  background-image: url("../assets/folder.svg");
   background-repeat: no-repeat;
   background-size: contain; /* Ensures the image fits */
   background-position: center; /* Centers the image */

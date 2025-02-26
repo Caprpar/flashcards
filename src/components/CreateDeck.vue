@@ -1,7 +1,6 @@
 <script></script>
 <template>
   <div class="cardcollection">
-    <img src="../assets/plus.svg" alt="" />
   </div>
 </template>
 <style scoped>
@@ -10,7 +9,7 @@
 }
 .cardcollection {
   transition: 0.3s;
-  background-image: url("../assets/folder.svg");
+  background-image: url("../assets/addDeck.svg");
   background-repeat: no-repeat;
   background-size: contain; /* Ensures the image fits */
   background-position: center; /* Centers the image */
