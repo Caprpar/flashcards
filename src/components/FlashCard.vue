@@ -1,103 +1,111 @@
 <script setup>
-import { useRoute } from 'vue-router';
-import { ref, watchEffect, onMounted, onBeforeUnmount } from 'vue';
-import { onBeforeRouteUpdate } from 'vue-router';
-import { useRouter } from 'vue-router';
-import { useFlashcard } from '../stores/flashcards';
+  import { useRoute } from "vue-router";
+  import {
+    ref,
+    watchEffect,
+    onMounted,
+    onBeforeUnmount,
+    defineEmits
+  } from "vue";
+  import { onBeforeRouteUpdate } from "vue-router";
+  import { useRouter } from "vue-router";
+  import { useFlashcard } from "../stores/flashcards";
 
-const flashcard = useFlashcard();
-// const dummyDeck = flashcard.dummyDeck();
-console.table(flashcard.decks);
-const route = useRoute();
-const currentDeck = ref([]);
-const currentCard = ref([]);
-const hideAnswer = ref(true);
+  const emit = defineEmits(["on-deck-update"]);
 
-// Variables for count
-const cardIndex = ref(0);
-const cardAmount = ref(0);
-const cardNr = ref(1);
+  const flashcard = useFlashcard();
+  // console.table(flashcard.decks);
+  const route = useRoute();
+  const currentDeck = ref([]);
+  const currentCard = ref([]);
+  const hideAnswer = ref(true);
 
-//
-const router = useRouter();
+  // Variables for count
+  const cardIndex = ref(0);
+  const cardAmount = ref(0);
 
-// function revealAnswer() {
-//   hideAnswer.value = !hideAnswer.value;
-//   console.log("reveal");
-// }
+  // function revealAnswer() {
+  //   hideAnswer.value = !hideAnswer.value;
+  //   console.log("reveal");
+  // }
 
-function handleKeyDown(event) {
-  if (event.code === 'space' || event.key === ' ') {
-    hideAnswer.value = !hideAnswer.value; // toggle
-    console.log('reveal');
-    // revealAnswer();
+  function handleKeyDown(event) {
+    if (event.code === "space" || event.key === " ") {
+      hideAnswer.value = !hideAnswer.value; // toggle
+    }
   }
-}
 
-/** When page reloads or new url is given, use this to update current card
- *
- * @param deckId - current active deck
- * @param cardIndex - current card index
- */
-function updateCurrentCard(deckId, cardIndex) {
-  currentDeck.value = flashcard.decks[deckId];
-  currentCard.value = currentDeck.value.cards[cardIndex];
-  updateCount(flashcard.decks[deckId], cardIndex);
-}
+  /** When page reloads or new url is given, use this to update current card
+   *
+   * @param deckId - current active deck
+   * @param cardIndex - current card index
+   */
+  function updateCurrentCard(deckId, cardIndex) {
+    currentDeck.value = flashcard.decks[deckId];
+    // currentDeck.value = JSON.parse(localStorage.getItem("decks"))[deckId];
 
-function updateCount(deck, cardNumber) {
-  cardAmount.value = deck.cards.length;
-  cardIndex.value = cardNumber + 1;
-  console.log(cardIndex);
-}
-
-// Update deckId and cardId from url when page refreshes
-onMounted(async () => {
-  watchEffect(
-    () => [route.params.deckId, route.params.cardNr],
-    updateCurrentCard(route.params.deckId - 1, route.params.cardNr - 1)
-  );
-
-  // Create eventlistener to any keydown
-  window.addEventListener('keydown', handleKeyDown);
-});
-
-//  Prevent duplicates of event listener
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', handleKeyDown);
-});
-
-// Update deckId and cardId when url changes
-onBeforeRouteUpdate(async (to, from) => {
-  const deckId = to.params.deckId - 1;
-  const cardNr = to.params.cardNr - 1;
-  updateCurrentCard(deckId, cardNr);
-});
-
-// Switch between cards
-function goPrevious() {
-  if (cardNr.value > 1) {
-    cardNr.value--;
-    console.log('Previous');
+    currentCard.value = currentDeck.value.cards[cardIndex];
+    updateCount(flashcard.decks[deckId], cardIndex);
   }
-}
 
-function goNext() {
-  if (cardNr.value < 10) {
-    cardNr.value++;
-    console.log('Next');
+  function updateCount(deck, cardNumber) {
+    cardAmount.value = deck.cards.length;
+    cardIndex.value = cardNumber + 1;
   }
-  S;
-}
+
+  // Update deckId and cardId from url when page refreshes
+  onMounted(async () => {
+    watchEffect(
+      () => [route.params.deckId, route.params.cardNr],
+      updateCurrentCard(route.params.deckId - 1, route.params.cardNr - 1),
+
+      // Send current deck to parrent
+      emit("on-deck-update", currentDeck.value)
+    );
+
+    // Create eventlistener to any keydown
+    window.addEventListener("keydown", handleKeyDown);
+  });
+
+  //  Prevent duplicates of event listener
+  onBeforeUnmount(() => {
+    window.removeEventListener("keydown", handleKeyDown);
+  });
+
+  // Update deckId and cardId when url changes
+  onBeforeRouteUpdate(async (to, from) => {
+    // Hides answer when player press next or previous button
+    hideAnswer.value = true;
+
+    const deckId = to.params.deckId - 1;
+    const cardNr = to.params.cardNr - 1;
+    updateCurrentCard(deckId, cardNr);
+
+    // Send current deck to parrent
+    emit("on-deck-update", currentDeck.value);
+  });
+
+  // Switch between cards
+  function goPrevious() {
+    if (cardNr.value > 1) {
+      cardNr.value--;
+      console.log("Previous");
+    }
+  }
+
+  function goNext() {
+    if (cardNr.value < 10) {
+      cardNr.value++;
+      console.log("Next");
+    }
+    S;
+  }
 </script>
 <template>
   <h1>{{ currentDeck.title }}</h1>
   <div class="flashcard">
     <router-link :to="`${cardNr}`">
-      <button
-        class="arrow-button left-arrow"
-        @click="goPrevious"
-      >
+      <button class="arrow-button left-arrow" @click="goPrevious">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="36"
@@ -113,28 +121,17 @@ function goNext() {
         </svg>
       </button>
     </router-link>
-    <div
-      v-if="hideAnswer"
-      class="flashcard-content"
-      id="front"
-    >
-      {{ currentCard.title }}
+    <div v-if="hideAnswer" class="flashcard-content" id="front">
+      {{ currentCard.question }}
     </div>
 
-    <div
-      v-else
-      class="flashcard-content"
-      id="back"
-    >
+    <div v-else class="flashcard-content" id="back">
       {{ currentCard.answer }}
     </div>
     <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
 
     <router-link :to="`${cardNr}`">
-      <button
-        class="arrow-button"
-        @click="goNext"
-      >
+      <button class="arrow-button" @click="goNext">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="36"
@@ -154,46 +151,46 @@ function goNext() {
 </template>
 
 <style scoped>
-.card-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.flashcard {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--light);
-  border-radius: 10px;
-  box-shadow: 0px 5px 11px 4px hsl(0, 0%, 84%);
-  width: 100%;
-  flex-grow: 1;
-}
-.flashcard-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-#count {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  color: var(--grey);
-}
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .flashcard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--light);
+    border-radius: 10px;
+    box-shadow: 0px 5px 11px 4px hsl(0, 0%, 84%);
+    width: 100%;
+    flex-grow: 1;
+  }
+  .flashcard-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  #count {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: var(--grey);
+  }
 
-.arrow-button {
-  background-color: var(--light);
-  color: var(--grey);
-  border: none;
-  padding: 1.5em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 24px;
-}
+  .arrow-button {
+    background-color: var(--light);
+    color: var(--grey);
+    border: none;
+    padding: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 24px;
+  }
 
-.arrow-button:hover {
-  color: var(--grey-hover);
-}
+  .arrow-button:hover {
+    color: var(--grey-hover);
+  }
 </style>

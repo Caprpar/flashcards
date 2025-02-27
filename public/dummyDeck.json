@@ -3,900 +3,780 @@
       "title": "1:ans gånger tabell",
       "cards": [
           {
-              "title": "1 x 1 = ?",
-              "question": "",
+              "question": "1 x 1 = ?",
               "answer": 1,
               "needsPractice": false,
-              "id": "52a35ec2-8ce0-41e8-9e25-daacd769568d"
+              "id": "78082110-72c9-43cd-99bd-6fd8743622e9"
           },
           {
-              "title": "1 x 2 = ?",
-              "question": "",
+              "question": "1 x 2 = ?",
               "answer": 2,
               "needsPractice": false,
-              "id": "c66a9dc4-537a-4cda-a8a1-7a3583f91a44"
+              "id": "ff6ca564-bd52-4ff5-995f-a97c33f2fb90"
           },
           {
-              "title": "1 x 3 = ?",
-              "question": "",
+              "question": "1 x 3 = ?",
               "answer": 3,
               "needsPractice": false,
-              "id": "98c6f7fe-0b34-486c-9aee-174933c49aaf"
+              "id": "b0aeedc1-8b8f-4624-acab-cf9f78b7666a"
           },
           {
-              "title": "1 x 4 = ?",
-              "question": "",
+              "question": "1 x 4 = ?",
               "answer": 4,
               "needsPractice": false,
-              "id": "01ae946d-c588-47d4-97ab-5960cf53bc4a"
+              "id": "51cf3639-e89a-4a28-9509-cdd9da19dc24"
           },
           {
-              "title": "1 x 5 = ?",
-              "question": "",
+              "question": "1 x 5 = ?",
               "answer": 5,
               "needsPractice": false,
-              "id": "8620118a-923d-4d50-b670-f6fe61620245"
+              "id": "584737e6-7fee-4f06-82af-cc75c9187e6b"
           },
           {
-              "title": "1 x 6 = ?",
-              "question": "",
+              "question": "1 x 6 = ?",
               "answer": 6,
               "needsPractice": false,
-              "id": "d0471b1e-3f1c-411d-9603-2878d6a74a35"
+              "id": "0785d81c-f54e-4428-8174-5a92a0cec127"
           },
           {
-              "title": "1 x 7 = ?",
-              "question": "",
+              "question": "1 x 7 = ?",
               "answer": 7,
               "needsPractice": false,
-              "id": "88d96f36-a8b3-48b7-8f58-2a26a2b8f078"
+              "id": "b9c21119-085f-494d-babf-b657692abe61"
           },
           {
-              "title": "1 x 8 = ?",
-              "question": "",
+              "question": "1 x 8 = ?",
               "answer": 8,
               "needsPractice": false,
-              "id": "b08141eb-8162-4cca-9a6e-7a428826bff7"
+              "id": "a506639c-397c-4af9-8292-9704d0815363"
           },
           {
-              "title": "1 x 9 = ?",
-              "question": "",
+              "question": "1 x 9 = ?",
               "answer": 9,
               "needsPractice": false,
-              "id": "83b657e0-1472-4830-9d0e-32466ffcfce5"
+              "id": "94903e66-ea70-4130-8a24-21de6f2f5d34"
           },
           {
-              "title": "1 x 10 = ?",
-              "question": "",
+              "question": "1 x 10 = ?",
               "answer": 10,
               "needsPractice": false,
-              "id": "24abd1bf-2a61-4835-b1ee-0f9df2a73f58"
+              "id": "995b717a-d879-4b34-b2d6-5f3f6befa290"
           },
           {
-              "title": "1 x 11 = ?",
-              "question": "",
+              "question": "1 x 11 = ?",
               "answer": 11,
               "needsPractice": false,
-              "id": "f25e0e47-7e27-47e2-8a58-da73acd220fe"
+              "id": "444e5e5e-46e7-404b-8d8c-d182094bf68d"
           },
           {
-              "title": "1 x 12 = ?",
-              "question": "",
+              "question": "1 x 12 = ?",
               "answer": 12,
               "needsPractice": false,
-              "id": "227d1745-2adf-4812-b2bf-0860c97ea128"
+              "id": "2bfde55d-034d-48ee-9daf-4ce2d08a93e7"
           }
       ],
-      "id": "57449154-e8bc-4dd8-883f-231157d08f29"
+      "id": "3db74ce4-ab1d-44df-ac39-28b10a67578c"
   },
   {
       "title": "2:ans gånger tabell",
       "cards": [
           {
-              "title": "2 x 1 = ?",
-              "question": "",
+              "question": "2 x 1 = ?",
               "answer": 2,
               "needsPractice": false,
-              "id": "df5116ca-09d2-4150-8cc6-604c90650a28"
+              "id": "673f21cf-5890-4752-bbba-ef7ee69b2e24"
           },
           {
-              "title": "2 x 2 = ?",
-              "question": "",
+              "question": "2 x 2 = ?",
               "answer": 4,
               "needsPractice": false,
-              "id": "2df22f8d-d1d0-4ad4-a94d-71f6dd012f7b"
+              "id": "e3611f32-9884-4c64-bd03-bfb5232d73a1"
           },
           {
-              "title": "2 x 3 = ?",
-              "question": "",
+              "question": "2 x 3 = ?",
               "answer": 6,
               "needsPractice": false,
-              "id": "22f14cde-a4e2-4750-bd21-2e2fc165e32c"
+              "id": "292e5e4c-d0c5-4cfb-9641-427dd1082033"
           },
           {
-              "title": "2 x 4 = ?",
-              "question": "",
+              "question": "2 x 4 = ?",
               "answer": 8,
               "needsPractice": false,
-              "id": "ae510256-82d2-466a-8b7a-cabc4f31d27e"
+              "id": "14924f47-9b3d-4e73-88f9-c33d6c3e84f2"
           },
           {
-              "title": "2 x 5 = ?",
-              "question": "",
+              "question": "2 x 5 = ?",
               "answer": 10,
               "needsPractice": false,
-              "id": "58076013-29ab-4c46-826f-f470449407b9"
+              "id": "3b0bd63f-577a-4525-9d07-6fd8d4ccf4b0"
           },
           {
-              "title": "2 x 6 = ?",
-              "question": "",
+              "question": "2 x 6 = ?",
               "answer": 12,
               "needsPractice": false,
-              "id": "b04a1734-b160-4728-bb38-d04fbabdce29"
+              "id": "a8585286-e3ac-4439-a7d0-ad2cc14c340b"
           },
           {
-              "title": "2 x 7 = ?",
-              "question": "",
+              "question": "2 x 7 = ?",
               "answer": 14,
               "needsPractice": false,
-              "id": "1f54109c-ef6d-41ef-b246-56137acecd27"
+              "id": "732de789-e989-4b8a-86dd-6007692f3a76"
           },
           {
-              "title": "2 x 8 = ?",
-              "question": "",
+              "question": "2 x 8 = ?",
               "answer": 16,
               "needsPractice": false,
-              "id": "12145132-0cad-43aa-9e32-9483009997a0"
+              "id": "cb2789c3-9b78-4ef2-98ba-8a3ac878835a"
           },
           {
-              "title": "2 x 9 = ?",
-              "question": "",
+              "question": "2 x 9 = ?",
               "answer": 18,
               "needsPractice": false,
-              "id": "f4c551c0-ce00-4c15-9014-c6a58735c0e7"
+              "id": "0ad633e8-26e7-441f-8110-de6859b54e5a"
           },
           {
-              "title": "2 x 10 = ?",
-              "question": "",
+              "question": "2 x 10 = ?",
               "answer": 20,
               "needsPractice": false,
-              "id": "30522946-5645-486a-bb5a-2cf80aa8cb88"
+              "id": "3a132ea1-a274-49d4-8986-8592b355475e"
           },
           {
-              "title": "2 x 11 = ?",
-              "question": "",
+              "question": "2 x 11 = ?",
               "answer": 22,
               "needsPractice": false,
-              "id": "5a9f855c-94bd-4a6a-98b0-d45f57984df4"
+              "id": "1675bcd1-ea9a-44a5-9a4c-8a8e251cb30d"
           },
           {
-              "title": "2 x 12 = ?",
-              "question": "",
+              "question": "2 x 12 = ?",
               "answer": 24,
               "needsPractice": false,
-              "id": "a3c947cc-3b69-4f73-bcaa-01e38f6496cd"
+              "id": "e65220b6-cd78-4a78-b35e-b76d14119b69"
           }
       ],
-      "id": "df5226bc-0d11-470f-8a6c-9ea77e9f6fef"
+      "id": "3e9da8a0-422f-4166-b7e6-8c53f739dda4"
   },
   {
       "title": "3:ans gånger tabell",
       "cards": [
           {
-              "title": "3 x 1 = ?",
-              "question": "",
+              "question": "3 x 1 = ?",
               "answer": 3,
               "needsPractice": false,
-              "id": "7fbf0b3a-a7dc-454d-ad22-fcbec81fa2b8"
+              "id": "4279eab0-c316-45df-90a0-6910b626d815"
           },
           {
-              "title": "3 x 2 = ?",
-              "question": "",
+              "question": "3 x 2 = ?",
               "answer": 6,
               "needsPractice": false,
-              "id": "c729aa45-6147-4543-897d-5a24afebf105"
+              "id": "4d55b51e-5619-43ee-849a-a79d725731e7"
           },
           {
-              "title": "3 x 3 = ?",
-              "question": "",
+              "question": "3 x 3 = ?",
               "answer": 9,
               "needsPractice": false,
-              "id": "e15426ba-7149-4f4a-bb09-8bc5f7c1be07"
+              "id": "2b421484-669e-41a1-a092-3b44073805ce"
           },
           {
-              "title": "3 x 4 = ?",
-              "question": "",
+              "question": "3 x 4 = ?",
               "answer": 12,
               "needsPractice": false,
-              "id": "53bda210-9a00-4e4a-a0dd-8faefa30d310"
+              "id": "4ea61551-0e2f-458e-9359-4a81e165c7ac"
           },
           {
-              "title": "3 x 5 = ?",
-              "question": "",
+              "question": "3 x 5 = ?",
               "answer": 15,
               "needsPractice": false,
-              "id": "d5c62315-e7af-4904-a537-1fed9daa0993"
+              "id": "d1f20e7f-e97f-4bd8-8e27-3120cb3ccb38"
           },
           {
-              "title": "3 x 6 = ?",
-              "question": "",
+              "question": "3 x 6 = ?",
               "answer": 18,
               "needsPractice": false,
-              "id": "ab6322d0-a36d-4d6b-9737-3042944bbba5"
+              "id": "a3f753a9-57d1-430e-8bda-dedf17c50c74"
           },
           {
-              "title": "3 x 7 = ?",
-              "question": "",
+              "question": "3 x 7 = ?",
               "answer": 21,
               "needsPractice": false,
-              "id": "b4e0a891-4d35-40c5-a1b3-7c3e1ff2c5df"
+              "id": "c565e1a7-3aa2-445f-a8e8-8e622bca92cf"
           },
           {
-              "title": "3 x 8 = ?",
-              "question": "",
+              "question": "3 x 8 = ?",
               "answer": 24,
               "needsPractice": false,
-              "id": "7c8ffbab-bc5b-42bf-9b0b-b124b39cae9a"
+              "id": "ad90210e-c5fd-47f4-82cc-acd46690b9c8"
           },
           {
-              "title": "3 x 9 = ?",
-              "question": "",
+              "question": "3 x 9 = ?",
               "answer": 27,
               "needsPractice": false,
-              "id": "de69191a-d1b5-45f9-bb5a-ba638d8f2b70"
+              "id": "12bd496c-9eb9-42d9-b205-742fa2ca6093"
           },
           {
-              "title": "3 x 10 = ?",
-              "question": "",
+              "question": "3 x 10 = ?",
               "answer": 30,
               "needsPractice": false,
-              "id": "cde87a3c-78fc-446e-8501-834732cdb289"
+              "id": "cbb6ab39-e4fe-492c-bf3b-ffc88cbc7eef"
           },
           {
-              "title": "3 x 11 = ?",
-              "question": "",
+              "question": "3 x 11 = ?",
               "answer": 33,
               "needsPractice": false,
-              "id": "d7b9e551-6779-47d9-b16b-0d8ebb22f6e8"
+              "id": "5c9fea51-c7b7-428a-b1aa-c8b3ab343d5c"
           },
           {
-              "title": "3 x 12 = ?",
-              "question": "",
+              "question": "3 x 12 = ?",
               "answer": 36,
               "needsPractice": false,
-              "id": "88ad528b-7dd7-49cb-9fdf-7b96c9f5c991"
+              "id": "77ac568f-79ef-4d9e-8683-323b874ae593"
           }
       ],
-      "id": "42728a07-7ec2-4b1f-8d2c-324cab1402f0"
+      "id": "362d07bc-818f-495c-ac16-36b1449c7abe"
   },
   {
       "title": "4:ans gånger tabell",
       "cards": [
           {
-              "title": "4 x 1 = ?",
-              "question": "",
+              "question": "4 x 1 = ?",
               "answer": 4,
               "needsPractice": false,
-              "id": "1f1bcf6a-e8b4-448b-a611-8d1403d135cf"
+              "id": "828f54ea-658d-424f-8744-097a30a94bf9"
           },
           {
-              "title": "4 x 2 = ?",
-              "question": "",
+              "question": "4 x 2 = ?",
               "answer": 8,
               "needsPractice": false,
-              "id": "30542084-5c7d-40c3-a338-73a8bea79968"
+              "id": "0fea5423-dfa2-42ba-822f-e2e0d34320cb"
           },
           {
-              "title": "4 x 3 = ?",
-              "question": "",
+              "question": "4 x 3 = ?",
               "answer": 12,
               "needsPractice": false,
-              "id": "8da7caef-9855-41a2-b3c4-64985d3e4161"
+              "id": "2b9638c9-8ffa-4473-9b60-c4b6385d89d7"
           },
           {
-              "title": "4 x 4 = ?",
-              "question": "",
+              "question": "4 x 4 = ?",
               "answer": 16,
               "needsPractice": false,
-              "id": "d63ee840-b0fd-4608-834b-591eb564d564"
+              "id": "e03a9801-abd8-4acb-90ec-dc9bce7d17ec"
           },
           {
-              "title": "4 x 5 = ?",
-              "question": "",
+              "question": "4 x 5 = ?",
               "answer": 20,
               "needsPractice": false,
-              "id": "30878a00-b65d-4a8b-be73-7a466a98da03"
+              "id": "f82b68c6-f776-4a68-b1a0-dab16df05be3"
           },
           {
-              "title": "4 x 6 = ?",
-              "question": "",
+              "question": "4 x 6 = ?",
               "answer": 24,
               "needsPractice": false,
-              "id": "08352743-2c36-4c44-babe-b0789d2f4b24"
+              "id": "04a9ae1e-e5a7-43bd-bbd8-2efc21b2f1e4"
           },
           {
-              "title": "4 x 7 = ?",
-              "question": "",
+              "question": "4 x 7 = ?",
               "answer": 28,
               "needsPractice": false,
-              "id": "e493a28f-eaff-4e8f-b7ca-fbc69360433a"
+              "id": "98cd018a-f157-480d-9fde-f0f8ba6c6bcf"
           },
           {
-              "title": "4 x 8 = ?",
-              "question": "",
+              "question": "4 x 8 = ?",
               "answer": 32,
               "needsPractice": false,
-              "id": "53418269-2f00-400e-afe7-7b21bdf8a321"
+              "id": "b8379984-e338-4529-b51f-9b16c929edef"
           },
           {
-              "title": "4 x 9 = ?",
-              "question": "",
+              "question": "4 x 9 = ?",
               "answer": 36,
               "needsPractice": false,
-              "id": "c512f6f4-a664-4d74-96d2-a5c93680dbb5"
+              "id": "4f53fc4f-5a87-496e-9c47-66bb82809e51"
           },
           {
-              "title": "4 x 10 = ?",
-              "question": "",
+              "question": "4 x 10 = ?",
               "answer": 40,
               "needsPractice": false,
-              "id": "b657e540-2b5a-44d0-af6c-627496455098"
+              "id": "e614a2fb-ba85-4669-92ee-6ee02af99683"
           },
           {
-              "title": "4 x 11 = ?",
-              "question": "",
+              "question": "4 x 11 = ?",
               "answer": 44,
               "needsPractice": false,
-              "id": "2400e211-c207-4b5a-833f-9bafd2554937"
+              "id": "16fb850a-cae5-4fe8-9635-304cc5209554"
           },
           {
-              "title": "4 x 12 = ?",
-              "question": "",
+              "question": "4 x 12 = ?",
               "answer": 48,
               "needsPractice": false,
-              "id": "01b5d75f-8e96-4962-a0ac-8e8f36c9afbb"
+              "id": "b68d5806-3cdd-4bb6-81db-33ae931d165b"
           }
       ],
-      "id": "7aa6d392-f674-4f61-861d-d50c644fc3f8"
+      "id": "6b37a94b-1669-43b2-93ba-ad45bd0a1a73"
   },
   {
       "title": "5:ans gånger tabell",
       "cards": [
           {
-              "title": "5 x 1 = ?",
-              "question": "",
+              "question": "5 x 1 = ?",
               "answer": 5,
               "needsPractice": false,
-              "id": "7ef47d5f-1a31-4b37-bc27-8bf0d6b0991c"
+              "id": "3413bfba-4de5-41c4-8eea-d482979963e4"
           },
           {
-              "title": "5 x 2 = ?",
-              "question": "",
+              "question": "5 x 2 = ?",
               "answer": 10,
               "needsPractice": false,
-              "id": "353f5c29-6bf7-4b6f-a43a-769e2d5f08e2"
+              "id": "99b270dc-5d8a-4279-9c48-ac6fbc5cb718"
           },
           {
-              "title": "5 x 3 = ?",
-              "question": "",
+              "question": "5 x 3 = ?",
               "answer": 15,
               "needsPractice": false,
-              "id": "11eab25d-9564-48ae-b11b-fb51d8d1d810"
+              "id": "9d9b785f-0bde-4fcc-86bc-26bcf32e333d"
           },
           {
-              "title": "5 x 4 = ?",
-              "question": "",
+              "question": "5 x 4 = ?",
               "answer": 20,
               "needsPractice": false,
-              "id": "dff526aa-5df2-4b3e-b807-df4b52f8032e"
+              "id": "072a2571-78d8-4ea6-be2d-fe638ed837cc"
           },
           {
-              "title": "5 x 5 = ?",
-              "question": "",
+              "question": "5 x 5 = ?",
               "answer": 25,
               "needsPractice": false,
-              "id": "305a31a4-8c38-4c1c-b572-b1c49218b1c7"
+              "id": "c4d325f1-7f18-411a-828a-b51790322213"
           },
           {
-              "title": "5 x 6 = ?",
-              "question": "",
+              "question": "5 x 6 = ?",
               "answer": 30,
               "needsPractice": false,
-              "id": "b7f38144-7191-48e9-a4a5-f7c400ef1e57"
+              "id": "f08bbe22-da9d-4db6-bdb9-656c92174abd"
           },
           {
-              "title": "5 x 7 = ?",
-              "question": "",
+              "question": "5 x 7 = ?",
               "answer": 35,
               "needsPractice": false,
-              "id": "b7003d24-cfda-42a9-bc08-50bc2c69a511"
+              "id": "3a01548a-de5e-4ae3-b676-3644c2fa6af4"
           },
           {
-              "title": "5 x 8 = ?",
-              "question": "",
+              "question": "5 x 8 = ?",
               "answer": 40,
               "needsPractice": false,
-              "id": "05096c98-bdef-44a4-ae82-a670019ffcd6"
+              "id": "64195ed9-7313-4340-b17f-689463713f02"
           },
           {
-              "title": "5 x 9 = ?",
-              "question": "",
+              "question": "5 x 9 = ?",
               "answer": 45,
               "needsPractice": false,
-              "id": "4e89af45-af40-490a-9789-5c8376350c60"
+              "id": "cfa29083-04e3-407f-accc-48325c2afb8d"
           },
           {
-              "title": "5 x 10 = ?",
-              "question": "",
+              "question": "5 x 10 = ?",
               "answer": 50,
               "needsPractice": false,
-              "id": "442de36a-9658-40f0-bac7-a84fc185134e"
+              "id": "052c742a-e8b5-4226-99a4-2747357c43dd"
           },
           {
-              "title": "5 x 11 = ?",
-              "question": "",
+              "question": "5 x 11 = ?",
               "answer": 55,
               "needsPractice": false,
-              "id": "49da7ab3-0b34-4f67-b88d-dfeac89667fe"
+              "id": "19ae6f2c-8322-400b-b0d1-0da941014ce4"
           },
           {
-              "title": "5 x 12 = ?",
-              "question": "",
+              "question": "5 x 12 = ?",
               "answer": 60,
               "needsPractice": false,
-              "id": "ef8410f0-113f-4f25-8c2a-6e61da5d032b"
+              "id": "503d8617-2106-4394-b69b-24aa41dcff05"
           }
       ],
-      "id": "b1d5ee22-a214-4710-95be-1919244f79da"
+      "id": "cb4c5f52-cb27-4fa3-8092-be19b7b4c20b"
   },
   {
       "title": "6:ans gånger tabell",
       "cards": [
           {
-              "title": "6 x 1 = ?",
-              "question": "",
+              "question": "6 x 1 = ?",
               "answer": 6,
               "needsPractice": false,
-              "id": "e13acd26-c225-4b13-a688-fe7404a386b6"
+              "id": "6796e00f-3bd7-4db3-ade4-2d5b20da7400"
           },
           {
-              "title": "6 x 2 = ?",
-              "question": "",
+              "question": "6 x 2 = ?",
               "answer": 12,
               "needsPractice": false,
-              "id": "ab875f92-7c16-41f9-88e1-56a83f5a96b4"
+              "id": "b186de18-b639-4353-b524-aa00e31310db"
           },
           {
-              "title": "6 x 3 = ?",
-              "question": "",
+              "question": "6 x 3 = ?",
               "answer": 18,
               "needsPractice": false,
-              "id": "d8207c09-8463-47e7-9733-e8649bc9f2a6"
+              "id": "56641522-9bd4-4853-a9f1-51758f593e7d"
           },
           {
-              "title": "6 x 4 = ?",
-              "question": "",
+              "question": "6 x 4 = ?",
               "answer": 24,
               "needsPractice": false,
-              "id": "64dbf9d9-3769-43ff-b0a9-6d96d1e96a65"
+              "id": "e56cc020-c393-4fbe-91b7-ce776b5a2ab8"
           },
           {
-              "title": "6 x 5 = ?",
-              "question": "",
+              "question": "6 x 5 = ?",
               "answer": 30,
               "needsPractice": false,
-              "id": "379d342e-f5e4-4615-a642-38d6e7073fef"
+              "id": "0609f7b5-a4be-4011-ad7e-e6fbe79def40"
           },
           {
-              "title": "6 x 6 = ?",
-              "question": "",
+              "question": "6 x 6 = ?",
               "answer": 36,
               "needsPractice": false,
-              "id": "c04e7502-c9e6-4bb6-a078-e1de1fc666e4"
+              "id": "137df6b0-2020-41b5-9bfa-3cd83e1bb0ba"
           },
           {
-              "title": "6 x 7 = ?",
-              "question": "",
+              "question": "6 x 7 = ?",
               "answer": 42,
               "needsPractice": false,
-              "id": "953d9d58-ecc3-4c78-99ca-5e61a0e92e22"
+              "id": "d309329b-f7b2-42b2-a46c-b583d312e5f0"
           },
           {
-              "title": "6 x 8 = ?",
-              "question": "",
+              "question": "6 x 8 = ?",
               "answer": 48,
               "needsPractice": false,
-              "id": "9fce3c36-3830-4980-b191-38262d083887"
+              "id": "fef9d3e8-f787-42bb-ac6a-d8c69ee04801"
           },
           {
-              "title": "6 x 9 = ?",
-              "question": "",
+              "question": "6 x 9 = ?",
               "answer": 54,
               "needsPractice": false,
-              "id": "5ee5d59a-0cc3-49e1-96b3-4052284f055d"
+              "id": "f8336028-cbc2-4f9f-92a4-0b796db553ba"
           },
           {
-              "title": "6 x 10 = ?",
-              "question": "",
+              "question": "6 x 10 = ?",
               "answer": 60,
               "needsPractice": false,
-              "id": "51a4cc43-b481-4510-8f60-dfc8f1e18492"
+              "id": "f0c24ad2-cd84-43eb-9680-0ce5ffcdbb44"
           },
           {
-              "title": "6 x 11 = ?",
-              "question": "",
+              "question": "6 x 11 = ?",
               "answer": 66,
               "needsPractice": false,
-              "id": "674096a6-91e2-441f-adf7-0f2d43baa627"
+              "id": "7c55f5ff-c4ac-4b9c-84e6-05646ecc75bf"
           },
           {
-              "title": "6 x 12 = ?",
-              "question": "",
+              "question": "6 x 12 = ?",
               "answer": 72,
               "needsPractice": false,
-              "id": "315d1669-68c2-4223-988a-09828121999b"
+              "id": "86c627de-052e-4424-84b5-6f67ee122f86"
           }
       ],
-      "id": "03e083b1-2042-4da9-a457-d9f49779f6af"
+      "id": "6d6375f6-39c9-47be-a047-4d23ed8c7301"
   },
   {
       "title": "7:ans gånger tabell",
       "cards": [
           {
-              "title": "7 x 1 = ?",
-              "question": "",
+              "question": "7 x 1 = ?",
               "answer": 7,
               "needsPractice": false,
-              "id": "7748161e-68ca-4c1c-a193-9bf97807d522"
+              "id": "0d2997e1-1019-43c2-bd14-a9d4113f4518"
           },
           {
-              "title": "7 x 2 = ?",
-              "question": "",
+              "question": "7 x 2 = ?",
               "answer": 14,
               "needsPractice": false,
-              "id": "40629c00-e597-47ea-b1db-3c4776e0e676"
+              "id": "3ddad7d0-8612-43c9-9d16-aa29d37a8f7f"
           },
           {
-              "title": "7 x 3 = ?",
-              "question": "",
+              "question": "7 x 3 = ?",
               "answer": 21,
               "needsPractice": false,
-              "id": "746a4920-b784-4173-b9ca-31b7ea24bb4d"
+              "id": "207eaf72-51f9-49fe-82c2-869d3bee38f5"
           },
           {
-              "title": "7 x 4 = ?",
-              "question": "",
+              "question": "7 x 4 = ?",
               "answer": 28,
               "needsPractice": false,
-              "id": "8f45a4b6-feea-492b-a163-77211779dcb5"
+              "id": "7b0247f1-9faa-4ae3-8ecb-ac9c91d65baa"
           },
           {
-              "title": "7 x 5 = ?",
-              "question": "",
+              "question": "7 x 5 = ?",
               "answer": 35,
               "needsPractice": false,
-              "id": "c792f8bb-d222-4643-9787-407d799c2d66"
+              "id": "9a698b59-145f-4c0e-969b-f9cd926f7b89"
           },
           {
-              "title": "7 x 6 = ?",
-              "question": "",
+              "question": "7 x 6 = ?",
               "answer": 42,
               "needsPractice": false,
-              "id": "03cbd401-2791-45b5-be64-34c25a92e296"
+              "id": "72af09bf-a6c8-4d18-8436-a944d740832f"
           },
           {
-              "title": "7 x 7 = ?",
-              "question": "",
+              "question": "7 x 7 = ?",
               "answer": 49,
               "needsPractice": false,
-              "id": "166e913a-28f6-4519-a213-7454b43121bd"
+              "id": "413db14b-497e-451c-84c8-88f871413b48"
           },
           {
-              "title": "7 x 8 = ?",
-              "question": "",
+              "question": "7 x 8 = ?",
               "answer": 56,
               "needsPractice": false,
-              "id": "f2335778-fd26-453f-963f-d9f1d62f625b"
+              "id": "1caec34e-4cbc-4f4e-9f8f-526007cd8894"
           },
           {
-              "title": "7 x 9 = ?",
-              "question": "",
+              "question": "7 x 9 = ?",
               "answer": 63,
               "needsPractice": false,
-              "id": "68479605-f626-407b-8dee-6473fcb9ee13"
+              "id": "35c762ea-6f95-4bba-9508-36b62872a3b8"
           },
           {
-              "title": "7 x 10 = ?",
-              "question": "",
+              "question": "7 x 10 = ?",
               "answer": 70,
               "needsPractice": false,
-              "id": "96b745be-1275-4458-bbda-fbef639c841b"
+              "id": "2bdffca2-79f2-4eff-96f9-ada9083d885e"
           },
           {
-              "title": "7 x 11 = ?",
-              "question": "",
+              "question": "7 x 11 = ?",
               "answer": 77,
               "needsPractice": false,
-              "id": "90b68a4c-6407-4527-bb1c-f86c26a06ba0"
+              "id": "5a3d08b9-ea54-429b-b806-84c27bfa220e"
           },
           {
-              "title": "7 x 12 = ?",
-              "question": "",
+              "question": "7 x 12 = ?",
               "answer": 84,
               "needsPractice": false,
-              "id": "9dbfc3c4-f1fa-444f-bf1e-c27e29461093"
+              "id": "72e3d9df-34f4-44f9-93ba-ed478772f0e0"
           }
       ],
-      "id": "0de2ffbb-a198-40f8-8064-ae381ba9c2d4"
+      "id": "448571eb-3049-479b-a67e-ff0193810167"
   },
   {
       "title": "8:ans gånger tabell",
       "cards": [
           {
-              "title": "8 x 1 = ?",
-              "question": "",
+              "question": "8 x 1 = ?",
               "answer": 8,
               "needsPractice": false,
-              "id": "bafa36b7-5c11-4f85-890d-3240a0e210bb"
+              "id": "b823e7ff-4c0e-4482-8794-bf18f62ccdf1"
           },
           {
-              "title": "8 x 2 = ?",
-              "question": "",
+              "question": "8 x 2 = ?",
               "answer": 16,
               "needsPractice": false,
-              "id": "b3ef8de5-c6ea-4166-8456-c741456823ef"
+              "id": "a05ba8ee-60c1-49f6-aef9-549590e90130"
           },
           {
-              "title": "8 x 3 = ?",
-              "question": "",
+              "question": "8 x 3 = ?",
               "answer": 24,
               "needsPractice": false,
-              "id": "a85f9e5a-5cfe-4e5f-917c-c32fbb841b1e"
+              "id": "c20af187-d93a-4ba3-af7a-1372e83fef4a"
           },
           {
-              "title": "8 x 4 = ?",
-              "question": "",
+              "question": "8 x 4 = ?",
               "answer": 32,
               "needsPractice": false,
-              "id": "15f381e1-b981-4b00-ae70-c86927e29a06"
+              "id": "c9a47c45-9c6f-41d2-b861-53cde94b05a1"
           },
           {
-              "title": "8 x 5 = ?",
-              "question": "",
+              "question": "8 x 5 = ?",
               "answer": 40,
               "needsPractice": false,
-              "id": "f67c604c-0129-41b0-b89a-58d33fc5c2cb"
+              "id": "d25788f1-5476-4ac4-b28c-c7f67c318746"
           },
           {
-              "title": "8 x 6 = ?",
-              "question": "",
+              "question": "8 x 6 = ?",
               "answer": 48,
               "needsPractice": false,
-              "id": "aabbcfdc-71af-46ca-b5db-1014a158710d"
+              "id": "d8fdf73d-939f-44b9-a673-ded3f2debcd8"
           },
           {
-              "title": "8 x 7 = ?",
-              "question": "",
+              "question": "8 x 7 = ?",
               "answer": 56,
               "needsPractice": false,
-              "id": "dd2d1f26-a1bc-4067-bcda-1df3c134d840"
+              "id": "d9052d8a-5969-4be1-bc3e-6bc89b7d930e"
           },
           {
-              "title": "8 x 8 = ?",
-              "question": "",
+              "question": "8 x 8 = ?",
               "answer": 64,
               "needsPractice": false,
-              "id": "2ad2245e-d51e-4f88-843f-c84b87713f83"
+              "id": "b087bc19-c0f6-454a-ab92-4c13dad20561"
           },
           {
-              "title": "8 x 9 = ?",
-              "question": "",
+              "question": "8 x 9 = ?",
               "answer": 72,
               "needsPractice": false,
-              "id": "74805e6b-1915-48a6-a705-3b4264e29fbe"
+              "id": "3a65ba84-b7c9-4a7c-b9d9-8aca49529cdb"
           },
           {
-              "title": "8 x 10 = ?",
-              "question": "",
+              "question": "8 x 10 = ?",
               "answer": 80,
               "needsPractice": false,
-              "id": "24a23920-3b48-4e19-b1d5-02afaeeaafd3"
+              "id": "25f77668-3454-4039-884a-02ddaa8674e9"
           },
           {
-              "title": "8 x 11 = ?",
-              "question": "",
+              "question": "8 x 11 = ?",
               "answer": 88,
               "needsPractice": false,
-              "id": "945e708a-b07a-4d22-b69b-7dd0708f93f3"
+              "id": "7661f5fd-c05e-4de2-9004-b4057c9f30ab"
           },
           {
-              "title": "8 x 12 = ?",
-              "question": "",
+              "question": "8 x 12 = ?",
               "answer": 96,
               "needsPractice": false,
-              "id": "5b8b1919-ecbd-4c67-bcc9-334d66131e75"
+              "id": "0690b452-24ae-422c-a4fd-46989a2ae0d6"
           }
       ],
-      "id": "82d318b8-7a85-4ff3-8278-44dd6f998cd5"
+      "id": "ad4e318e-7d4e-400d-bffd-a8cb8da24ca9"
   },
   {
       "title": "9:ans gånger tabell",
       "cards": [
           {
-              "title": "9 x 1 = ?",
-              "question": "",
+              "question": "9 x 1 = ?",
               "answer": 9,
               "needsPractice": false,
-              "id": "3c4a1c04-2bff-4454-aa5d-652a9df80eab"
+              "id": "db109e55-de5a-4d48-bd76-cbd18356ec6a"
           },
           {
-              "title": "9 x 2 = ?",
-              "question": "",
+              "question": "9 x 2 = ?",
               "answer": 18,
               "needsPractice": false,
-              "id": "03ae3499-452e-4cc7-b988-b9a1b20af73a"
+              "id": "6dc5175e-d83a-4837-a26e-69ab7c61bac3"
           },
           {
-              "title": "9 x 3 = ?",
-              "question": "",
+              "question": "9 x 3 = ?",
               "answer": 27,
               "needsPractice": false,
-              "id": "e9cea09e-17f5-4581-88af-52f9f43144ab"
+              "id": "9fda2082-04e1-4cf6-ace3-8c3736a24499"
           },
           {
-              "title": "9 x 4 = ?",
-              "question": "",
+              "question": "9 x 4 = ?",
               "answer": 36,
               "needsPractice": false,
-              "id": "08db14e8-50f0-4945-b769-bff186b66cdc"
+              "id": "8e86ecc4-a5bf-46f9-8e56-a2ce5c3a18ae"
           },
           {
-              "title": "9 x 5 = ?",
-              "question": "",
+              "question": "9 x 5 = ?",
               "answer": 45,
               "needsPractice": false,
-              "id": "3734dcd5-d3f9-486e-a8a0-64ac23256bc4"
+              "id": "cdd7b989-a089-4505-bc74-fc49b2765ed5"
           },
           {
-              "title": "9 x 6 = ?",
-              "question": "",
+              "question": "9 x 6 = ?",
               "answer": 54,
               "needsPractice": false,
-              "id": "4abcb9d1-3afd-420b-b339-f297c5a12995"
+              "id": "ac1b0c23-b9fb-4e30-b8e2-29f1abf1d6fd"
           },
           {
-              "title": "9 x 7 = ?",
-              "question": "",
+              "question": "9 x 7 = ?",
               "answer": 63,
               "needsPractice": false,
-              "id": "c87ea94c-a8df-4d50-bfb0-7d6ff632e530"
+              "id": "0beff9a0-928c-44aa-98fe-91a71ca6f17c"
           },
           {
-              "title": "9 x 8 = ?",
-              "question": "",
+              "question": "9 x 8 = ?",
               "answer": 72,
               "needsPractice": false,
-              "id": "47c3ce93-0f55-46eb-a550-fec0a362f8bd"
+              "id": "e5e7adfd-beb9-46da-af49-23599040db1d"
           },
           {
-              "title": "9 x 9 = ?",
-              "question": "",
+              "question": "9 x 9 = ?",
               "answer": 81,
               "needsPractice": false,
-              "id": "8840d14d-17f0-43b7-a119-3fa2982405e7"
+              "id": "20ab531a-ad43-42f8-bffd-2a7f2474e186"
           },
           {
-              "title": "9 x 10 = ?",
-              "question": "",
+              "question": "9 x 10 = ?",
               "answer": 90,
               "needsPractice": false,
-              "id": "2dfda213-c1a9-4b9a-9b88-8130f17c3c29"
+              "id": "0491e286-3cae-4faf-a26a-d69ab7ccd7e0"
           },
           {
-              "title": "9 x 11 = ?",
-              "question": "",
+              "question": "9 x 11 = ?",
               "answer": 99,
               "needsPractice": false,
-              "id": "789d9ec9-2b0e-47a9-bf31-16146b3b7e27"
+              "id": "0f7ac72d-fc4a-4452-8979-5f60d3e686d6"
           },
           {
-              "title": "9 x 12 = ?",
-              "question": "",
+              "question": "9 x 12 = ?",
               "answer": 108,
               "needsPractice": false,
-              "id": "f92cfbf5-5052-41ee-b1ba-aebd06f25b4c"
+              "id": "595a35a5-bbda-4f10-bad9-01c718e05af3"
           }
       ],
-      "id": "4aec4a54-bb26-4ba5-8f5d-61b73e5c9fd1"
+      "id": "2aaeffaf-f4e4-4129-97c4-63e1f058f04f"
   },
   {
       "title": "10:ans gånger tabell",
       "cards": [
           {
-              "title": "10 x 1 = ?",
-              "question": "",
+              "question": "10 x 1 = ?",
               "answer": 10,
               "needsPractice": false,
-              "id": "34f69ff1-a28a-4e49-9434-7ec650a5e900"
+              "id": "78feb7d7-1fd9-4604-b88c-2b9e778806e8"
           },
           {
-              "title": "10 x 2 = ?",
-              "question": "",
+              "question": "10 x 2 = ?",
               "answer": 20,
               "needsPractice": false,
-              "id": "4df04220-abb3-422b-b65d-1e006f703da8"
+              "id": "9f97901a-f326-4aaa-9cc8-87e26b0f32d8"
           },
           {
-              "title": "10 x 3 = ?",
-              "question": "",
+              "question": "10 x 3 = ?",
               "answer": 30,
               "needsPractice": false,
-              "id": "de8fe894-5768-405f-a222-427b7bc8b7f7"
+              "id": "6cd28367-92a2-4255-be59-11fa994da853"
           },
           {
-              "title": "10 x 4 = ?",
-              "question": "",
+              "question": "10 x 4 = ?",
               "answer": 40,
               "needsPractice": false,
-              "id": "5c1db1a9-7f3e-483d-b7a5-fd733f2a6f05"
+              "id": "3a99a08d-0b01-4f68-a526-f49abb8a0a79"
           },
           {
-              "title": "10 x 5 = ?",
-              "question": "",
+              "question": "10 x 5 = ?",
               "answer": 50,
               "needsPractice": false,
-              "id": "70569ca1-e644-4662-a11b-81baf894b51d"
+              "id": "14f4fd77-c0ca-401a-9665-e383111ec5ef"
           },
           {
-              "title": "10 x 6 = ?",
-              "question": "",
+              "question": "10 x 6 = ?",
               "answer": 60,
               "needsPractice": false,
-              "id": "b18a5318-9a1c-4f4b-b31d-68f18c6dde62"
+              "id": "815e6afa-c702-4697-b5b6-073a6ec96003"
           },
           {
-              "title": "10 x 7 = ?",
-              "question": "",
+              "question": "10 x 7 = ?",
               "answer": 70,
               "needsPractice": false,
-              "id": "6777a41c-ccb3-48f3-bf0a-33c993003435"
+              "id": "b5ff9b0e-e4c5-43b7-8d1c-3d3a166d431b"
           },
           {
-              "title": "10 x 8 = ?",
-              "question": "",
+              "question": "10 x 8 = ?",
               "answer": 80,
               "needsPractice": false,
-              "id": "fff864a4-2930-4e30-a646-40bf933c1e05"
+              "id": "013a7858-a114-432c-8c2b-f8f5325d7563"
           },
           {
-              "title": "10 x 9 = ?",
-              "question": "",
+              "question": "10 x 9 = ?",
               "answer": 90,
               "needsPractice": false,
-              "id": "df1416b0-1fe0-439e-be35-27c5cf36907b"
+              "id": "4befdc87-6dd6-43b1-a09b-636fc8e022fd"
           },
           {
-              "title": "10 x 10 = ?",
-              "question": "",
+              "question": "10 x 10 = ?",
               "answer": 100,
               "needsPractice": false,
-              "id": "5cf17ee2-5c95-4a19-819f-4356e68ef4d5"
+              "id": "4e628992-ccad-4001-a9dc-0225b57258dd"
           },
           {
-              "title": "10 x 11 = ?",
-              "question": "",
+              "question": "10 x 11 = ?",
               "answer": 110,
               "needsPractice": false,
-              "id": "a5cbb6d9-3a72-4d79-aa73-490dce22184a"
+              "id": "fb71d11f-7216-4436-b29a-fb930e833c36"
           },
           {
-              "title": "10 x 12 = ?",
-              "question": "",
+              "question": "10 x 12 = ?",
               "answer": 120,
               "needsPractice": false,
-              "id": "efeaaa96-864b-4610-a58a-21abe92b6041"
+              "id": "134b16c2-246a-49fe-8e49-80bbb5fe0122"
           }
       ],
-      "id": "f4c07f06-1f01-4508-ad54-5dacdd42a871"
+      "id": "bd35ffff-350a-46ca-b4f0-ebdb14f44882"
   }
 ]
