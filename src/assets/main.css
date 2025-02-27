@@ -8,4 +8,6 @@
   --danger: #cc4760;
   --light: hsl(60, 100%, 98%);
   --dark: #1c1818;
+  --grey: #5f5f5f;
+  --grey-hover: #a1a1a1;
 }
