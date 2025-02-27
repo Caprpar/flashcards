@@ -91,7 +91,7 @@
   }
 
   function goNext() {
-    const cardAmount = currentDeck1.value.cards.length;
+    const cardAmount = currentDeck.value.cards.length;
     if (cardNr.value < cardAmount) {
       cardNr.value++;
     }
