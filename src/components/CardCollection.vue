@@ -15,11 +15,13 @@
   const props = defineProps({
     deck: {
       type: Object,
-      required: false
+      required: false,
+      default: null
     },
     image: {
       type: String,
-      required: false
+      required: false,
+      default: null
     }
   });
 

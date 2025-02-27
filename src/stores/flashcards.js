@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export const useFlashcard = defineStore("flashcard", {
   state: () => ({
     /** The global variable that contains all current user decks*/
-    decks: [],
+    decks: []
   }),
   actions: {
     async fetchDecks() {
@@ -20,9 +20,9 @@ export const useFlashcard = defineStore("flashcard", {
       return {
         question,
         answer,
-        needsPractice: false,
+        needsPractice: true,
         hasAnswer: false,
-        id: uuidv4(),
+        id: uuidv4()
       };
     },
     /** Add new card object to a deck using deck ID
@@ -42,7 +42,7 @@ export const useFlashcard = defineStore("flashcard", {
       const deck = {
         title,
         cards,
-        id: uuidv4(),
+        id: uuidv4()
       };
       // this.decks.push(deck);
       return deck;
@@ -74,7 +74,7 @@ export const useFlashcard = defineStore("flashcard", {
         decks.push(deck);
       }
       return decks;
-    },
+    }
   },
   getters: {
     /** Get the updated deck object
@@ -82,6 +82,6 @@ export const useFlashcard = defineStore("flashcard", {
      */
     getDecks() {
       return this.decks;
-    },
-  },
+    }
+  }
 });

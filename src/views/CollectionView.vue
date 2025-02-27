@@ -10,6 +10,10 @@
   // flashcard.decks = flashcard.dummyDeck();
 
   // const decks = ref(flashcard.decks);
+  if (!localStorage.getItem("decks")) {
+    localStorage.setItem("decks", JSON.stringify(flashcard.dummyDeck()));
+    alert("Gave localstorage dummydeck");
+  }
   const decks = ref(JSON.parse(localStorage.getItem("decks")));
 
   onMounted(() => {
