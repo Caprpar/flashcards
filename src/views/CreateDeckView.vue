@@ -1,5 +1,5 @@
 <script setup>
-import CreateCard from "../components/CreateCard.vue";
+  import CreateCard from "../components/CreateCard.vue";
 </script>
 <template>
   <CreateCard />

@@ -10,11 +10,11 @@ export default createRouter({
   routes: [
     {
       component: CardView,
-      path: "/collection/:deckId/:cardNr",
+      path: "/collection/:deckId/:cardNr"
     },
     {
       component: CollectionView,
-      path: "/",
+      path: "/"
     },
     {
       component: EditDeckView,
@@ -22,7 +22,7 @@ export default createRouter({
     },
     {
       component: CreateDeckView,
-      path: "/createDeck",
-    },
-  ],
+      path: "/createDeck"
+    }
+  ]
 });
