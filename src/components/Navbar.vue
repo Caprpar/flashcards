@@ -30,7 +30,7 @@
           Add Deck</b-nav-item
         >
         <b-nav-item :to="'/edit'" class="text-white"
-          >Customize Cards</b-nav-item
+          >Customize Decks</b-nav-item
         >
       </b-nav>
     </div>

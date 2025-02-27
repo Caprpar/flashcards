@@ -1,13 +1,30 @@
+<!-- eslint-disable vue/no-use-v-if-with-v-for -->
 <template>
   <div class="container my-4">
     <h1 class="text-center mb-4">Multiplikationsträning</h1>
     <div
+      style="background-color: var(--primary)"
       class="deck mb-5 p-3 border rounded shadow-sm"
       v-for="(deck, deckIndex) in flashcard.decks"
       :key="deckIndex"
     >
-      <h2 class="text-center mb-3">{{ deck.title }}</h2>
+      <h2 style="color: aliceblue" class="text-center mb-3">
+        {{ deck.title }}
+        <!-- <input
+          type="button"
+          :value="deck.title"
+          @click="OnShowDeck(deck.cards)"
+        /> -->
+      </h2>
+      <b-button
+        class="w-100 mt-3"
+        @click="OnShowDeck(deckIndex)"
+        style="background-color: var(--secondary)"
+      >
+        {{ showDeck === deckIndex ? "Hide Deck" : "Show Deck" }}
+      </b-button>
       <div
+        v-if="showDeck === deckIndex"
         class="card mb-3 p-3 border rounded"
         v-for="(card, cardIndex) in deck.cards"
         :key="card.id"
@@ -23,6 +40,7 @@
             @change="savedDecks"
             class="form-control"
             type="text"
+            placeholder="Write question"
           />
         </div>
         <div class="mb-3">
@@ -33,22 +51,32 @@
             @change="savedDecks"
             class="form-control"
             type="text"
+            placeholder="Write answer"
           />
         </div>
         <b-button
-          variant="danger"
+          style="background-color: var(--danger)"
           class="w-100 w-sm-25"
           @click="removeCard(deckIndex, card.id)"
         >
-          Delete
+          Discard Card
         </b-button>
       </div>
+
       <b-button
-        variant="primary"
+        v-if="showDeck === deckIndex"
+        style="background-color: var(--success)"
         class="w-100 mt-3"
         @click="addCard(deckIndex)"
       >
         Add New Card
+      </b-button>
+      <b-button
+        style="background-color: var(--danger)"
+        class="w-100 mt-3"
+        @click="removeDeck(deckIndex)"
+      >
+        Remove Deck
       </b-button>
     </div>
   </div>
@@ -88,6 +116,8 @@
 
   const flashcard = useFlashcard();
 
+  const showDeck = ref(null);
+
   // Save decks to localStorage
   function savedDecks() {
     localStorage.setItem("decks", JSON.stringify(flashcard.decks));
@@ -110,7 +140,7 @@
   function addCard(deckIndex) {
     const deck = flashcard.decks[deckIndex];
     if (deck) {
-      const newCard = flashcard.createCard("New Question", 0);
+      const newCard = flashcard.createCard("", "");
       deck.cards.push(newCard); // Add new card to deck
       savedDecks(); // Save deck to localStorage
 
@@ -132,6 +162,19 @@
       deck.cards = deck.cards.filter((card) => card.id !== cardId);
       savedDecks();
     }
+  }
+
+  function removeDeck(deckIndex) {
+    flashcard.decks.splice(deckIndex);
+    savedDecks();
+  }
+  function OnShowDeck(deckIndex) {
+    // if (showDeck.value === null) {
+    //   showDeck.value = deckIndex; // Show deck
+    // } else {
+    //   showDeck.value = null; // Hide deck
+    // }
+    showDeck.value = showDeck.value === null ? deckIndex : null;
   }
 
   // Fetch decks on component mount
