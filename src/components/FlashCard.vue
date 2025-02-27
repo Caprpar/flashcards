@@ -19,6 +19,8 @@
   const currentDeck = ref([]);
   const currentCard = ref([]);
   const hideAnswer = ref(true);
+  const currentDeck1 = ref(flashcard.decks);
+  const cardNr = ref(1);
 
   // Variables for count
   const cardIndex = ref(0);
@@ -94,11 +96,10 @@
   }
 
   function goNext() {
-    if (cardNr.value < 10) {
+    const cardAmount = currentDeck1.value.cards.length;
+    if (cardNr.value < cardAmount) {
       cardNr.value++;
-      console.log("Next");
     }
-    S;
   }
 </script>
 <template>
