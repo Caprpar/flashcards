@@ -3,31 +3,39 @@ import FlashCard from '../components/FlashCard.vue';
 import FlashcardButton from '../components/FlashcardButton.vue';
 </script>
 <template>
-  <div class="card-view-container">
-    <FlashCard />
-    <div class="buttons-container">
-      <FlashcardButton
-        color="var(--success)"
-        text="Rätt"
-      />
-      <FlashcardButton
-        color="var(--danger)"
-        text="Fel"
-      />
+  <main>
+    <div class="card-view-container">
+      <FlashCard />
+      <div class="buttons-container">
+        <FlashcardButton
+          color="var(--success)"
+          text="Rätt"
+        />
+        <FlashcardButton
+          color="var(--danger)"
+          text="Fel"
+        />
+      </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped>
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
 .card-view-container {
-  padding-top: 2em;
-  width: clamp(9em, 95%, 43em);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 90vh;
-  margin: 0 auto;
+  padding-top: 2em;
+  width: clamp(9em, 95%, 43em);
 }
 .buttons-container {
   display: flex;
