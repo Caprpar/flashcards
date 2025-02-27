@@ -1,15 +1,16 @@
 <script setup>
   import { defineProps } from "vue";
-  import { defineProps } from "vue";
 
   const props = defineProps({
     color: { required: true, type: String },
     text: { type: String }
   });
 </script>
+
 <template>
   <button :style="`background-color: ${props.color}`">{{ props.text }}</button>
 </template>
+
 <style scoped>
   button {
     width: 100%;

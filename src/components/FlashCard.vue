@@ -118,7 +118,7 @@
       </button>
     </router-link>
     <div v-if="hideAnswer" class="flashcard-content" id="front">
-      {{ currentCard.title }}
+      {{ currentCard.question }}
     </div>
     <div v-else class="card" id="back">
       {{ currentCard.answer }}

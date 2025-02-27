@@ -42,8 +42,6 @@
     }
     return styleSettings;
   }
-  import FlashCard from "../components/FlashCard.vue";
-  import FlashcardButton from "../components/FlashcardButton.vue";
 </script>
 <template>
   <main>
