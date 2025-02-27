@@ -89,15 +89,12 @@
       <div class="flex-container">
         <div class="text-div">
           <h2>Question</h2>
-          <textarea
-            v-model="question"
-            placeholder="Type question here"
-          ></textarea>
+          <textarea v-model="question" placeholder="Type question here" />
         </div>
 
         <div class="text-div">
           <h2>Answer</h2>
-          <textarea v-model="answer" placeholder="Type answer here"></textarea>
+          <textarea v-model="answer" placeholder="Type answer here" />
         </div>
       </div>
       <div class="button-center">
