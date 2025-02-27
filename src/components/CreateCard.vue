@@ -65,6 +65,7 @@
     cards.value = [];
     let decks = localStorage.getItem("decks");
     decks = JSON.parse(decks);
+    flashcards.decks = decks; // sets decks to pinia variable, otherwise card wont show up
     decks.push(newDeck.value);
     localStorage.setItem("decks", JSON.stringify(decks));
     deckCreated.value = false;

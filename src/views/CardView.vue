@@ -82,7 +82,7 @@
     justify-content: space-around;
     align-items: center;
     display: flex;
-    width: 28em;
+    width: 100%;
   }
 
   .dot {
