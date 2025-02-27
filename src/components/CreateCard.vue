@@ -107,7 +107,9 @@
           Compile deck
         </button>
       </div>
-      <p>"{{ newDeck.title }}" deck has {{ cards.length }} cards</p>
+      <p>
+        "{{ newDeck.title }}" deck has <b>{{ cards.length }}</b> cards
+      </p>
     </form>
   </section>
 </template>
@@ -158,14 +160,23 @@
     margin-top: 20px;
   }
   button {
+    width: 150px;
     padding: 10px 20px;
     border-radius: 10px;
     background-color: var(--success);
     border: none;
   }
   p {
+    color: var(--light);
+    background-color: var(--info);
     margin-top: 20px;
     text-align: center;
     font-size: 1.2em;
+  }
+  b {
+    background-color: var(--light);
+    color: var(--dark);
+    border-radius: 2px;
+    padding: 0 5px;
   }
 </style>
