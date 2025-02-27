@@ -6,7 +6,6 @@
   import { useFlashcard } from "../stores/flashcards";
 
   const route = useRoute();
-  const cardNr = ref(1);
   const flashcard = useFlashcard();
   const currentDeck = ref(flashcard.decks);
 
@@ -45,33 +44,52 @@
   }
 </script>
 <template>
-  <div class="flashcard">
-    <router-link :to="`${cardNr}`">
-      <button class="arrow" @click="goPrevious">⬅️</button>
-    </router-link>
-
-    <FlashCard @on-deck-update="updateDeck" />
-    <router-link :to="`${cardNr}`">
-      <button class="arrow" @click="goNext">➡️</button>
-    </router-link>
-  </div>
-  <div class="center">
-    <div id="answer-indicator">
-      <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
-      <div
-        v-for="(card, index) in currentDeck.cards"
-        :key="card.id"
-        :class="dotStyle(card, index)"
-      />
+  <main>
+    <div class="card-view-container">
+      <FlashCard @on-deck-update="updateDeck" />
+      <div id="answer-indicator">
+        <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
+        <div
+          v-for="(card, index) in currentDeck.cards"
+          :key="card.id"
+          :class="dotStyle(card, index)"
+        />
+      </div>
+      <div class="buttons-container">
+        <FlashcardButton color="var(--success)" text="Rätt" />
+        <FlashcardButton color="var(--danger)" text="Fel" />
+      </div>
     </div>
-    <div class="buttons">
-      <FlashcardButton color="var(--success)" text="Rätt" />
-      <FlashcardButton color="var(--danger)" text="Fel" />
-    </div>
-  </div>
+  </main>
 </template>
 
-<style>
+<style scoped>
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+  }
+
+  .card-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding-top: 2em;
+    width: clamp(9em, 95%, 43em);
+  }
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px; /* Adds space between buttons */
+    width: 100%; /* Ensures it fills the container */
+    max-width: 700px; /* Adjust this as needed */
+  }
   #answer-indicator {
     margin-top: 1em;
     justify-content: space-around;
@@ -100,12 +118,6 @@
     background-color: var(--danger);
   }
 
-  .center {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   .buttons {
     display: flex;
     justify-content: space-between;
@@ -124,5 +136,30 @@
     background: none;
     border: none;
     padding: 8px;
+  }
+  <style scoped > main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .card-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding-top: 2em;
+    width: clamp(9em, 95%, 43em);
+  }
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px; /* Adds space between buttons */
+    width: 100%; /* Ensures it fills the container */
+    max-width: 700px; /* Adjust this as needed */
   }
 </style>

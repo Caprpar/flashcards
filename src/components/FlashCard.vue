@@ -19,8 +19,8 @@
   const currentDeck = ref([]);
   const currentCard = ref([]);
   const hideAnswer = ref(true);
-
-  const card = flashcard.createCard("vem är kungen", "carl");
+  const currentDeck1 = ref(flashcard.decks);
+  const cardNr = ref(1);
 
   // Variables for count
   const cardIndex = ref(0);
@@ -81,43 +81,111 @@
     // Send current deck to parrent
     emit("on-deck-update", currentDeck.value);
   });
+
+  // Switch between cards
+  function goPrevious() {
+    if (cardNr.value > 1) {
+      cardNr.value--;
+      console.log("Previous");
+    }
+  }
+
+  function goNext() {
+    const cardAmount = currentDeck.value.cards.length;
+    if (cardNr.value < cardAmount) {
+      cardNr.value++;
+    }
+  }
 </script>
 <template>
-  <div id="center" tabindex="0">
-    <!-- Get card from url parameters -->
-    <h1>{{ currentDeck.title }}</h1>
-    <div v-if="hideAnswer" class="card" id="front">
+  <h1>{{ currentDeck.title }}</h1>
+  <div class="flashcard">
+    <router-link :to="`${cardNr}`">
+      <button class="arrow-button left-arrow" @click="goPrevious">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="24"
+          fill="currentColor"
+          class="bi bi-chevron-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+          />
+        </svg>
+      </button>
+    </router-link>
+    <div v-if="hideAnswer" class="flashcard-content" id="front">
       {{ currentCard.question }}
-      <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
     </div>
     <div v-else class="card" id="back">
       {{ currentCard.answer }}
-      <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
     </div>
+    <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
+
+    <router-link :to="`${cardNr}`">
+      <button class="arrow-button" @click="goNext">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="24"
+          fill="currentColor"
+          class="bi bi-chevron-right"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+          />
+        </svg>
+      </button>
+    </router-link>
   </div>
 </template>
 
 <style scoped>
-  #center {
-    width: 45%;
+  .card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .card {
+  .flashcard {
     position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: clamp(9em, 95%, 33em);
-    height: min(31em, 143vw);
+    justify-content: space-between;
     background-color: var(--light);
     border-radius: 10px;
     box-shadow: 0px 5px 11px 4px hsl(0, 0%, 84%);
+    width: 100%;
+    flex-grow: 1;
+  }
+  .flashcard-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   #count {
     position: absolute;
-    top: 3%;
-    right: 4%;
+    top: 15px;
+    right: 20px;
+    color: var(--grey);
+  }
+
+  .arrow-button {
+    background-color: var(--light);
+    color: var(--grey);
+    border: none;
+    padding: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 24px;
+  }
+
+  .arrow-button:hover {
+    color: var(--grey-hover);
   }
 </style>
