@@ -1,76 +1,74 @@
 <script setup>
-import { ref } from "vue";
-import { v4 as uuidv4 } from "uuid";
+  import { ref } from "vue";
+  import { v4 as uuidv4 } from "uuid";
+  import { useFlashcard } from "../stores/flashcards";
 
-const deckCreated = ref(false);
-const newDeck = ref(null);
-const deckName = ref("");
-const nameTaken = ref(false);
-const question = ref("");
-const answer = ref("");
-const cards = ref([]);
+  const flashcards = useFlashcard();
 
-// creates a deck without cards
-function nameDeck() {
-  if (nameAvailable(deckName.value)) {
-    newDeck.value = {
-      title: deckName.value,
-      cards: null,
-      id: uuidv4(),
-    };
-    deckCreated.value = true;
-    nameTaken.value = false;
-    deckName.value = "";
-  } else nameTaken.value = true;
-}
+  const deckCreated = ref(false);
+  const newDeck = ref(null);
+  const deckName = ref("");
+  const nameTaken = ref(false);
+  const question = ref("");
+  const answer = ref("");
+  const cards = ref([]);
 
-// check if deck name is taken
+  // creates a deck without cards
+  function nameDeck() {
+    if (nameAvailable(deckName.value)) {
+      newDeck.value = {
+        title: deckName.value,
+        cards: null,
+        id: uuidv4()
+      };
+      deckCreated.value = true;
+      nameTaken.value = false;
+      deckName.value = "";
+    } else nameTaken.value = true;
+  }
 
-function nameAvailable(name) {
-  const decks = JSON.parse(localStorage.getItem("decks"));
+  // check if deck name is taken
 
-  for (const deck of decks) {
-    console.log("deck: ", deck);
-    console.log("deck.title: ", deck.title);
+  function nameAvailable(name) {
+    const decks = JSON.parse(localStorage.getItem("decks"));
 
-    if (deck.title === name) {
-      console.log(deck.title);
+    for (const deck of decks) {
+      console.log("deck: ", deck);
+      console.log("deck.title: ", deck.title);
 
-      return false;
+      if (deck.title === name) {
+        console.log(deck.title);
+
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // add a card to cards if there´s a question and answer
+  function createCard() {
+    if (question.value && answer.value) {
+      const card = flashcards.createCard(question.value, answer.value);
+      cards.value.push(card);
+      question.value = "";
+      answer.value = "";
+    } else {
+      // flash border on empty textarea
     }
   }
-  return true;
-}
 
-// add a card to cards if there´s a question and answer
-function createCard() {
-  if (question.value && answer.value) {
-    const card = {
-      question: question.value,
-      answer: answer.value,
-      needsPractice: true,
-      id: uuidv4(),
-    };
-    cards.value.push(card);
-    question.value = "";
-    answer.value = "";
-  } else {
-    // flash border on empty textarea
+  // adds cards to deck and add it to localStorage
+  function createDeck() {
+    if (cards.value) {
+      newDeck.value.cards = cards.value;
+    }
+    cards.value = [];
+    let decks = localStorage.getItem("decks");
+    decks = JSON.parse(decks);
+    decks.push(newDeck.value);
+    localStorage.setItem("decks", JSON.stringify(decks));
+    deckCreated.value = false;
   }
-}
-
-// adds cards to deck and add it to localStorage
-function createDeck() {
-  if (cards.value) {
-    newDeck.value.cards = cards.value;
-  }
-  cards.value = [];
-  let decks = localStorage.getItem("decks");
-  decks = JSON.parse(decks);
-  decks.push(newDeck.value);
-  localStorage.setItem("decks", JSON.stringify(decks));
-  deckCreated.value = false;
-}
 </script>
 
 <template>
@@ -115,59 +113,59 @@ function createDeck() {
 </template>
 
 <style scoped>
-section {
-  margin-top: 40px;
-}
-.flex-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-input {
-  box-sizing: border-box;
-  border: 2px solid var(--secondary);
-  border-radius: 10px;
-  background-color: var(--light);
-}
-input:focus {
-  outline: none;
-  border: 2px solid var(--primary);
-}
-.taken {
-  color: var(--warning);
-}
-h2 {
-  text-align: center;
-}
-textarea {
-  width: 300px;
-  height: 200px;
-  box-sizing: border-box;
-  border: 2px solid var(--secondary);
-  border-radius: 10px;
-  background-color: var(--light);
-  resize: none;
-  text-align: center;
-}
-textarea:focus {
-  outline: none;
-  border: 2px solid var(--primary);
-}
-.button-center {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 20px;
-}
-button {
-  padding: 10px 20px;
-  border-radius: 10px;
-  background-color: var(--success);
-  border: none;
-}
-p {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 1.2em;
-}
+  section {
+    margin-top: 40px;
+  }
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  input {
+    box-sizing: border-box;
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    background-color: var(--light);
+  }
+  input:focus {
+    outline: none;
+    border: 2px solid var(--primary);
+  }
+  .taken {
+    color: var(--warning);
+  }
+  h2 {
+    text-align: center;
+  }
+  textarea {
+    width: 300px;
+    height: 200px;
+    box-sizing: border-box;
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    background-color: var(--light);
+    resize: none;
+    text-align: center;
+  }
+  textarea:focus {
+    outline: none;
+    border: 2px solid var(--primary);
+  }
+  .button-center {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+  }
+  button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: var(--success);
+    border: none;
+  }
+  p {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+  }
 </style>
