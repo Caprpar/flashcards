@@ -19,8 +19,8 @@
   const currentDeck = ref([]);
   const currentCard = ref([]);
   const hideAnswer = ref(true);
-
-  const card = flashcard.createCard("vem är kungen", "carl");
+  const currentDeck1 = ref(flashcard.decks);
+  const cardNr = ref(1);
 
   // Variables for count
   const cardIndex = ref(0);
@@ -81,6 +81,21 @@
     // Send current deck to parrent
     emit("on-deck-update", currentDeck.value);
   });
+
+  // Switch between cards
+  function goPrevious() {
+    if (cardNr.value > 1) {
+      cardNr.value--;
+      console.log("Previous");
+    }
+  }
+
+  function goNext() {
+    const cardAmount = currentDeck1.value.cards.length;
+    if (cardNr.value < cardAmount) {
+      cardNr.value++;
+    }
+  }
 </script>
 <template>
   <h1>{{ currentDeck.title }}</h1>
