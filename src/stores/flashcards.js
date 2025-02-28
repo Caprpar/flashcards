@@ -117,6 +117,7 @@ export const useFlashcard = defineStore("flashcard", {
       this.fillDummySessions(deck, 5);
       deck.stats.practice = this.getFlashcardsByStatus(deck, "practice");
       deck.stats.mastered = this.getFlashcardsByStatus(deck, "mastered");
+      deck.stats.neutral = this.getNeutralCards(deck);
       deck.stats.practiceAmount = deck.stats.sessions.length;
       deck.stats.latest = this.getSessionAverage(
         deck.stats.sessions.slice(-1)[0]
@@ -167,6 +168,20 @@ export const useFlashcard = defineStore("flashcard", {
       });
 
       return filteredCards;
+    },
+    /**
+     *
+     * @param {Object} deck deck from createDeck()
+     * @returns Cards which are neither mastered or failed in a sequensed order
+     */
+    getNeutralCards(deck) {
+      let ids = deck.cards.map((card) => card.id);
+      const masteredIds = deck.stats.mastered.map((card) => card.id);
+      const practiceIds = deck.stats.practice.map((card) => card.id);
+      const combined = [...masteredIds, ...practiceIds];
+      // remove mastered and practice from ids
+      const filteredIds = ids.filter((id) => !combined.includes(id));
+      return filteredIds;
     },
     /**Get sessions average score
      *
