@@ -47,6 +47,7 @@ export const useFlashcard = defineStore("flashcard", {
           average: 0, // Total average score 1-100%
           mastered: null, // mastered cards
           practice: null, // cards need practice
+          neutral: null, // rest of the cards
           latest: 0, // latest score 1-100%
           practiceAmount: 0, // total practice amount
           sessions: [] // use sessions data to declare rest of stats
