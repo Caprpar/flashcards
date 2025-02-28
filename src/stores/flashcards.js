@@ -158,12 +158,12 @@ export const useFlashcard = defineStore("flashcard", {
     getMasteredFlashcards(deck) {
       // return array of cards that needs practice
 
-      // goes through all sessions and save all card.ids that dont need practice
-      let masteredCardIds = [];
+      // Fill masteredCardIds with all card ids, then remove id if card dont need pracice
+      let masteredCardIds = deck.cards.map((card) => card.id);
       for (const session of deck.stats.sessions) {
         for (const card of session) {
           if (!card.needsPractice) {
-            masteredCardIds.push(card.id);
+            masteredCardIds = masteredCardIds.filter((id) => id != card.id);
           }
         }
       }
