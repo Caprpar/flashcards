@@ -120,7 +120,8 @@
     <div v-if="hideAnswer" class="flashcard-content" id="front">
       {{ currentCard.question }}
     </div>
-    <div v-else class="card" id="back">
+
+    <div v-else class="flashcard-content" id="back">
       {{ currentCard.answer }}
     </div>
     <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>

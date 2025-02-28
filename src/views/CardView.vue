@@ -1,26 +1,13 @@
 <script setup>
   import FlashCard from "../components/FlashCard.vue";
   import FlashcardButton from "../components/FlashcardButton.vue";
-  import { ref, watch, watchEffect } from "vue";
+  import { ref, watchEffect } from "vue";
   import { useRoute } from "vue-router";
   import { useFlashcard } from "../stores/flashcards";
 
   const route = useRoute();
   const flashcard = useFlashcard();
   const currentDeck = ref(flashcard.decks);
-
-  function goPrevious() {
-    if (cardNr.value > 1) {
-      cardNr.value--;
-    }
-  }
-
-  function goNext() {
-    const cardAmount = currentDeck.value.cards.length;
-    if (cardNr.value < cardAmount) {
-      cardNr.value++;
-    }
-  }
 
   function updateDeck(deck) {
     currentDeck.value = deck;
@@ -110,31 +97,9 @@
     height: 15px;
   }
   .correct {
-    /* background-color: #47973e; */
     background-color: var(--success);
   }
   .wrong {
-    background-color: #973e3e;
     background-color: var(--danger);
-  }
-
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-    width: clamp(9em, 95%, 33em);
-    margin-top: 20px;
-  }
-  .flashcard {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .arrow {
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 8px;
   }
 </style>
