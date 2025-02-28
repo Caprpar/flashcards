@@ -13,7 +13,7 @@
     currentDeck.value = deck;
   }
 
-  function dotStyle(currentCard, index) {
+  function dotStyle(currentCard) {
     const cardIndex = 1 + currentDeck.value.cards.indexOf(currentCard);
     let styleSettings = "dot ";
     watchEffect(() => {
@@ -37,9 +37,9 @@
       <div id="answer-indicator">
         <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
         <div
-          v-for="(card, index) in currentDeck.cards"
+          v-for="card in currentDeck.cards"
           :key="card.id"
-          :class="dotStyle(card, index)"
+          :class="dotStyle(card)"
         />
       </div>
       <div class="buttons-container">
