@@ -42,7 +42,15 @@ export const useFlashcard = defineStore("flashcard", {
       const deck = {
         title,
         cards,
-        id: uuidv4()
+        id: uuidv4(),
+        stats: {
+          average: 0, // Total average score 1-100%
+          easiest: null, // easiest card
+          hardest: null, // hardest card
+          latest: 0, // latest score 1-100%
+          practiceAmount: 0, // total practice amount
+          sessions: [] // use sessions data to declare rest of stats
+        }
       };
       // this.decks.push(deck);
       return deck;
@@ -52,6 +60,10 @@ export const useFlashcard = defineStore("flashcard", {
     },
     saveToLocal() {
       localStorage.setItem("decks", JSON.stringify(this.decks));
+    },
+    pushStats(deckId, session) {
+      const deck = this.getDeck(deckId);
+      deck.stats.sessions.push(session);
     },
     /** Generates a multiplication dummydeck 10 decks with 12 cards in each deck
      * @returns deck object
@@ -82,6 +94,35 @@ export const useFlashcard = defineStore("flashcard", {
      */
     getDecks() {
       return this.decks;
+    },
+    getDeck(deckId) {
+      return this.decks.filter((deck) => deck.id === deckId);
+    },
+    getMasteredFlashcards(session) {
+      // return array of cards that needs practice
+    },
+    getEasiestCard(deck) {
+      // return easiest card from sessions
+    },
+    getHardestCard(deck) {
+      // return easiest card from sessions
+    },
+    getRequiresPracticeCards(deck, session) {
+      // return array of cards that needs practice
+      let needsPracticeIds = [];
+      for (const deckArray of session) {
+        for (const card of deckArray) {
+          if (card.needsPractice) {
+            needsPracticeIds.push(card.id);
+          }
+        }
+      }
+      needsPracticeIds = set(needsPracticeIds); // Remove duplicate ids
+      // retrive cards with ids from needsPractice
+      const requiresPractice = needsPracticeIds.map((id) => {
+        deck.cards.filter((card) => card.id === id);
+      });
+      return requiresPractice;
     }
   }
 });
