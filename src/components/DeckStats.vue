@@ -17,7 +17,6 @@
       <h1>
         {{ deck.title }}
       </h1>
-      <span>average: {{ deck.stats.average }}%</span>
       <ul class="dots">
         <li
           v-for="deck in deck.stats.mastered"
@@ -38,8 +37,9 @@
     </div>
     <div id="info">
       <ul>
-        <li>latest: {{ deck.stats.latest }}</li>
-        <li>times: {{ deck.stats.practiceAmount }}</li>
+        <li>Average: {{ deck.stats.average }}%</li>
+        <li>Latest score: {{ deck.stats.latest }}%</li>
+        <li>Times practiced: {{ deck.stats.practiceAmount }}</li>
       </ul>
     </div>
     <div id="cards">
@@ -84,9 +84,10 @@
       "title"
       "info"
       "cards";
-    padding: 0.5em;
+    padding: 0.9em;
     /* box-shadow: 0 0 hsl(0, 0%, 25%); */
-    border: solid;
+    /* border: solid; */
+    border-bottom: dotted #7c7c7c;
     border-radius: 1em;
     width: clamp(10em, 95%, 45em);
     height: 30em;
@@ -97,7 +98,7 @@
   }
   #info {
     display: flex;
-    align-items: end;
+    align-items: start;
     /* border: solid; */
     grid-area: info;
   }
@@ -179,6 +180,12 @@
       bottom: 1em;
       right: 1em;
       transform: rotate(16deg);
+    }
+    #info {
+      display: flex;
+      align-items: end;
+      /* border: solid; */
+      grid-area: info;
     }
   }
 </style>

@@ -23,7 +23,7 @@ export default createRouter({
     },
     {
       component: StatisticsView,
-      path: "/statistics"
+      path: "/statistics/:deckId"
     },
     {
       component: CreateDeckView,

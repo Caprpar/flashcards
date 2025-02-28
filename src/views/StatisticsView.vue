@@ -1,17 +1,27 @@
 <script setup>
   import { useFlashcard } from "../stores/flashcards";
   import { ref } from "vue";
+  import { useRoute } from "vue-router";
   import DeckStats from "../components/DeckStats.vue";
+
   const flashcard = useFlashcard();
   const decks = ref(flashcard.decks);
   const stats = ref("in stats");
+  const route = useRoute();
 </script>
 
 <template>
   <main>
-    <DeckStats :deck="flashcard.decks[0]" />
+    <DeckStats :deck="flashcard.decks[route.params.deckId - 1]" />
     <ul>
-      <li v-for="deck in decks" :key="deck.id">{{ deck.title }}</li>
+      <router-link
+        class="nodeco"
+        v-for="deck in decks"
+        :key="deck.id"
+        :to="'/statistics/' + Number(decks.indexOf(deck) + 1)"
+      >
+        <li>{{ deck.title }}</li>
+      </router-link>
     </ul>
   </main>
 </template>
@@ -38,16 +48,30 @@
     align-items: center;
     width: clamp(10em, 95%, 45em);
   }
+  li:hover {
+    background-color: var(--primary);
+    /* outline: solid 6px var(--primary); */
+    color: white;
+  }
   li {
-    color: var(--light);
+    border: solid 3px var(--primary);
+    color: var(--primary);
     font-weight: bold;
     list-style-type: none;
-    background-color: var(--primary);
+    /* background-color: var(--primary); */
     width: fit-content;
-
-    padding: 0.3em;
+    border-radius: 8px;
+    padding: 0.1em;
+  }
+  .nodeco {
+    text-decoration: none;
   }
   DeckStats {
     grid-area: card;
+  }
+  @media screen and (min-width: 767px) {
+    li {
+      padding: 0.5em;
+    }
   }
 </style>
