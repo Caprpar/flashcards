@@ -21,6 +21,7 @@ export default [
       "vue/multiline-html-element-content-newline": "off",
       "vue/order-in-components": "off",
       "vue/singleline-html-element-content-newline": "off",
+      
     },
   },
 ];
