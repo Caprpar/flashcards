@@ -130,12 +130,25 @@ export const useFlashcard = defineStore("flashcard", {
     },
     getMasteredFlashcards(deck) {
       // return array of cards that needs practice
-      const requiresPractice = this.getRequiresPracticeCards(deck);
-      // filter out cards that dont needs practice
-      const masteredCards = requiresPractice.map((practiceCard) => {
-        deck.cards.filter((deckCard) => practiceCard.id != deckCard.id);
+      let masteredCardIds = [];
+      for (const session of deck.stats.sessions) {
+        for (const card of session) {
+          if (!card.needsPractice) {
+            masteredCardIds.push(card.id);
+          }
+        }
+      }
+      masteredCardIds = new Set(masteredCardIds); // Remove duplicate ids
+      // retrive cards with ids from needsPractice
+      let isMastered = [];
+      Array.from(masteredCardIds).map((id) => {
+        deck.cards.filter((card) => {
+          if (card.id === id) {
+            isMastered.push(card);
+          }
+        });
       });
-      return masteredCards;
+      return isMastered;
     }
   },
   getters: {
