@@ -45,8 +45,8 @@ export const useFlashcard = defineStore("flashcard", {
         id: uuidv4(),
         stats: {
           average: 0, // Total average score 1-100%
-          easiest: null, // easiest card
-          hardest: null, // hardest card
+          mastered: null, // mastered cards
+          practice: null, // cards need practice
           latest: 0, // latest score 1-100%
           practiceAmount: 0, // total practice amount
           sessions: [] // use sessions data to declare rest of stats
@@ -102,7 +102,7 @@ export const useFlashcard = defineStore("flashcard", {
           cardCopy.hasAnswer = true;
           // 25% to answer wrong
           cardCopy.needsPractice =
-            Math.floor(Math.random() * 4) + 1 === 1 ? true : false;
+            Math.floor(Math.random() * 2) + 1 === 1 ? true : false;
           session.push(cardCopy);
         }
         sessions.push(session);
@@ -114,71 +114,58 @@ export const useFlashcard = defineStore("flashcard", {
      */
     fillDummyData(deck) {
       this.fillDummySessions(deck, 5);
-      deck.stats.hardest = this.getRequiresPracticeCards(deck);
-      deck.stats.easiest = this.getMasteredFlashcards(deck);
+      deck.stats.practice = this.getFlashcardsByStatus(deck, "practice");
+      deck.stats.mastered = this.getFlashcardsByStatus(deck, "mastered");
       deck.stats.practiceAmount = deck.stats.sessions.length;
       deck.stats.latest = this.getSessionAverage(
         deck.stats.sessions.slice(-1)[0]
       );
       deck.stats.average = this.getTotalAverage(deck.stats.sessions);
     },
-    /** Goes through decks sessions and decide which cards are in need for practice
-     *
-     * @param {Object} deck object form createDeck()
-     * @returns Array containing card that requires practice
-     */
-    getRequiresPracticeCards(deck) {
-      // return array of cards that needs practice
-      let needsPracticeIds = [];
-      // goes through all sessions and save all card.ids that needsPractice
-      for (const session of deck.stats.sessions) {
-        for (const card of session) {
-          if (card.needsPractice) {
-            needsPracticeIds.push(card.id);
-          }
-        }
-      }
-      needsPracticeIds = new Set(needsPracticeIds); // Remove duplicate ids
-      // save cards with ids from needsPractice to array
-      let requiresPractice = [];
-      Array.from(needsPracticeIds).map((id) => {
-        deck.cards.filter((card) => {
-          if (card.id === id) {
-            requiresPractice.push(card);
-          }
-        });
-      });
-      return requiresPractice;
-    },
-    /** From all sessions filter out cards that user mastered
+    /** Returns either the cards that needs practice or cards that are masterd from latest sessions
      *
      * @param {Object} deck from createDeck()
-     * @returns card that user masters
+     * @param {String} status practice / mastered
+     * @param {Number} latestSessionAmount if latestSessionAmount = 2 it will only compare the last two sessions
+     * @returns Card array of either mastered or cards that needs practice
      */
-    getMasteredFlashcards(deck) {
-      // return array of cards that needs practice
-
+    getFlashcardsByStatus(deck, status = "practice", latestSessionAmount = 2) {
       // Fill masteredCardIds with all card ids, then remove id if card dont need pracice
-      let masteredCardIds = deck.cards.map((card) => card.id);
-      for (const session of deck.stats.sessions) {
+      let flashcardIds = deck.cards.map((card) => card.id);
+      for (const session of deck.stats.sessions.splice(
+        latestSessionAmount * -1
+      )) {
         for (const card of session) {
-          if (!card.needsPractice) {
-            masteredCardIds = masteredCardIds.filter((id) => id != card.id);
+          if (status === "practice") {
+            if (card.needsPractice) {
+              flashcardIds = flashcardIds.filter((id) => id != card.id);
+            }
+          } else if (status === "mastered") {
+            if (!card.needsPractice) {
+              flashcardIds = flashcardIds.filter((id) => id != card.id);
+            }
+          } else {
+            throw new Error(
+              `status has to be either practice or mastered not: ${status} `
+            );
           }
         }
       }
-      masteredCardIds = new Set(masteredCardIds); // Remove duplicate ids
+
+      flashcardIds = new Set(flashcardIds); // Remove duplicate ids
       // retrive cards with ids from needsPractice
-      let isMastered = [];
+      let filteredCards = [];
+
       // save cards with ids from masteredCardIds to array
-      Array.from(masteredCardIds).map((id) => {
+      Array.from(flashcardIds).map((id) => {
         deck.cards.filter((card) => {
           if (card.id === id) {
-            isMastered.push(card);
+            filteredCards.push(card);
           }
         });
       });
-      return isMastered;
+
+      return filteredCards;
     },
     /**Get sessions average score
      *
