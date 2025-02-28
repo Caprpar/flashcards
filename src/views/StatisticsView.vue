@@ -1,26 +1,53 @@
 <script setup>
   import { useFlashcard } from "../stores/flashcards";
   import { ref } from "vue";
+  import DeckStats from "../components/DeckStats.vue";
   const flashcard = useFlashcard();
-  const deck = ref(flashcard.decks[0]);
+  const decks = ref(flashcard.decks);
   const stats = ref("in stats");
 </script>
 
 <template>
   <main>
-    <h1>{{ deck.title }}</h1>
+    <DeckStats :deck="flashcard.decks[0]" />
     <ul>
-      <li>{{ deck.stats.average }}</li>
-      <li>{{ deck.stats.latest }}</li>
-      <li>Are mastered</li>
-      <li v-for="card in deck.stats.mastered" :key="card.id">{{ card }}</li>
-      <li>need practice</li>
-      <li v-for="card in deck.stats.practice" :key="card.id">{{ card }}</li>
-    </ul>
-    <ul>
-      <li v-for="deck in deck.stats.sessions[0]" :key="deck.id">{{ deck }}</li>
+      <li v-for="deck in decks" :key="deck.id">{{ deck.title }}</li>
     </ul>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+  main {
+    padding-top: 1em;
+    display: flex;
+    grid-template-areas:
+      "links"
+      "card";
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    gap: 1em;
+  }
+  ul {
+    display: inline-grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5em;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    width: clamp(10em, 95%, 45em);
+  }
+  li {
+    color: var(--light);
+    font-weight: bold;
+    list-style-type: none;
+    background-color: var(--primary);
+    width: fit-content;
+
+    padding: 0.3em;
+  }
+  DeckStats {
+    grid-area: card;
+  }
+</style>
