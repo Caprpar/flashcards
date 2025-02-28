@@ -83,7 +83,7 @@ export const useFlashcard = defineStore("flashcard", {
           const card = this.createCard(question, answer);
           deck.cards.push(card);
         }
-        this.fillDummySessions(deck, 5);
+        this.fillDummyData(deck);
         decks.push(deck);
       }
       return decks;
@@ -100,6 +100,42 @@ export const useFlashcard = defineStore("flashcard", {
         }
         deck.stats.sessions.push(session);
       }
+    },
+    fillDummyData(deck) {
+      this.fillDummySessions(deck, 5);
+      deck.stats.hardest = this.getRequiresPracticeCards(deck);
+      deck.stats.easiest = this.getMasteredFlashcards(deck);
+    },
+    getRequiresPracticeCards(deck) {
+      // return array of cards that needs practice
+      let needsPracticeIds = [];
+      for (const session of deck.stats.sessions) {
+        for (const card of session) {
+          if (card.needsPractice) {
+            needsPracticeIds.push(card.id);
+          }
+        }
+      }
+      needsPracticeIds = new Set(needsPracticeIds); // Remove duplicate ids
+      // retrive cards with ids from needsPractice
+      let requiresPractice = [];
+      Array.from(needsPracticeIds).map((id) => {
+        deck.cards.filter((card) => {
+          if (card.id === id) {
+            requiresPractice.push(card);
+          }
+        });
+      });
+      return requiresPractice;
+    },
+    getMasteredFlashcards(deck) {
+      // return array of cards that needs practice
+      const requiresPractice = this.getRequiresPracticeCards(deck);
+      // filter out cards that dont needs practice
+      const masteredCards = requiresPractice.map((practiceCard) => {
+        deck.cards.filter((deckCard) => practiceCard.id != deckCard.id);
+      });
+      return masteredCards;
     }
   },
   getters: {
@@ -117,32 +153,6 @@ export const useFlashcard = defineStore("flashcard", {
     },
     getHardestCard(deck) {
       // return easiest card from sessions
-    },
-    getRequiresPracticeCards(deck, session) {
-      // return array of cards that needs practice
-      let needsPracticeIds = [];
-      for (const deckArray of session) {
-        for (const card of deckArray) {
-          if (card.needsPractice) {
-            needsPracticeIds.push(card.id);
-          }
-        }
-      }
-      needsPracticeIds = set(needsPracticeIds); // Remove duplicate ids
-      // retrive cards with ids from needsPractice
-      const requiresPractice = needsPracticeIds.map((id) => {
-        deck.cards.filter((card) => card.id === id);
-      });
-      return requiresPractice;
-    },
-    getMasteredFlashcards(deck, session) {
-      // return array of cards that needs practice
-      const requiresPractice = this.getRequiresPracticeCards(deck, session);
-      // filter out cards that dont needs practice
-      const masteredCards = requiresPractice.map((practiceCard) => {
-        deck.cards.filter((deckCard) => practiceCard.id != deckCard.id);
-      });
-      return masteredCards;
     }
   }
 });
