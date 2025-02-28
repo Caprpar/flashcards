@@ -4,9 +4,9 @@
       fluid
       class="d-flex justify-content-between align-items-center"
     >
-      <!-- Namn/logga -->
+      <!-- Name/logo -->
       <b-navbar-brand href="#" class="text-white">Glare</b-navbar-brand>
-      <!-- Hamburgermeny toggle-->
+      <!-- Hamburgermenu toggle-->
       <b-navbar-toggle @click="toggleMenu">
         <template #default>
           <span v-if="!isMenuOpen">
@@ -18,10 +18,15 @@
     </b-container>
   </b-navbar>
 
+<<<<<<< HEAD:src/components/NavbarComponent.vue
   <!-- Mörk overlay trycks för att stänga meny-->
   <div v-if="isMenuOpen" class="overlay" @click="closeMenu" />
+=======
+  <!-- Dark overlay is pressable to close menu-->
+  <div v-if="isMenuOpen" class="overlay" @click="closeMenu"></div>
+>>>>>>> main:src/components/Navbar.vue
 
-  <!-- Hamburgermeny slide från höger -->
+  <!-- Hamburgermenu slides in from the right -->
   <transition name="slide">
     <div v-if="isMenuOpen" class="mobile-menu custom-navbar">
       <b-nav vertical>
@@ -48,7 +53,7 @@
     BNavItem
   } from "bootstrap-vue-next";
 
-  // Hamburgermeny toggle logik
+  // Hamburgermenu toggle logic
   const isMenuOpen = ref(false);
 
   function toggleMenu() {
@@ -61,28 +66,28 @@
 </script>
 
 <style scoped>
-  /* Navbar bakgrundsfärg */
+  /* Navbar backgroundcolor */
   .custom-navbar {
     background-color: #023c40 !important;
   }
 
-  /* Hamburgermeny toggle */
+  /* Hamburgermenu toggle */
   :deep(.navbar-brand),
   :deep(.navbar-toggler) {
     transform: translateY(-2px);
   }
 
-  /* Hamburgermany toggle visas alltid oavsett skärmstorlek */
+  /* Hamburgermenu toggle always shows */
   :deep(.navbar-toggler) {
     display: block !important;
   }
 
-  /* Bootstraps egen hamburgermeny ikon */
+  /* Bootstraps own hamburgermenu icon */
   :deep(.navbar-toggler-icon) {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   }
 
-  /* X ikon matchar bootstraps hamburgermeny ikon */
+  /* X icon matches bootstraps hamburgermenu icon dimensions */
   .custom-close-icon {
     font-size: 2.5rem;
     line-height: 1;
@@ -94,7 +99,7 @@
     margin-top: -10px;
   }
 
-  /* Länkar */
+  /* Links */
   :deep(.nav-link),
   :deep(.nav-link:visited) {
     color: #fff !important;
@@ -107,7 +112,7 @@
     transform: scale(1.02);
   }
 
-  /* Mörk overlay bredvid öppen hamburgermeny */
+  /* Dark overlay next to open hamburgermenu */
   .overlay {
     position: fixed;
     top: 56px;
@@ -118,7 +123,7 @@
     z-index: 1020;
   }
 
-  /* Hamburgermeny */
+  /* Hamburgermenu */
   .mobile-menu {
     position: fixed;
     top: 56px;
@@ -132,7 +137,7 @@
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   }
 
-  /* Hamburgermeny animation */
+  /* Hamburgermenu animation */
   .slide-enter-active,
   .slide-leave-active {
     transition: transform 0.3s ease;
