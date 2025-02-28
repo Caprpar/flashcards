@@ -83,9 +83,23 @@ export const useFlashcard = defineStore("flashcard", {
           const card = this.createCard(question, answer);
           deck.cards.push(card);
         }
+        this.fillDummySessions(deck, 5);
         decks.push(deck);
       }
       return decks;
+    },
+    fillDummySessions(deck, amount) {
+      const cards = deck.cards;
+      for (let index = 0; index < amount; index++) {
+        const session = [];
+        for (const card of cards) {
+          card.hasAnswer = true;
+          card.needsPractice =
+            Math.floor(Math.random() * 4) + 1 === 1 ? true : false;
+          session.push(card);
+        }
+        deck.stats.sessions.push(session);
+      }
     }
   },
   getters: {
@@ -97,9 +111,6 @@ export const useFlashcard = defineStore("flashcard", {
     },
     getDeck(deckId) {
       return this.decks.filter((deck) => deck.id === deckId);
-    },
-    getMasteredFlashcards(session) {
-      // return array of cards that needs practice
     },
     getEasiestCard(deck) {
       // return easiest card from sessions
@@ -123,6 +134,15 @@ export const useFlashcard = defineStore("flashcard", {
         deck.cards.filter((card) => card.id === id);
       });
       return requiresPractice;
+    },
+    getMasteredFlashcards(deck, session) {
+      // return array of cards that needs practice
+      const requiresPractice = this.getRequiresPracticeCards(deck, session);
+      // filter out cards that dont needs practice
+      const masteredCards = requiresPractice.map((practiceCard) => {
+        deck.cards.filter((deckCard) => practiceCard.id != deckCard.id);
+      });
+      return masteredCards;
     }
   }
 });
