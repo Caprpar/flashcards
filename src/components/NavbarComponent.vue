@@ -18,13 +18,8 @@
     </b-container>
   </b-navbar>
 
-<<<<<<< HEAD:src/components/NavbarComponent.vue
-  <!-- Mörk overlay trycks för att stänga meny-->
-  <div v-if="isMenuOpen" class="overlay" @click="closeMenu" />
-=======
   <!-- Dark overlay is pressable to close menu-->
-  <div v-if="isMenuOpen" class="overlay" @click="closeMenu"></div>
->>>>>>> main:src/components/Navbar.vue
+  <div v-if="isMenuOpen" class="overlay" @click="closeMenu" />
 
   <!-- Hamburgermenu slides in from the right -->
   <transition name="slide">
