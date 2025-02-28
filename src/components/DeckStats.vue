@@ -110,6 +110,10 @@
     gap: 1em;
   }
 
+  .card:hover {
+    /* transform: scale(1.1); */
+    /* cursor: pointer; */
+  }
   .card {
     position: relative;
     display: flex;
