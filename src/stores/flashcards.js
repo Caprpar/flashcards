@@ -88,6 +88,10 @@ export const useFlashcard = defineStore("flashcard", {
       }
       return decks;
     },
+    /** Fill deck.stat.sessions with given amount of random sessions
+     * @param {Object} deck deck object from createDeck()
+     * @param {Number} amount amount of dummy session to generate
+     */
     fillDummySessions(deck, amount) {
       const cards = deck.cards;
       let sessions = [];
@@ -96,6 +100,7 @@ export const useFlashcard = defineStore("flashcard", {
         for (const card of cards) {
           const cardCopy = { ...card };
           cardCopy.hasAnswer = true;
+          // 25% to answer wrong
           cardCopy.needsPractice =
             Math.floor(Math.random() * 4) + 1 === 1 ? true : false;
           session.push(cardCopy);
@@ -104,6 +109,9 @@ export const useFlashcard = defineStore("flashcard", {
       }
       deck.stats.sessions = sessions;
     },
+    /** From dummysessions get data and fill deck.stats
+     * @param {Object} deck deck object from createDeck()
+     */
     fillDummyData(deck) {
       this.fillDummySessions(deck, 5);
       deck.stats.hardest = this.getRequiresPracticeCards(deck);
@@ -114,9 +122,15 @@ export const useFlashcard = defineStore("flashcard", {
       );
       deck.stats.average = this.getTotalAverage(deck.stats.sessions);
     },
+    /** Goes through decks sessions and decide which cards are in need for practice
+     *
+     * @param {Object} deck object form createDeck()
+     * @returns Array containing card that requires practice
+     */
     getRequiresPracticeCards(deck) {
       // return array of cards that needs practice
       let needsPracticeIds = [];
+      // goes through all sessions and save all card.ids that needsPractice
       for (const session of deck.stats.sessions) {
         for (const card of session) {
           if (card.needsPractice) {
@@ -125,7 +139,7 @@ export const useFlashcard = defineStore("flashcard", {
         }
       }
       needsPracticeIds = new Set(needsPracticeIds); // Remove duplicate ids
-      // retrive cards with ids from needsPractice
+      // save cards with ids from needsPractice to array
       let requiresPractice = [];
       Array.from(needsPracticeIds).map((id) => {
         deck.cards.filter((card) => {
@@ -136,8 +150,15 @@ export const useFlashcard = defineStore("flashcard", {
       });
       return requiresPractice;
     },
+    /** From all sessions filter out cards that user mastered
+     *
+     * @param {Object} deck from createDeck()
+     * @returns card that user masters
+     */
     getMasteredFlashcards(deck) {
       // return array of cards that needs practice
+
+      // goes through all sessions and save all card.ids that dont need practice
       let masteredCardIds = [];
       for (const session of deck.stats.sessions) {
         for (const card of session) {
@@ -149,6 +170,7 @@ export const useFlashcard = defineStore("flashcard", {
       masteredCardIds = new Set(masteredCardIds); // Remove duplicate ids
       // retrive cards with ids from needsPractice
       let isMastered = [];
+      // save cards with ids from masteredCardIds to array
       Array.from(masteredCardIds).map((id) => {
         deck.cards.filter((card) => {
           if (card.id === id) {
@@ -158,6 +180,11 @@ export const useFlashcard = defineStore("flashcard", {
       });
       return isMastered;
     },
+    /**Get sessions average score
+     *
+     * @param {Array} session array of cards with data from a session
+     * @returns average score from session
+     */
     getSessionAverage(session) {
       let questions = session.length;
       let score = 0;
@@ -167,6 +194,11 @@ export const useFlashcard = defineStore("flashcard", {
       let average = (score / questions) * 100;
       return average.toFixed();
     },
+    /** Get total average score from multiple sessions
+     *
+     * @param {Array} sessions Array containng multiple sessions
+     * @returns
+     */
     getTotalAverage(sessions) {
       let score = 0;
       for (const session of sessions) {
