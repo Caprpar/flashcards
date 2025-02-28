@@ -90,21 +90,29 @@ export const useFlashcard = defineStore("flashcard", {
     },
     fillDummySessions(deck, amount) {
       const cards = deck.cards;
+      let sessions = [];
       for (let index = 0; index < amount; index++) {
-        const session = [];
+        let session = [];
         for (const card of cards) {
-          card.hasAnswer = true;
-          card.needsPractice =
+          const cardCopy = { ...card };
+          cardCopy.hasAnswer = true;
+          cardCopy.needsPractice =
             Math.floor(Math.random() * 4) + 1 === 1 ? true : false;
-          session.push(card);
+          session.push(cardCopy);
         }
-        deck.stats.sessions.push(session);
+        sessions.push(session);
       }
+      deck.stats.sessions = sessions;
     },
     fillDummyData(deck) {
       this.fillDummySessions(deck, 5);
       deck.stats.hardest = this.getRequiresPracticeCards(deck);
       deck.stats.easiest = this.getMasteredFlashcards(deck);
+      deck.stats.practiceAmount = deck.stats.sessions.length;
+      deck.stats.latest = this.getSessionAverage(
+        deck.stats.sessions.slice(-1)[0]
+      );
+      deck.stats.average = this.getTotalAverage(deck.stats.sessions);
     },
     getRequiresPracticeCards(deck) {
       // return array of cards that needs practice
@@ -149,6 +157,22 @@ export const useFlashcard = defineStore("flashcard", {
         });
       });
       return isMastered;
+    },
+    getSessionAverage(session) {
+      let questions = session.length;
+      let score = 0;
+      session.forEach((card) => {
+        score += card.needsPractice ? 0 : 1;
+      });
+      let average = (score / questions) * 100;
+      return average.toFixed();
+    },
+    getTotalAverage(sessions) {
+      let score = 0;
+      for (const session of sessions) {
+        score += Number(this.getSessionAverage(session));
+      }
+      return score / sessions.length;
     }
   },
   getters: {
@@ -160,12 +184,6 @@ export const useFlashcard = defineStore("flashcard", {
     },
     getDeck(deckId) {
       return this.decks.filter((deck) => deck.id === deckId);
-    },
-    getEasiestCard(deck) {
-      // return easiest card from sessions
-    },
-    getHardestCard(deck) {
-      // return easiest card from sessions
     }
   }
 });
