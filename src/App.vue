@@ -1,5 +1,5 @@
 <script setup>
-  import Navbar from "./components/Navbar.vue";
+  import NavbarComponent from "./components/NavbarComponent.vue";
   import { RouterView } from "vue-router";
   import FlashCard from "./components/FlashCard.vue";
 
@@ -18,7 +18,7 @@
 </script>
 
 <template>
-  <Navbar />
+  <NavbarComponent />
   <RouterView />
   <!-- <CardCollection />> -->
 </template>
