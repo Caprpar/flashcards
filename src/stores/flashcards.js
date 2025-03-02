@@ -134,7 +134,7 @@ export const useFlashcard = defineStore("flashcard", {
     getFlashcardsByStatus(deck, status = "practice", latestSessionAmount = 2) {
       // Fill masteredCardIds with all card ids, then remove id if card dont need pracice
       let flashcardIds = deck.cards.map((card) => card.id);
-      for (const session of deck.stats.sessions.splice(
+      for (const session of deck.stats.sessions.slice(
         latestSessionAmount * -1
       )) {
         for (const card of session) {
@@ -179,6 +179,7 @@ export const useFlashcard = defineStore("flashcard", {
       const masteredIds = deck.stats.mastered.map((card) => card.id);
       const practiceIds = deck.stats.practice.map((card) => card.id);
       const combined = [...masteredIds, ...practiceIds];
+
       // remove mastered and practice from ids
       const filteredIds = ids.filter((id) => !combined.includes(id));
       return filteredIds;

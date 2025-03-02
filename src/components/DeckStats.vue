@@ -34,6 +34,16 @@
           class="dot grey"
         />
       </ul>
+      <ul v-for="session in deck.stats.sessions" :key="session.id" class="dots">
+        <li v-for="card in session" :key="card.id">
+          <div v-if="card.hasAnswer && card.needsPractice" class="dot green" />
+          <div
+            v-else-if="card.hasAnswer && !card.needsPractice"
+            class="dot red"
+          />
+          <div v-else class="dot grey" />
+        </li>
+      </ul>
     </div>
     <div id="info">
       <ul>
@@ -121,7 +131,7 @@
     align-items: center;
     background-color: var(--light);
     border: none;
-    box-shadow: 0 0 5px 1px hsl(0, 0%, 50%);
+    box-shadow: 0 0 3px 0px hsl(0, 0%, 50%);
     height: 100%;
   }
   .stamp {
@@ -131,10 +141,10 @@
     transform: rotate(16deg);
   }
   .thumbs-up {
-    color: rgb(12, 155, 12);
+    color: rgb(0, 189, 0);
   }
   .thumbs-down {
-    color: rgb(182, 7, 7);
+    color: rgb(204, 1, 1);
   }
   .dot {
     width: 10px;

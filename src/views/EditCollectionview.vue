@@ -43,4 +43,3 @@
   }
   onMounted(fetchDecks);
 </script>
-<style></style>
