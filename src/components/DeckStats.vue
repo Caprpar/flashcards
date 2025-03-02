@@ -17,6 +17,7 @@
       <h1>
         {{ deck.title }}
       </h1>
+      <!-- Displays how many cards that are mastered, how many are fatal and, amounts of neutral cards -->
       <ul class="dots">
         <li
           v-for="deck in deck.stats.mastered"
@@ -34,6 +35,7 @@
           class="dot grey"
         />
       </ul>
+      <!-- Draws out all sessions progress -->
       <ul v-for="session in deck.stats.sessions" :key="session.id" class="dots">
         <li v-for="card in session" :key="card.id">
           <div v-if="card.hasAnswer && card.needsPractice" class="dot green" />
@@ -53,7 +55,7 @@
       </ul>
     </div>
     <div id="cards">
-      <div class="card">
+      <div class="card" v-if="deck.stats.mastered[0].question">
         {{ deck.stats.mastered[0].question }}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +70,7 @@
           />
         </svg>
       </div>
-      <div class="card">
+      <div class="card" v-if="deck.stats.practice[0].question">
         {{ deck.stats.practice[0].question }}
         <svg
           xmlns="http://www.w3.org/2000/svg"
