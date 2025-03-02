@@ -88,36 +88,56 @@
 </template>
 
 <style scoped>
+  * {
+    /* border: solid; */
+  }
   section {
     display: grid;
     grid-template-areas:
-      "title"
-      "info"
-      "cards";
+      "title info"
+      "cards cards";
     padding: 0.9em;
     /* box-shadow: 0 0 hsl(0, 0%, 25%); */
     /* border: solid; */
     border-bottom: dotted var(--dark);
     border-radius: 1em;
     width: clamp(10em, 95%, 45em);
-    height: 30em;
-    grid-template-rows: 1fr 1fr 3fr;
+    grid-template-rows: 1fr 18em;
   }
   h1 {
-    border-bottom: dashed var(--dark);
-    padding-bottom: 0.2em;
+    /* border-bottom: dashed var(--dark); */
+    padding-bottom: 0.4em;
   }
   #title {
     grid-area: title;
-    border-bottom: solid;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 1em;
+    /* border-bottom: solid 1px #707070; */
   }
-  #average {
+  .dot {
+    width: 2.3vw;
+    height: 2.3vw;
+    border-radius: 100px;
   }
-  #total {
+  .dots {
+    display: flex;
+    justify-content: space-around;
+    width: fit-content;
+    gap: 0.3em;
+    gap: 6px;
+    margin-bottom: 0.2em;
   }
-  #practice-amount {
+  .green {
+    background-color: var(--success);
   }
-
+  .red {
+    background-color: var(--danger);
+  }
+  .grey {
+    background-color: var(--grey);
+  }
   .stat-title {
     display: flex;
     margin: 0;
@@ -130,6 +150,7 @@
   }
 
   .stat {
+    /* Standard color are yellow, change rbg with :style="" in element to set customised color */
     --r: 172;
     --b: 91;
     --g: 44;
@@ -142,8 +163,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 4em;
-    height: 4em;
+    width: clamp(13vw, 5em, 6em);
+    height: clamp(13vw, 13vw, 15px);
     background-color: var(--color-o);
     border: double 0.4em var(--color);
     color: var(--color);
@@ -160,20 +181,30 @@
   }
   #info > ul {
     display: flex;
-    width: 100%;
+    flex-wrap: wrap;
+    width: clamp(1em, 100%, 29em);
     height: 100%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: end;
   }
   #info {
     grid-area: info;
+    display: flex;
+    padding: 0 1em;
+    justify-content: center;
   }
   #cards {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     grid-area: cards;
+    /* height: clamp(10em, 100%, 16em);
+    height: 17em;
+    height: 20em; */
+    height: 100%;
     gap: 1em;
+    flex-grow: 1;
+    padding-top: 1em;
   }
 
   .card:hover {
@@ -202,25 +233,6 @@
   .thumbs-down {
     color: rgb(204, 1, 1);
   }
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 100px;
-  }
-  .dots {
-    display: flex;
-    gap: 0.3em;
-    margin-bottom: 0.2em;
-  }
-  .green {
-    background-color: var(--success);
-  }
-  .red {
-    background-color: var(--danger);
-  }
-  .grey {
-    background-color: var(--grey);
-  }
 
   ul {
     padding: 0;
@@ -241,6 +253,10 @@
       grid-template-columns: auto 1fr;
       grid-template-rows: none;
       height: 21em;
+      grid-template-rows: 1fr 1fr;
+    }
+    #title {
+      padding-bottom: 0;
     }
     #cards {
       padding-left: 1em;
@@ -251,11 +267,23 @@
       right: 1em;
       transform: rotate(16deg);
     }
+    .stat {
+      width: 4em;
+      height: 4em;
+    }
+    #info > ul {
+      justify-content: space-around;
+    }
     #info {
       display: flex;
       align-items: end;
+      padding: 1em 0;
       /* border: solid; */
       grid-area: info;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
     }
   }
 </style>

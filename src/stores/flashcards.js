@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 export const useFlashcard = defineStore("flashcard", {
   state: () => ({
     /** The global variable that contains all current user decks*/
-    decks: []
+    decks: [],
+    sessions: 2
   }),
   actions: {
     async fetchDecks() {
@@ -114,7 +115,7 @@ export const useFlashcard = defineStore("flashcard", {
      * @param {Object} deck deck object from createDeck()
      */
     fillDummyData(deck) {
-      this.fillDummySessions(deck, 5);
+      this.fillDummySessions(deck, this.sessions);
       deck.stats.practice = this.getFlashcardsByStatus(deck, "practice");
       deck.stats.mastered = this.getFlashcardsByStatus(deck, "mastered");
       deck.stats.neutral = this.getNeutralCards(deck);
