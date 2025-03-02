@@ -10,7 +10,7 @@
       <b-navbar-toggle @click="toggleMenu">
         <template #default>
           <span v-if="!isMenuOpen">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon" />
           </span>
           <span v-else class="custom-close-icon text-white">&times;</span>
         </template>
@@ -19,7 +19,7 @@
   </b-navbar>
 
   <!-- Dark overlay is pressable to close menu-->
-  <div v-if="isMenuOpen" class="overlay" @click="closeMenu"></div>
+  <div v-if="isMenuOpen" class="overlay" @click="closeMenu" />
 
   <!-- Hamburgermenu slides in from the right -->
   <transition name="slide">

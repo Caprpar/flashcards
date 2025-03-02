@@ -21,10 +21,10 @@
         @click="OnShowDeck(deckIndex)"
         style="background-color: var(--secondary)"
       >
-        {{ showDeck === deckIndex ? "Hide Deck" : "Show Deck" }}
+        {{ showDeck[deckIndex] ? "Hide Deck" : "Show Deck" }}
       </b-button>
       <div
-        v-if="showDeck === deckIndex"
+        v-if="showDeck[deckIndex]"
         class="card mb-3 p-3 border rounded"
         v-for="(card, cardIndex) in deck.cards"
         :key="card.id"
@@ -64,7 +64,7 @@
       </div>
 
       <b-button
-        v-if="showDeck === deckIndex"
+        v-if="showDeck[deckIndex]"
         style="background-color: var(--success)"
         class="w-100 mt-3"
         @click="addCard(deckIndex)"
@@ -116,7 +116,7 @@
 
   const flashcard = useFlashcard();
 
-  const showDeck = ref(null);
+  const showDeck = ref([]);
 
   // Save decks to localStorage
   function savedDecks() {
@@ -156,7 +156,7 @@
   }
 
   // Remove a card from a deck
-  function removeCard(deckIndex, cardId) {
+  function removeCard(deckIndex) {
     const deck = flashcard.decks[deckIndex];
     if (deck) {
       deck.cards = deck.cards.filter((card) => card.id !== cardId);
@@ -165,16 +165,30 @@
   }
 
   function removeDeck(deckIndex) {
-    flashcard.decks.splice(deckIndex);
+    if (flashcard.decks.length > 1) {
+      console.log(
+        "Removed Deck:",
+        flashcard.decks[deckIndex],
+        flashcard.decks[deckIndex].title
+      );
+      flashcard.decks.splice(deckIndex, 1);
+    } else {
+      flashcard.decks = [];
+      console.log(
+        `Removed Deck:${flashcard.decks[deckIndex].title}`,
+        "No Deck left"
+      );
+    }
     savedDecks();
   }
+
   function OnShowDeck(deckIndex) {
     // if (showDeck.value === null) {
     //   showDeck.value = deckIndex; // Show deck
     // } else {
     //   showDeck.value = null; // Hide deck
     // }
-    showDeck.value = showDeck.value === null ? deckIndex : null;
+    showDeck.value[deckIndex] = !showDeck.value[deckIndex];
   }
 
   // Fetch decks on component mount
