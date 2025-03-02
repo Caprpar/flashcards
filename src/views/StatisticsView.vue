@@ -6,14 +6,15 @@
 
   const flashcard = useFlashcard();
   const decks = ref(flashcard.decks);
-  const stats = ref("in stats");
   const route = useRoute();
 </script>
 
 <template>
   <main>
+    <!-- Picks deck from decks array by targeting index retrived from url (route.params.deckId) -->
     <DeckStats :deck="flashcard.decks[route.params.deckId - 1]" />
     <ul>
+      <!-- Links to targeted deck by directing to decks index from url -->
       <router-link
         class="nodeco"
         v-for="deck in decks"

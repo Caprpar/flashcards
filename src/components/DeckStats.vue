@@ -3,6 +3,7 @@
   import { defineProps, ref } from "vue";
   const flashcard = useFlashcard();
 
+  // css variables r, b, g to give stat circles color depending on stat score
   const red = ref({ "--r": 175, "--b": 1, "--g": 1 });
   const green = ref({ "--r": 0, "--b": 143, "--g": 0 });
   const yellow = ref({ "--r": 0, "--b": 143, "--g": 0 });
@@ -21,7 +22,7 @@
       <h1>
         {{ deck.title }}
       </h1>
-      <!-- Draws out all sessions progress -->
+      <!-- Draws out all sesssion history where a card answer represent a dot red or green  -->
       <ul
         v-for="session in props.deck.stats.sessions"
         :key="session.id"
@@ -37,8 +38,12 @@
         </li>
       </ul>
     </div>
+    <!-- Displays three circles average, latest session and amount of tries,
+     circles color turns either red, yellow or green depending on score-->
+
     <div id="info">
       <ul>
+        <!-- Average: red when score < 50, yellow: score < 75, else green -->
         <li>
           <p class="stat-title">Average</p>
           <p class="stat" v-if="deck.stats.average < 50" :style="red">
@@ -50,6 +55,7 @@
           <p class="stat" v-else>{{ deck.stats.average }}%</p>
         </li>
 
+        <!-- Latest session score: red when score < 50, yellow: score < 75, else green -->
         <li>
           <p class="stat-title">Latest</p>
           <p class="stat" v-if="deck.stats.latest < 50" :style="red">
@@ -61,6 +67,7 @@
           <p class="stat" v-else>{{ deck.stats.latest }}%</p>
         </li>
 
+        <!-- Tries: red when score < 5, yellow: score < 10, else green -->
         <li>
           <p class="stat-title">Tries</p>
           <p class="stat" v-if="deck.stats.practiceAmount < 5" :style="red">
@@ -77,6 +84,7 @@
         </li>
       </ul>
     </div>
+    <!-- Displays one of players mastered card one of players toughest card -->
     <div id="cards">
       <div class="card" v-if="deck.stats.mastered[0]">
         {{ deck.stats.mastered[0].question }}
@@ -232,10 +240,6 @@
     padding-top: 1em;
   }
 
-  .card:hover {
-    /* transform: scale(1.1); */
-    /* cursor: pointer; */
-  }
   .card {
     position: relative;
     display: flex;
@@ -301,7 +305,6 @@
     #info > ul {
       justify-content: space-around;
       align-items: center;
-      height: ;
     }
     #info {
       display: flex;
