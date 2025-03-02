@@ -17,24 +17,6 @@
       <h1>
         {{ deck.title }}
       </h1>
-      <!-- Displays how many cards that are mastered, how many are fatal and, amounts of neutral cards -->
-      <ul class="dots">
-        <li
-          v-for="deck in deck.stats.mastered"
-          :key="deck.id"
-          class="dot green"
-        />
-        <li
-          v-for="deck in deck.stats.practice"
-          :key="deck.id"
-          class="dot red"
-        />
-        <li
-          v-for="deck in deck.stats.neutral"
-          :key="deck.id"
-          class="dot grey"
-        />
-      </ul>
       <!-- Draws out all sessions progress -->
       <ul v-for="session in deck.stats.sessions" :key="session.id" class="dots">
         <li v-for="card in session" :key="card.id">
@@ -55,7 +37,7 @@
       </ul>
     </div>
     <div id="cards">
-      <div class="card" v-if="deck.stats.mastered[0].question">
+      <div class="card" v-if="deck.stats.mastered[0]">
         {{ deck.stats.mastered[0].question }}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +52,7 @@
           />
         </svg>
       </div>
-      <div class="card" v-if="deck.stats.practice[0].question">
+      <div class="card" v-if="deck.stats.practice[0]">
         {{ deck.stats.practice[0].question }}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -99,11 +81,15 @@
     padding: 0.9em;
     /* box-shadow: 0 0 hsl(0, 0%, 25%); */
     /* border: solid; */
-    border-bottom: dotted #7c7c7c;
+    border-bottom: dotted var(--dark);
     border-radius: 1em;
     width: clamp(10em, 95%, 45em);
     height: 30em;
     grid-template-rows: 1fr 1fr 3fr;
+  }
+  h1 {
+    border-bottom: dashed var(--dark);
+    padding-bottom: 0.2em;
   }
   #title {
     grid-area: title;
