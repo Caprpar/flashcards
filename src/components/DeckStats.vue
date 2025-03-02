@@ -279,6 +279,7 @@
       grid-template-rows: none;
       /* height: 21em; */
       grid-template-rows: 1fr 9em;
+      grid-template-columns: 1fr 1.5fr;
     }
     #title {
       padding-bottom: 0;

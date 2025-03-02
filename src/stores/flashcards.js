@@ -85,7 +85,7 @@ export const useFlashcard = defineStore("flashcard", {
         x <= this.random(this.cardRange.start, this.cardRange.end);
         x++
       ) {
-        const deckTitle = `${x}:ans gånger tabell`;
+        const deckTitle = `${x}:ans multiplikationstabell`;
         const deck = this.createDeck(deckTitle);
 
         for (
