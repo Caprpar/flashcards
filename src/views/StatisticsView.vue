@@ -30,11 +30,7 @@
   main {
     padding-top: 1em;
     display: flex;
-    grid-template-areas:
-      "links"
-      "card";
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     width: 100%;
     gap: 1em;

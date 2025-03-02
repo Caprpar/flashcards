@@ -5,9 +5,14 @@ export const useFlashcard = defineStore("flashcard", {
   state: () => ({
     /** The global variable that contains all current user decks*/
     decks: [],
-    sessions: 2
+    dummySessions: true,
+    sessionsRange: { start: 5, end: 20 },
+    cardRange: { start: 5, end: 20 }
   }),
   actions: {
+    random(start, end) {
+      return Math.floor(Math.random() * end + start);
+    },
     async fetchDecks() {
       const response = await fetch("/decks.json");
       this.decks = await response.json();
@@ -75,17 +80,27 @@ export const useFlashcard = defineStore("flashcard", {
       const tableAmounts = 10;
       const tableLimit = 12;
 
-      for (let x = 1; x <= tableAmounts; x++) {
+      for (
+        let x = 1;
+        x <= this.random(this.cardRange.start, this.cardRange.end);
+        x++
+      ) {
         const deckTitle = `${x}:ans gånger tabell`;
         const deck = this.createDeck(deckTitle);
 
-        for (let y = 1; y <= tableLimit; y++) {
+        for (
+          let y = 1;
+          y <= this.random(this.cardRange.start, this.cardRange.end);
+          y++
+        ) {
           const question = `${x} x ${y} = ?`;
           const answer = x * y;
           const card = this.createCard(question, answer);
           deck.cards.push(card);
         }
-        this.fillDummyData(deck);
+        if (this.dummySessions) {
+          this.fillDummyData(deck);
+        }
         decks.push(deck);
       }
       return decks;
@@ -115,7 +130,10 @@ export const useFlashcard = defineStore("flashcard", {
      * @param {Object} deck deck object from createDeck()
      */
     fillDummyData(deck) {
-      this.fillDummySessions(deck, this.sessions);
+      this.fillDummySessions(
+        deck,
+        this.random(this.sessionsRange.start, this.sessionsRange.end)
+      );
       deck.stats.practice = this.getFlashcardsByStatus(deck, "practice");
       deck.stats.mastered = this.getFlashcardsByStatus(deck, "mastered");
       deck.stats.neutral = this.getNeutralCards(deck);
@@ -197,7 +215,7 @@ export const useFlashcard = defineStore("flashcard", {
         score += card.needsPractice ? 0 : 1;
       });
       let average = (score / questions) * 100;
-      return average.toFixed();
+      return 100 - average.toFixed();
     },
     /** Get total average score from multiple sessions
      *

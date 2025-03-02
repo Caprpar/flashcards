@@ -5,6 +5,7 @@
 
   const red = ref({ "--r": 175, "--b": 1, "--g": 1 });
   const green = ref({ "--r": 0, "--b": 143, "--g": 0 });
+  const yellow = ref({ "--r": 0, "--b": 143, "--g": 0 });
 
   const props = defineProps({
     deck: {
@@ -21,7 +22,11 @@
         {{ deck.title }}
       </h1>
       <!-- Draws out all sessions progress -->
-      <ul v-for="session in deck.stats.sessions" :key="session.id" class="dots">
+      <ul
+        v-for="session in props.deck.stats.sessions"
+        :key="session.id"
+        class="dots"
+      >
         <li v-for="card in session" :key="card.id">
           <div v-if="card.hasAnswer && card.needsPractice" class="dot green" />
           <div
@@ -36,19 +41,39 @@
       <ul>
         <li>
           <p class="stat-title">Average</p>
-          <p class="stat" :style="deck.stats.average > 50 ? green : red">
+          <p class="stat" v-if="deck.stats.average < 50" :style="red">
             {{ deck.stats.average }}%
           </p>
+          <p class="stat" v-else-if="deck.stats.average >= 75" :style="green">
+            {{ deck.stats.average }}%
+          </p>
+          <p class="stat" v-else>{{ deck.stats.average }}%</p>
         </li>
+
         <li>
           <p class="stat-title">Latest</p>
-          <p class="stat" :style="deck.stats.latest > 50 ? green : red">
+          <p class="stat" v-if="deck.stats.latest < 50" :style="red">
             {{ deck.stats.latest }}%
           </p>
+          <p class="stat" v-else-if="deck.stats.latest >= 75" :style="green">
+            {{ deck.stats.latest }}%
+          </p>
+          <p class="stat" v-else>{{ deck.stats.latest }}%</p>
         </li>
+
         <li>
           <p class="stat-title">Tries</p>
-          <p class="stat">{{ deck.stats.practiceAmount }}</p>
+          <p class="stat" v-if="deck.stats.practiceAmount < 5" :style="red">
+            x{{ deck.stats.practiceAmount }}
+          </p>
+          <p
+            class="stat"
+            v-else-if="deck.stats.practiceAmount > 10"
+            :style="green"
+          >
+            x{{ deck.stats.practiceAmount }}
+          </p>
+          <p class="stat" v-else>x{{ deck.stats.practiceAmount }}</p>
         </li>
       </ul>
     </div>
@@ -148,7 +173,6 @@
     align-items: center;
     font-weight: bold;
   }
-
   .stat {
     /* Standard color are yellow, change rbg with :style="" in element to set customised color */
     --r: 172;
@@ -174,6 +198,7 @@
   #info > ul > li {
     padding: 0;
     margin: 0;
+    margin-left: 0.4em;
     display: grid;
     grid-template-areas:
       "stat"
@@ -252,11 +277,12 @@
         "info cards";
       grid-template-columns: auto 1fr;
       grid-template-rows: none;
-      height: 21em;
-      grid-template-rows: 1fr 1fr;
+      /* height: 21em; */
+      grid-template-rows: 1fr 9em;
     }
     #title {
       padding-bottom: 0;
+      /* align-items: center; */
     }
     #cards {
       padding-left: 1em;
@@ -268,15 +294,16 @@
       transform: rotate(16deg);
     }
     .stat {
-      width: 4em;
-      height: 4em;
+      width: 5em;
+      height: 5em;
     }
     #info > ul {
       justify-content: space-around;
+      align-items: center;
+      height: ;
     }
     #info {
       display: flex;
-      align-items: end;
       padding: 1em 0;
       /* border: solid; */
       grid-area: info;
