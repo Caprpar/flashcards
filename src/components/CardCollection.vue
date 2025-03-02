@@ -25,8 +25,6 @@
     }
   });
 
-  console.log(props.image);
-
   const decksCard = ref([]);
   const router = useRouter();
 
