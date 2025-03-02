@@ -166,9 +166,18 @@
 
   function removeDeck(deckIndex) {
     if (flashcard.decks.length > 1) {
+      console.log(
+        "Removed Deck:",
+        flashcard.decks[deckIndex],
+        flashcard.decks[deckIndex].title
+      );
       flashcard.decks.splice(deckIndex, 1);
     } else {
       flashcard.decks = [];
+      console.log(
+        `Removed Deck:${flashcard.decks[deckIndex].title}`,
+        "No Deck left"
+      );
     }
     savedDecks();
   }
