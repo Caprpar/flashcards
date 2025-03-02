@@ -37,7 +37,8 @@
     gap: 1em;
   }
   ul {
-    display: inline-grid;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 0.5em;
     padding: 0;
@@ -59,6 +60,10 @@
     width: fit-content;
     border-radius: 8px;
     padding: 0.1em;
+    /* text-wrap: wrap; */
+    overflow-wrap: anywhere;
+    /* inline-size: 6em; */git
+    width: 9em;
   }
   .nodeco {
     text-decoration: none;

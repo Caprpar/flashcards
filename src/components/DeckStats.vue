@@ -23,26 +23,32 @@
         {{ deck.title }}
       </h1>
       <!-- Draws out all sesssion history where a card answer represent a dot red or green  -->
-      <ul
-        v-for="session in props.deck.stats.sessions"
-        :key="session.id"
-        class="dots"
-      >
-        <li v-for="card in session" :key="card.id">
-          <div v-if="card.hasAnswer && card.needsPractice" class="dot green" />
-          <div
-            v-else-if="card.hasAnswer && !card.needsPractice"
-            class="dot red"
-          />
-          <div v-else class="dot grey" />
-        </li>
-      </ul>
+      <div v-if="deck.stats.sessions">
+        <p v-if="!deck.stats.sessions[0]">Study this deck to gather data</p>
+        <ul
+          v-for="session in props.deck.stats.sessions"
+          :key="session.id"
+          class="dots"
+        >
+          <li v-for="card in session" :key="card.id">
+            <div
+              v-if="card.hasAnswer && card.needsPractice"
+              class="dot green"
+            />
+            <div
+              v-else-if="card.hasAnswer && !card.needsPractice"
+              class="dot red"
+            />
+            <div v-else class="dot grey" />
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- Displays three circles average, latest session and amount of tries,
      circles color turns either red, yellow or green depending on score-->
 
     <div id="info">
-      <ul>
+      <ul v-if="deck.stats.sessions[0]">
         <!-- Average: red when score < 50, yellow: score < 75, else green -->
         <li>
           <p class="stat-title">Average</p>
@@ -85,7 +91,7 @@
       </ul>
     </div>
     <!-- Displays one of players mastered card one of players toughest card -->
-    <div id="cards">
+    <div id="cards" v-if="deck.stats.sessions[0]">
       <div class="card" v-if="deck.stats.mastered[0]">
         {{ deck.stats.mastered[0].question }}
         <svg
@@ -117,6 +123,9 @@
         </svg>
       </div>
     </div>
+    <div id="study-deck">
+      <button>Study deck</button>
+    </div>
   </section>
 </template>
 
@@ -128,24 +137,27 @@
     display: grid;
     grid-template-areas:
       "title info"
-      "cards cards";
-    padding: 0.9em;
+      "cards cards"
+      "button button";
+    /* padding: 0.9em; */
     /* box-shadow: 0 0 hsl(0, 0%, 25%); */
     /* border: solid; */
     border-bottom: dotted var(--dark);
     border-radius: 1em;
-    width: clamp(10em, 95%, 45em);
-    grid-template-rows: 1fr 18em;
+    width: clamp(1em, 86%, 49em);
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   h1 {
     /* border-bottom: dashed var(--dark); */
     padding-bottom: 0.4em;
+    text-wrap: wrap;
+    overflow-wrap: anywhere;
   }
   #title {
     grid-area: title;
     display: flex;
     flex-direction: column;
-    width: 100%;
     padding-bottom: 1em;
     /* border-bottom: solid 1px #707070; */
   }
@@ -275,15 +287,32 @@
     * {
       /* border: solid; */
     }
+
+    h1 {
+      /* border-bottom: dashed var(--dark); */
+      inline-size: 10em;
+    }
+
+    #study-deck {
+      grid-area: button;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      height: 4em;
+      width: 11em;
+    }
     section {
       grid-template-areas:
         "title cards"
-        "info cards";
+        "info button";
       grid-template-columns: auto 1fr;
       grid-template-rows: none;
       /* height: 21em; */
-      grid-template-rows: 1fr 9em;
+      /* grid-template-rows: 1fr 9em; */
       grid-template-columns: 1fr 1.5fr;
+      grid-template-rows: 1fr 18em;
     }
     #title {
       padding-bottom: 0;
