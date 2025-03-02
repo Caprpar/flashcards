@@ -208,7 +208,7 @@ export const useFlashcard = defineStore("flashcard", {
       for (const session of sessions) {
         score += Number(this.getSessionAverage(session));
       }
-      return score / sessions.length;
+      return (score / sessions.length).toFixed();
     }
   },
   getters: {

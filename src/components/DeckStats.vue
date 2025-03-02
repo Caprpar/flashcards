@@ -1,7 +1,10 @@
 <script setup>
   import { useFlashcard } from "../stores/flashcards";
-  import { defineProps } from "vue";
+  import { defineProps, ref } from "vue";
   const flashcard = useFlashcard();
+
+  const red = ref({ "--r": 175, "--b": 1, "--g": 1 });
+  const green = ref({ "--r": 0, "--b": 143, "--g": 0 });
 
   const props = defineProps({
     deck: {
@@ -31,9 +34,22 @@
     </div>
     <div id="info">
       <ul>
-        <li>Average: {{ deck.stats.average }}%</li>
-        <li>Latest score: {{ deck.stats.latest }}%</li>
-        <li>Times practiced: {{ deck.stats.practiceAmount }}</li>
+        <li>
+          <p class="stat-title">Average</p>
+          <p class="stat" :style="deck.stats.average > 50 ? green : red">
+            {{ deck.stats.average }}%
+          </p>
+        </li>
+        <li>
+          <p class="stat-title">Latest</p>
+          <p class="stat" :style="deck.stats.latest > 50 ? green : red">
+            {{ deck.stats.latest }}%
+          </p>
+        </li>
+        <li>
+          <p class="stat-title">Tries</p>
+          <p class="stat">{{ deck.stats.practiceAmount }}</p>
+        </li>
       </ul>
     </div>
     <div id="cards">
@@ -93,11 +109,63 @@
   }
   #title {
     grid-area: title;
+    border-bottom: solid;
+  }
+  #average {
+  }
+  #total {
+  }
+  #practice-amount {
+  }
+
+  .stat-title {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    grid-area: title;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+
+  .stat {
+    --r: 172;
+    --b: 91;
+    --g: 44;
+    --color: rgb(var(--r), var(--b), var(--g));
+    --color-o: rgb(var(--r), var(--b), var(--g), 27%);
+    padding: 0;
+    margin: 0;
+    grid-area: stat;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4em;
+    height: 4em;
+    background-color: var(--color-o);
+    border: double 0.4em var(--color);
+    color: var(--color);
+    border-radius: 1000px;
+  }
+
+  #info > ul > li {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-areas:
+      "stat"
+      "title";
+  }
+  #info > ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
   }
   #info {
-    display: flex;
-    align-items: start;
-    /* border: solid; */
     grid-area: info;
   }
   #cards {
