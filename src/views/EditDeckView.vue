@@ -156,9 +156,10 @@
   }
 
   // Remove a card from a deck
-  function removeCard(deckIndex) {
+  function removeCard(deckIndex, cardId) {
     const deck = flashcard.decks[deckIndex];
     if (deck) {
+      console.log(deck.title, "is removed");
       deck.cards = deck.cards.filter((card) => card.id !== cardId);
       savedDecks();
     }
@@ -206,9 +207,4 @@
     padding: 10px;
     border: 1px solid #ddd;
   }
-  /* #Container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
-  } */
 </style>
