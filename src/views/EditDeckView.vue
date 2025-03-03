@@ -57,7 +57,7 @@
         <b-button
           style="background-color: var(--danger)"
           class="w-100 w-sm-25"
-          @click="removeCard(deckIndex, card.id)"
+          @click="removeCard(deckIndex, card.id, cardIndex + 1)"
         >
           Discard Card
         </b-button>
@@ -156,10 +156,10 @@
   }
 
   // Remove a card from a deck
-  function removeCard(deckIndex, cardId) {
+  function removeCard(deckIndex, cardId, cardIndex) {
     const deck = flashcard.decks[deckIndex];
     if (deck) {
-      console.log(deck.title, "is removed");
+      console.log(`Card ${cardIndex} is removed from ${deck.title}`);
       deck.cards = deck.cards.filter((card) => card.id !== cardId);
       savedDecks();
     }
@@ -167,11 +167,7 @@
 
   function removeDeck(deckIndex) {
     if (flashcard.decks.length > 1) {
-      console.log(
-        "Removed Deck:",
-        flashcard.decks[deckIndex],
-        flashcard.decks[deckIndex].title
-      );
+      console.log("Removed Deck:", flashcard.decks[deckIndex].title);
       flashcard.decks.splice(deckIndex, 1);
     } else {
       console.log(
