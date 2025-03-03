@@ -5,9 +5,9 @@ export const useFlashcard = defineStore("flashcard", {
   state: () => ({
     /** The global variable that contains all current user decks*/
     decks: [],
-    dummySessions: true,
-    sessionsRange: { start: 5, end: 20 },
-    cardRange: { start: 5, end: 20 }
+    dummySessions: true, // fill sessions with dummysessions
+    sessionsRange: { start: 5, end: 20 }, // generates between start to end amounts of sessions
+    cardRange: { start: 5, end: 20 } // generates between start to end amounts of cards when creating deck
   }),
   actions: {
     random(start, end) {
@@ -53,7 +53,6 @@ export const useFlashcard = defineStore("flashcard", {
           average: 0, // Total average score 1-100%
           mastered: null, // mastered cards
           practice: null, // cards need practice
-          neutral: null, // rest of the cards
           latest: 0, // latest score 1-100%
           practiceAmount: 0, // total practice amount
           sessions: [] // use sessions data to declare rest of stats
@@ -115,18 +114,18 @@ export const useFlashcard = defineStore("flashcard", {
       for (let index = 0; index < amount; index++) {
         let session = [];
         for (const card of cards) {
-          const cardCopy = { ...card };
+          const cardCopy = { ...card }; // duplicate card, otherwise all sessions ends up looking the same
           cardCopy.hasAnswer = true;
           // 25% to answer wrong
           cardCopy.needsPractice =
-            Math.floor(Math.random() * 2) + 1 === 1 ? true : false;
+            Math.floor(Math.random() * 4) + 1 === 1 ? true : false;
           session.push(cardCopy);
         }
         sessions.push(session);
       }
       deck.stats.sessions = sessions;
     },
-    /** From dummysessions get data and fill deck.stats
+    /** fill deck.stats with information using stats.sessions data
      * @param {Object} deck deck object from createDeck()
      */
     fillDummyData(deck) {
@@ -136,7 +135,6 @@ export const useFlashcard = defineStore("flashcard", {
       );
       deck.stats.practice = this.getFlashcardsByStatus(deck, "practice");
       deck.stats.mastered = this.getFlashcardsByStatus(deck, "mastered");
-      deck.stats.neutral = this.getNeutralCards(deck);
       deck.stats.practiceAmount = deck.stats.sessions.length;
       deck.stats.latest = this.getSessionAverage(
         deck.stats.sessions.slice(-1)[0]
@@ -187,21 +185,6 @@ export const useFlashcard = defineStore("flashcard", {
       });
 
       return filteredCards;
-    },
-    /**
-     *
-     * @param {Object} deck deck from createDeck()
-     * @returns Cards which are neither mastered or failed in a sequensed order
-     */
-    getNeutralCards(deck) {
-      let ids = deck.cards.map((card) => card.id);
-      const masteredIds = deck.stats.mastered.map((card) => card.id);
-      const practiceIds = deck.stats.practice.map((card) => card.id);
-      const combined = [...masteredIds, ...practiceIds];
-
-      // remove mastered and practice from ids
-      const filteredIds = ids.filter((id) => !combined.includes(id));
-      return filteredIds;
     },
     /**Get sessions average score
      *

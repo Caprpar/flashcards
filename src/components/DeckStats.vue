@@ -19,18 +19,20 @@
     }
   });
 
+  // Let dot graph max show 10 latest sessions
   let dotsGraph =
     props.deck.stats.sessions.length < 10
       ? props.deck.stats.sessions
       : props.deck.stats.sessions.slice(-10);
 
+  // Update dotgraph to current decks sessions when url changes
   watch(
     () => route.params.deckId,
     (newId, oldId) => {
       sessions.value = flashcard.decks[newId - 1].stats.sessions;
+      // Let dot graph max show 10 latest sessions
       dotsGraph =
         sessions.value.length < 10 ? sessions.value : sessions.value.slice(-10);
-      console.log(oldId - 1);
     }
   );
 </script>
