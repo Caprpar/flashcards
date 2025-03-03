@@ -1,12 +1,16 @@
 <script setup>
   import { useFlashcard } from "../stores/flashcards";
-  import { defineProps, ref } from "vue";
+  import { defineProps, ref, watch } from "vue";
+  import { useRoute } from "vue-router";
   const flashcard = useFlashcard();
 
   // css variables r, b, g to give stat circles color depending on stat score
   const red = ref({ "--r": 175, "--b": 1, "--g": 1 });
   const green = ref({ "--r": 0, "--b": 143, "--g": 0 });
   const yellow = ref({ "--r": 0, "--b": 143, "--g": 0 });
+  const route = useRoute();
+
+  const sessions = ref();
 
   const props = defineProps({
     deck: {
@@ -14,6 +18,21 @@
       type: Object
     }
   });
+
+  let dotsGraph =
+    props.deck.stats.sessions.length < 10
+      ? props.deck.stats.sessions
+      : props.deck.stats.sessions.slice(-10);
+
+  watch(
+    () => route.params.deckId,
+    (newId, oldId) => {
+      sessions.value = flashcard.decks[newId - 1].stats.sessions;
+      dotsGraph =
+        sessions.value.length < 10 ? sessions.value : sessions.value.slice(-10);
+      console.log(oldId - 1);
+    }
+  );
 </script>
 
 <template>
@@ -22,22 +41,20 @@
       <h1>
         {{ deck.title }}
       </h1>
+      <router-link
+        id="practice-link"
+        :to="`/collection/${route.params.deckId}/1`"
+        >Practice this deck</router-link
+      >
       <!-- Draws out all sesssion history where a card answer represent a dot red or green  -->
-      <div v-if="deck.stats.sessions">
+      <div id="dots-container" v-if="deck.stats.sessions">
         <p v-if="!deck.stats.sessions[0]">Study this deck to gather data</p>
-        <ul
-          v-for="session in props.deck.stats.sessions"
-          :key="session.id"
-          class="dots"
-        >
+        <ul v-for="session in dotsGraph" :key="session.id" class="dots">
           <li v-for="card in session" :key="card.id">
-            <div
-              v-if="card.hasAnswer && card.needsPractice"
-              class="dot green"
-            />
+            <div v-if="card.hasAnswer && card.needsPractice" class="dot red" />
             <div
               v-else-if="card.hasAnswer && !card.needsPractice"
-              class="dot red"
+              class="dot green"
             />
             <div v-else class="dot grey" />
           </li>
@@ -123,9 +140,6 @@
         </svg>
       </div>
     </div>
-    <div id="study-deck">
-      <button>Study deck</button>
-    </div>
   </section>
 </template>
 
@@ -137,9 +151,7 @@
     display: grid;
     grid-template-areas:
       "title info"
-      "cards cards"
-      "button button";
-    /* padding: 0.9em; */
+      "cards cards"; /* padding: 0.9em; */
     /* box-shadow: 0 0 hsl(0, 0%, 25%); */
     /* border: solid; */
     border-bottom: dotted var(--dark);
@@ -153,6 +165,11 @@
     padding-bottom: 0.4em;
     text-wrap: wrap;
     overflow-wrap: anywhere;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  #practice-link {
+    margin: 1em 0;
   }
   #title {
     grid-area: title;
@@ -293,12 +310,6 @@
       inline-size: 10em;
     }
 
-    #study-deck {
-      grid-area: button;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
     button {
       height: 4em;
       width: 11em;
@@ -306,13 +317,14 @@
     section {
       grid-template-areas:
         "title cards"
-        "info button";
+        "info cards";
       grid-template-columns: auto 1fr;
       grid-template-rows: none;
       /* height: 21em; */
       /* grid-template-rows: 1fr 9em; */
       grid-template-columns: 1fr 1.5fr;
-      grid-template-rows: 1fr 18em;
+      grid-template-rows: 1fr 10em;
+      padding-bottom: 1em;
     }
     #title {
       padding-bottom: 0;

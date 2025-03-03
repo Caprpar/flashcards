@@ -158,11 +158,11 @@ export const useFlashcard = defineStore("flashcard", {
       )) {
         for (const card of session) {
           if (status === "practice") {
-            if (card.needsPractice) {
+            if (!card.needsPractice) {
               flashcardIds = flashcardIds.filter((id) => id != card.id);
             }
           } else if (status === "mastered") {
-            if (!card.needsPractice) {
+            if (card.needsPractice) {
               flashcardIds = flashcardIds.filter((id) => id != card.id);
             }
           } else {
@@ -206,7 +206,7 @@ export const useFlashcard = defineStore("flashcard", {
     /**Get sessions average score
      *
      * @param {Array} session array of cards with data from a session
-     * @returns average score from session
+     * @returns average precentage score from session
      */
     getSessionAverage(session) {
       let questions = session.length;
@@ -215,12 +215,12 @@ export const useFlashcard = defineStore("flashcard", {
         score += card.needsPractice ? 0 : 1;
       });
       let average = (score / questions) * 100;
-      return 100 - average.toFixed();
+      return average.toFixed();
     },
     /** Get total average score from multiple sessions
      *
      * @param {Array} sessions Array containng multiple sessions
-     * @returns
+     * @returns average precentage score from all sessions
      */
     getTotalAverage(sessions) {
       let score = 0;

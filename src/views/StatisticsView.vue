@@ -1,6 +1,6 @@
 <script setup>
   import { useFlashcard } from "../stores/flashcards";
-  import { ref } from "vue";
+  import { ref, watch } from "vue";
   import { useRoute } from "vue-router";
   import DeckStats from "../components/DeckStats.vue";
 
@@ -62,7 +62,7 @@
     padding: 0.1em;
     /* text-wrap: wrap; */
     overflow-wrap: anywhere;
-    /* inline-size: 6em; */git
+    /* inline-size: 6em; */
     width: 9em;
   }
   .nodeco {
@@ -73,7 +73,8 @@
   }
   @media screen and (min-width: 767px) {
     li {
-      padding: 0.5em;
+      padding: 0.2em 0.3em;
+      width: 10.8em;
     }
   }
 </style>
