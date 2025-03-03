@@ -86,7 +86,6 @@
   function goPrevious() {
     if (cardNr.value > 1) {
       cardNr.value--;
-      console.log("Previous");
     }
   }
 

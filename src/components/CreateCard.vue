@@ -16,11 +16,7 @@
   // creates a deck without cards
   function nameDeck() {
     if (nameAvailable(deckName.value)) {
-      newDeck.value = {
-        title: deckName.value,
-        cards: null,
-        id: uuidv4()
-      };
+      newDeck.value = flashcards.createDeck(deckName.value);
       deckCreated.value = true;
       nameTaken.value = false;
       deckName.value = "";
@@ -65,6 +61,7 @@
     cards.value = [];
     let decks = localStorage.getItem("decks");
     decks = JSON.parse(decks);
+    flashcards.decks = decks; // sets decks to pinia variable, otherwise card wont show up
     decks.push(newDeck.value);
     localStorage.setItem("decks", JSON.stringify(decks));
     deckCreated.value = false;
@@ -88,15 +85,12 @@
       <div class="flex-container">
         <div class="text-div">
           <h2>Question</h2>
-          <textarea
-            v-model="question"
-            placeholder="Type question here"
-          ></textarea>
+          <textarea v-model="question" placeholder="Type question here" />
         </div>
 
         <div class="text-div">
           <h2>Answer</h2>
-          <textarea v-model="answer" placeholder="Type answer here"></textarea>
+          <textarea v-model="answer" placeholder="Type answer here" />
         </div>
       </div>
       <div class="button-center">

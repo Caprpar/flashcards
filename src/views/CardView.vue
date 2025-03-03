@@ -14,7 +14,7 @@
     currentDeck.value = deck;
   }
 
-  function dotStyle(currentCard, index) {
+  function dotStyle(currentCard) {
     const cardIndex = 1 + currentDeck.value.cards.indexOf(currentCard);
     let styleSettings = "dot ";
     watchEffect(() => {
@@ -32,39 +32,59 @@
   }
 </script>
 <template>
-  <div class="flashcard">
-    <router-link :to="`${cardNr}`">
-      <button class="arrow" @click="goPrevious">⬅️</button>
-    </router-link>
-
-    <FlashCard @on-deck-update="updateDeck" />
-    <router-link :to="`${cardNr}`">
-      <button class="arrow" @click="goNext">➡️</button>
-    </router-link>
-  </div>
-  <div class="center">
-    <div id="answer-indicator">
-      <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
-      <div
-        v-for="(card, index) in currentDeck.cards"
-        :key="card.id"
-        :class="dotStyle(card, index)"
-      />
+  <main>
+    <div class="card-view-container">
+      <FlashCard @on-deck-update="updateDeck" />
+      <div id="answer-indicator">
+        <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
+        <div
+          v-for="card in currentDeck.cards"
+          :key="card.id"
+          :class="dotStyle(card)"
+        />
+      </div>
+      <div class="buttons-container">
+        <FlashcardButton color="var(--success)" text="Rätt" />
+        <FlashcardButton color="var(--danger)" text="Fel" />
+      </div>
     </div>
-    <div class="buttons">
-      <FlashcardButton color="var(--success)" text="Rätt" />
-      <FlashcardButton color="var(--danger)" text="Fel" />
-    </div>
-  </div>
+  </main>
 </template>
 
 <style>
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+  }
+
+  .card-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding-top: 2em;
+    width: clamp(9em, 95%, 43em);
+  }
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px; /* Adds space between buttons */
+    width: 100%; /* Ensures it fills the container */
+    max-width: 700px; /* Adjust this as needed */
+  }
+
   #answer-indicator {
     margin-top: 1em;
     justify-content: space-around;
     align-items: center;
     display: flex;
-    width: 28em;
+    width: 100%;
   }
 
   .dot {

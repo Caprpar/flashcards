@@ -195,7 +195,7 @@
   onMounted(getDecks);
 </script>
 
-<style>
+<style scoped>
   .deck {
     margin-bottom: 20px;
     padding: 10px;
