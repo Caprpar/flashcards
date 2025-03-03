@@ -173,11 +173,11 @@
       );
       flashcard.decks.splice(deckIndex, 1);
     } else {
-      flashcard.decks = [];
       console.log(
         `Removed Deck:${flashcard.decks[deckIndex].title}`,
         "No Deck left"
       );
+      flashcard.decks = [];
     }
     savedDecks();
   }
@@ -206,4 +206,9 @@
     padding: 10px;
     border: 1px solid #ddd;
   }
+  /* #Container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+  } */
 </style>
