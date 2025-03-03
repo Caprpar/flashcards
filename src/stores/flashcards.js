@@ -117,7 +117,7 @@ export const useFlashcard = defineStore("flashcard", {
           cardCopy.hasAnswer = true;
           // 25% to answer wrong
           cardCopy.needsPractice =
-            Math.floor(Math.random() * 4) + 1 === 1 ? true : false;
+            Math.floor(Math.random() * 2) + 1 === 1 ? true : false;
           session.push(cardCopy);
         }
         sessions.push(session);
