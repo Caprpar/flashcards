@@ -32,6 +32,9 @@
         <b-nav-item :to="'/edit'" class="text-white"
           >Customize Decks</b-nav-item
         >
+        <b-nav-item :to="'/statistics/1'" class="text-white"
+          >Stastistics</b-nav-item
+        >
       </b-nav>
     </div>
   </transition>
