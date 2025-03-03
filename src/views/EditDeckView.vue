@@ -156,9 +156,10 @@
   }
 
   // Remove a card from a deck
-  function removeCard(deckIndex) {
+  function removeCard(deckIndex, cardId) {
     const deck = flashcard.decks[deckIndex];
     if (deck) {
+      console.log(deck.title, "is removed");
       deck.cards = deck.cards.filter((card) => card.id !== cardId);
       savedDecks();
     }
@@ -173,11 +174,11 @@
       );
       flashcard.decks.splice(deckIndex, 1);
     } else {
-      flashcard.decks = [];
       console.log(
         `Removed Deck:${flashcard.decks[deckIndex].title}`,
         "No Deck left"
       );
+      flashcard.decks = [];
     }
     savedDecks();
   }
