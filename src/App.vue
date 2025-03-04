@@ -10,13 +10,17 @@
   const flashcards = useFlashcard();
 
   // If localstorage is empty, give it dummyDecks
-  if (!localStorage.getItem("decks")) {
-    // Fill flashcards.deck with dummydeck
-    flashcards.dummyDeck();
-    localStorage.setItem("decks", JSON.stringify(flashcards.decks));
+  if (
+    !localStorage.getItem("decks") ||
+    JSON.parse(localStorage.getItem("decks")).length === 0
+  ) {
+    flashcards.decks.value = flashcards.dummyDeck();
+    // localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()));
+    console.log("flashcard.decks: ", flashcards.decks);
+
     alert("Gave localstorage dummydeck");
   }
-  flashcards.decks = JSON.parse(localStorage.getItem("decks"));
+  // flashcards.decks = JSON.parse(localStorage.getItem("decks"));
 </script>
 
 <template>

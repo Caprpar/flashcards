@@ -86,9 +86,9 @@
   const showDeck = ref([]);
 
   // Save decks to localStorage
-  function savedDecks() {
-    localStorage.setItem("decks", JSON.stringify(flashcard.decks));
-  }
+  // function savedDecks() {
+  //   localStorage.setItem("decks", JSON.stringify(flashcard.decks));
+  // }
 
   // Fetch decks from localStorage or dummyDecks.json
   async function getDecks() {
@@ -97,7 +97,7 @@
       flashcard.decks = JSON.parse(savedDecks);
     } else {
       flashcard.decks = flashcard.dummyDeck();
-      savedDecks();
+      // savedDecks();
     }
     console.log("flashcard.decks:", flashcard.decks);
     // console.log(flashcard.decks.cards);
@@ -109,7 +109,16 @@
     if (deck) {
       const newCard = flashcard.createCard("", "");
       deck.cards.push(newCard); // Add new card to deck
-      savedDecks(); // Save deck to localStorage
+      // savedDecks(); // Save deck to localStorage
+
+      // deck.cards.push({
+      //   title: "Ny fråga",
+      //   question: "",
+      //   answer: 0,
+      //   needsPractice: false,
+      //   id: uuidv4(),
+      // });
+      // deck.cards.push(flashcard.createCard("", 0));
     }
   }
 
@@ -118,7 +127,7 @@
     const deck = flashcard.decks[deckIndex];
     if (deck) {
       deck.cards = deck.cards.filter((card) => card.id !== cardId);
-      savedDecks();
+      // savedDecks();
     }
   }
 
@@ -128,7 +137,7 @@
     } else {
       flashcard.decks = [];
     }
-    savedDecks();
+    // savedDecks();
   }
 
   function OnShowDeck(deckIndex) {
