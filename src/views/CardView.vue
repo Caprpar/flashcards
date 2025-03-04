@@ -68,7 +68,7 @@
     height: 90vh;
     padding-top: 2em;
     width: clamp(9em, 95%, 43em);
-    font: bold 2em Arial, sans-serif;
+    font: 1.5em Arial, sans-serif;
   }
   .buttons-container {
     display: flex;
@@ -104,5 +104,18 @@
   }
   .wrong {
     background-color: var(--danger);
+  }
+
+  @media (max-width: 375px) {
+    .card-view-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+      padding-top: 2em;
+      width: clamp(9em, 95%, 43em);
+      font: 1em Arial, sans-serif;
+    }
   }
 </style>

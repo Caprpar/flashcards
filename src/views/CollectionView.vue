@@ -53,6 +53,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    max-width: 32em;
+    max-width: 35em;
   }
 </style>

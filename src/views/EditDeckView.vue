@@ -10,11 +10,6 @@
     >
       <h2 style="color: aliceblue" class="text-center mb-3">
         {{ deck.title }}
-        <!-- <input
-          type="button"
-          :value="deck.title"
-          @click="OnShowDeck(deck.cards)"
-        /> -->
       </h2>
       <b-button
         class="w-100 mt-3"
@@ -82,34 +77,6 @@
   </div>
 </template>
 
-<!-- <template>
-  <div>
-    <h1>Multiplikationsträning</h1>
-    <div
-      class="deck"
-      v-for="(deck, deckIndex) in flashcard.decks"
-      :key="deckIndex"
-    >
-      <h2>{{ deck.title }}</h2>
-      <div class="card" v-for="(card, cardIndex) in deck.cards" :key="card.id">
-        <p>Card: {{ cardIndex + 1 }}</p>
-        <input v-model="card.question" @change="savedDecks" />
-        <input v-model="card.answer" @change="savedDecks" />
-        <b-button
-          variant="danger"
-          class="w-25"
-          @click="removeCard(deckIndex, card.id)"
-        >
-          Delete</b-button
-        >
-      </div>
-      <b-button variant="primary" @click="addCard(deckIndex)">
-        Add New Card
-      </b-button>
-    </div>
-  </div>
-</template> -->
-
 <script setup>
   import { ref, onMounted } from "vue";
   import { useFlashcard } from "../stores/flashcards";
@@ -143,15 +110,6 @@
       const newCard = flashcard.createCard("", "");
       deck.cards.push(newCard); // Add new card to deck
       savedDecks(); // Save deck to localStorage
-
-      // deck.cards.push({
-      //   title: "Ny fråga",
-      //   question: "",
-      //   answer: 0,
-      //   needsPractice: false,
-      //   id: uuidv4(),
-      // });
-      // deck.cards.push(flashcard.createCard("", 0));
     }
   }
 
@@ -159,7 +117,6 @@
   function removeCard(deckIndex, cardId, cardIndex) {
     const deck = flashcard.decks[deckIndex];
     if (deck) {
-      console.log(`Card ${cardIndex} is removed from ${deck.title}`);
       deck.cards = deck.cards.filter((card) => card.id !== cardId);
       savedDecks();
     }
@@ -167,24 +124,14 @@
 
   function removeDeck(deckIndex) {
     if (flashcard.decks.length > 1) {
-      console.log("Removed Deck:", flashcard.decks[deckIndex].title);
       flashcard.decks.splice(deckIndex, 1);
     } else {
-      console.log(
-        `Removed Deck:${flashcard.decks[deckIndex].title}`,
-        "No Deck left"
-      );
       flashcard.decks = [];
     }
     savedDecks();
   }
 
   function OnShowDeck(deckIndex) {
-    // if (showDeck.value === null) {
-    //   showDeck.value = deckIndex; // Show deck
-    // } else {
-    //   showDeck.value = null; // Hide deck
-    // }
     showDeck.value[deckIndex] = !showDeck.value[deckIndex];
   }
 
