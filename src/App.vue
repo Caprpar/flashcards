@@ -11,7 +11,9 @@
 
   // If localstorage is empty, give it dummyDecks
   if (!localStorage.getItem("decks")) {
-    localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()));
+    // Fill flashcards.deck with dummydeck
+    flashcards.dummyDeck();
+    localStorage.setItem("decks", JSON.stringify(flashcards.decks));
     alert("Gave localstorage dummydeck");
   }
   flashcards.decks = JSON.parse(localStorage.getItem("decks"));

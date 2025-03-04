@@ -42,7 +42,7 @@ export const useFlashcard = defineStore("flashcard", {
       const deck = {
         title,
         cards,
-        id: uuidv4()
+        id: this.decks.length + 1
       };
       // this.decks.push(deck);
       return deck;
@@ -57,7 +57,7 @@ export const useFlashcard = defineStore("flashcard", {
      * @returns deck object
      */
     dummyDeck() {
-      let decks = [];
+      // let decks = [];
       const tableAmounts = 10;
       const tableLimit = 12;
 
@@ -71,9 +71,9 @@ export const useFlashcard = defineStore("flashcard", {
           const card = this.createCard(question, answer);
           deck.cards.push(card);
         }
-        decks.push(deck);
+        this.decks.push(deck);
       }
-      return decks;
+      // return decks;
     }
   },
   getters: {

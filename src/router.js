@@ -10,7 +10,8 @@ export default createRouter({
   routes: [
     {
       component: CardView,
-      path: "/collection/:deckId/:cardNr"
+      path: "/collection/:deckId/:cardNr",
+      name: "/collection"
     },
     {
       component: CollectionView,
