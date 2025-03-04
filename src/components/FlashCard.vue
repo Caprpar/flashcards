@@ -22,7 +22,6 @@
   const hideAnswer = ref(true);
   const cardNr = ref(route.params.cardNr - 1);
   let deckId = route.params.deckId;
-  console.log(deckId);
 
   // Variables for count
   const cardIndex = ref(0);
@@ -49,9 +48,7 @@
     deckId = Number(deckId);
     cardIndex = Number(cardIndex);
     currentDeck.value = flashcard.decks.filter((deck) => deck.id === deckId)[0];
-    console.log(currentDeck.value.cards);
     // currentDeck.value = JSON.parse(localStorage.getItem("decks"))[deckId];
-
     currentCard.value = currentDeck.value.cards[cardIndex];
     updateCount(currentDeck.value, cardIndex);
   }
@@ -84,7 +81,6 @@
   onBeforeRouteUpdate(async (to, from) => {
     // Hides answer when player press next or previous button
     hideAnswer.value = true;
-    console.log("change");
 
     deckId = to.params.deckId;
     const cardNr = to.params.cardNr - 1;
