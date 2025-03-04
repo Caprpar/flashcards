@@ -219,8 +219,8 @@ export const useFlashcard = defineStore("flashcard", {
     getDecks() {
       return this.decks;
     },
-    getDeck(deckId) {
-      return this.decks.filter((deck) => deck.id === deckId);
+    getDeck: (state) => {
+      (deckId) => this.decks.filter((deck) => deck.id === deckId);
     }
   }
 });
