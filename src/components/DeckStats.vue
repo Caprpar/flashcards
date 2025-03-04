@@ -146,9 +146,9 @@
 </template>
 
 <style scoped>
-  * {
-    /* border: solid; */
-  }
+  /* * {
+    border: solid;
+  } */
   section {
     display: grid;
     grid-template-areas:
@@ -269,6 +269,12 @@
     gap: 1em;
     flex-grow: 1;
     padding-top: 1em;
+    font-size: 1.5em;
+  }
+  @media (min-width: 768px) {
+    #cards {
+      font-size: 2rem;
+    }
   }
 
   .card {
@@ -303,9 +309,9 @@
   }
 
   @media screen and (min-width: 768px) {
-    * {
-      /* border: solid; */
-    }
+    /* * {
+      border: solid;
+    } */
 
     h1 {
       /* border-bottom: dashed var(--dark); */
