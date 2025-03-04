@@ -131,7 +131,7 @@
 <template>
   <h1>{{ currentDeck.title }}</h1>
   <div class="flashcard">
-    <router-link :to="`${cardNr}`">
+    <router-link :to="`${cardNr}`" tabindex="-1">
       <button class="arrow-button left-arrow" @click="goPrevious(cardNr)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@
     </div>
     <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
 
-    <router-link :to="`${cardNr}`">
+    <router-link :to="`${cardNr}`" tabindex="-1">
       <button class="arrow-button" @click="goNext">
         <svg
           xmlns="http://www.w3.org/2000/svg"
