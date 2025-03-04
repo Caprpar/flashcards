@@ -197,6 +197,7 @@
     top: 15px;
     right: 20px;
     color: var(--grey);
+    font-size: 1.3rem;
   }
 
   .arrow-button {
@@ -211,5 +212,11 @@
 
   .arrow-button:hover {
     color: var(--grey-hover);
+  }
+  @media (min-width: 768px) {
+    #front,
+    #back {
+      padding: 0 4rem;
+    }
   }
 </style>

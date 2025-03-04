@@ -6,6 +6,7 @@
   import { useFlashcard } from "../stores/flashcards";
 
   const route = useRoute();
+  const cardNr = ref(1);
   const flashcard = useFlashcard();
   const currentDeck = ref(flashcard.decks);
 
@@ -13,7 +14,7 @@
     currentDeck.value = deck;
   }
 
-  function dotStyle(currentCard, index) {
+  function dotStyle(currentCard) {
     const cardIndex = 1 + currentDeck.value.cards.indexOf(currentCard);
     let styleSettings = "dot ";
     watchEffect(() => {
@@ -37,9 +38,9 @@
       <div id="answer-indicator">
         <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
         <div
-          v-for="(card, index) in currentDeck.cards"
+          v-for="card in currentDeck.cards"
           :key="card.id"
-          :class="dotStyle(card, index)"
+          :class="dotStyle(card)"
         />
       </div>
       <div class="buttons-container">
@@ -50,7 +51,7 @@
   </main>
 </template>
 
-<style scoped>
+<style>
   main {
     display: flex;
     justify-content: center;
@@ -67,6 +68,7 @@
     height: 90vh;
     padding-top: 2em;
     width: clamp(9em, 95%, 43em);
+    font: 1.5em Arial, sans-serif;
   }
   .buttons-container {
     display: flex;
@@ -77,12 +79,13 @@
     width: 100%; /* Ensures it fills the container */
     max-width: 700px; /* Adjust this as needed */
   }
+
   #answer-indicator {
     margin-top: 1em;
     justify-content: space-around;
     align-items: center;
     display: flex;
-    width: 28em;
+    width: 100%;
   }
 
   .dot {
@@ -101,5 +104,18 @@
   }
   .wrong {
     background-color: var(--danger);
+  }
+
+  @media (max-width: 375px) {
+    .card-view-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+      padding-top: 2em;
+      width: clamp(9em, 95%, 43em);
+      font: 1em Arial, sans-serif;
+    }
   }
 </style>

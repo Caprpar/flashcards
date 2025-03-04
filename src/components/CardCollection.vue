@@ -2,7 +2,7 @@
   <div class="card-collection">
     <div class="cardcollection">
       <h2 v-if="deck">{{ deck.title }}</h2>
-      <p v-if="deck">{{ deck.cards.length }} cards</p>
+      <p v-if="deck">({{ deck.cards.length }} cards)</p>
     </div>
   </div>
 </template>
@@ -25,8 +25,6 @@
     }
   });
 
-  console.log(props.image);
-
   const decksCard = ref([]);
   const router = useRouter();
 
@@ -43,8 +41,10 @@
 
 <style scoped>
   .cardcollection > h2 {
-    padding: 30px 0px 0px 10px;
-    font-size: 1rem;
+    padding: 40px 10px 10px 10px;
+    font-size: 0.9rem;
+    text-wrap: wrap;
+    overflow-wrap: break-word;
   }
 
   .cardcollection > p {
@@ -63,5 +63,6 @@
     width: 150px; /* Set a width */
     height: 150px; /* Set a height */
     color: #e1faf9;
+    font-size: 0.6em;
   }
 </style>
