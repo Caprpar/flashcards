@@ -46,11 +46,13 @@
    * @param cardIndex - current card index
    */
   function updateCurrentCard(deckId, cardIndex) {
-    currentDeck.value = flashcard.decks.filter((deck) => deck.id === deckId);
-    console.log(currentDeck.value[0].cards);
+    deckId = Number(deckId);
+    cardIndex = Number(cardIndex);
+    currentDeck.value = flashcard.decks.filter((deck) => deck.id === deckId)[0];
+    console.log(currentDeck.value.cards);
     // currentDeck.value = JSON.parse(localStorage.getItem("decks"))[deckId];
 
-    currentCard.value = currentDeck.value[0].cards[cardIndex];
+    currentCard.value = currentDeck.value.cards[cardIndex];
     updateCount(currentDeck.value, cardIndex);
   }
 
@@ -63,10 +65,7 @@
   onMounted(async () => {
     watchEffect(
       () => [route.params.deckId, route.params.cardNr],
-      updateCurrentCard(
-        Number(route.params.deckId),
-        Number(route.params.cardNr - 1)
-      ),
+      updateCurrentCard(route.params.deckId, route.params.cardNr - 1),
 
       // Send current deck to parrent
       emit("on-deck-update", currentDeck.value)
@@ -85,6 +84,7 @@
   onBeforeRouteUpdate(async (to, from) => {
     // Hides answer when player press next or previous button
     hideAnswer.value = true;
+    console.log("change");
 
     deckId = to.params.deckId;
     const cardNr = to.params.cardNr - 1;
