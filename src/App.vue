@@ -14,10 +14,13 @@
     !localStorage.getItem("decks") ||
     JSON.parse(localStorage.getItem("decks")).length === 0
   ) {
-    localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()));
+    flashcards.decks = flashcards.dummyDeck();
+    // localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()));
+    console.log("flashcard.decks: ", flashcards.decks);
+
     alert("Gave localstorage dummydeck");
   }
-  flashcards.decks = JSON.parse(localStorage.getItem("decks"));
+  // flashcards.decks = JSON.parse(localStorage.getItem("decks"));
 </script>
 
 <template>

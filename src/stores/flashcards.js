@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import { v4 as uuidv4 } from "uuid";
+import { useLocalStorage } from "@vueuse/core";
 
 export const useFlashcard = defineStore("flashcard", {
   state: () => ({
     /** The global variable that contains all current user decks*/
-    decks: [],
+    decks: useLocalStorage("decks", []),
     dummySessions: true, // fill sessions with dummysessions
     sessionsRange: { start: 5, end: 20 }, // generates between start to end amounts of sessions
     cardRange: { start: 5, end: 20 } // generates between start to end amounts of cards when creating deck
@@ -64,9 +65,9 @@ export const useFlashcard = defineStore("flashcard", {
     retriveFromLocal() {
       this.decks = JSON.parse(localStorage.getItem("decks"));
     },
-    saveToLocal() {
-      localStorage.setItem("decks", JSON.stringify(this.decks));
-    },
+    // saveToLocal() {
+    //   localStorage.setItem("decks", JSON.stringify(this.decks));
+    // },
     pushStats(deckId, session) {
       const deck = this.getDeck(deckId);
       deck.stats.sessions.push(session);
