@@ -1,5 +1,5 @@
 <script setup>
-  import { useRoute } from "vue-router";
+  import { useRoute, useRouter } from "vue-router";
   import {
     ref,
     watchEffect,
@@ -15,12 +15,14 @@
 
   const flashcard = useFlashcard();
   // console.table(flashcard.decks);
+  const router = useRouter();
   const route = useRoute();
   const currentDeck = ref([]);
   const currentCard = ref([]);
   const hideAnswer = ref(true);
-  const currentDeck1 = ref(flashcard.decks);
-  const cardNr = ref(1);
+  const cardNr = ref(route.params.cardNr - 1);
+  let deckId = route.params.deckId;
+  console.log(deckId);
 
   // Variables for count
   const cardIndex = ref(0);
@@ -30,6 +32,12 @@
     if (event.code === "space" || event.key === " ") {
       hideAnswer.value = !hideAnswer.value; // toggle
     }
+    if (event.code === "ArrowLeft" || event.key === "ArrowLeft") {
+      goPrevious();
+    }
+    if (event.code === "ArrowRight" || event.key === "ArrowRight") {
+      goNext();
+    }
   }
 
   /** When page reloads or new url is given, use this to update current card
@@ -38,7 +46,7 @@
    * @param cardIndex - current card index
    */
   function updateCurrentCard(deckId, cardIndex) {
-    currentDeck.value = flashcard.decks[deckId];
+    currentDeck.value = flashcard.decks[deckId - 1];
     // currentDeck.value = JSON.parse(localStorage.getItem("decks"))[deckId];
 
     currentCard.value = currentDeck.value.cards[cardIndex];
@@ -54,7 +62,7 @@
   onMounted(async () => {
     watchEffect(
       () => [route.params.deckId, route.params.cardNr],
-      updateCurrentCard(route.params.deckId - 1, route.params.cardNr - 1),
+      updateCurrentCard(route.params.deckId, route.params.cardNr - 1),
 
       // Send current deck to parrent
       emit("on-deck-update", currentDeck.value)
@@ -74,7 +82,7 @@
     // Hides answer when player press next or previous button
     hideAnswer.value = true;
 
-    const deckId = to.params.deckId - 1;
+    deckId = to.params.deckId;
     const cardNr = to.params.cardNr - 1;
     updateCurrentCard(deckId, cardNr);
 
@@ -83,9 +91,17 @@
   });
 
   // Switch between cards
-  function goPrevious() {
+  function goPrevious(previous) {
     if (cardNr.value > 1) {
       cardNr.value--;
+      // change url to collection/deckId/cardNr.value
+      router.push({
+        name: "/collection",
+        params: {
+          deckId,
+          cardNr: cardNr.value
+        }
+      });
     }
   }
 
@@ -93,6 +109,14 @@
     const cardAmount = currentDeck.value.cards.length;
     if (cardNr.value < cardAmount) {
       cardNr.value++;
+      // change url to collection/deckId/cardNr.value
+      router.push({
+        name: "/collection",
+        params: {
+          deckId,
+          cardNr: cardNr.value
+        }
+      });
     }
   }
 </script>
@@ -100,7 +124,7 @@
   <h1>{{ currentDeck.title }}</h1>
   <div class="flashcard">
     <router-link :to="`${cardNr}`">
-      <button class="arrow-button left-arrow" @click="goPrevious">
+      <button class="arrow-button left-arrow" @click="goPrevious(cardNr)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="36"
@@ -173,6 +197,7 @@
     top: 15px;
     right: 20px;
     color: var(--grey);
+    font-size: 1.3rem;
   }
 
   .arrow-button {
@@ -187,5 +212,11 @@
 
   .arrow-button:hover {
     color: var(--grey-hover);
+  }
+  @media (min-width: 768px) {
+    #front,
+    #back {
+      padding: 0 4rem;
+    }
   }
 </style>

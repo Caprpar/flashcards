@@ -14,7 +14,7 @@
     !localStorage.getItem("decks") ||
     JSON.parse(localStorage.getItem("decks")).length === 0
   ) {
-    flashcards.decks = flashcards.dummyDeck();
+    flashcards.decks.value = flashcards.dummyDeck();
     // localStorage.setItem("decks", JSON.stringify(flashcards.dummyDeck()));
     console.log("flashcard.decks: ", flashcards.decks);
 

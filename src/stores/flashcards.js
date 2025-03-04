@@ -49,7 +49,7 @@ export const useFlashcard = defineStore("flashcard", {
       const deck = {
         title,
         cards,
-        id: uuidv4(),
+        id: this.decks.length + 1,
         stats: {
           average: 0, // Total average score 1-100%
           mastered: null, // mastered cards
@@ -76,7 +76,7 @@ export const useFlashcard = defineStore("flashcard", {
      * @returns deck object
      */
     dummyDeck() {
-      let decks = [];
+      // let decks = [];
       const tableAmounts = 10;
       const tableLimit = 12;
 
@@ -101,9 +101,8 @@ export const useFlashcard = defineStore("flashcard", {
         if (this.dummySessions) {
           this.fillDummyData(deck);
         }
-        decks.push(deck);
+        this.decks.push(deck);
       }
-      return decks;
     },
     /** Fill deck.stat.sessions with given amount of random sessions
      * @param {Object} deck deck object from createDeck()
