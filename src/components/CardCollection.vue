@@ -41,7 +41,8 @@
 
 <style scoped>
   .cardcollection > h2 {
-    padding: 40px 10px 10px 10px;
+    padding: 40px 10px 0px 10px;
+    margin: 0;
     font-size: 0.9rem;
     text-wrap: wrap;
     overflow-wrap: break-word;
