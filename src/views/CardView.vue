@@ -68,7 +68,7 @@
     height: 90vh;
     padding-top: 2em;
     width: clamp(9em, 95%, 43em);
-    font: 1.5em Arial, sans-serif;
+    font: Arial, sans-serif;
   }
   .buttons-container {
     display: flex;

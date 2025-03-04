@@ -269,12 +269,6 @@
     gap: 1em;
     flex-grow: 1;
     padding-top: 1em;
-    font-size: 1.5em;
-  }
-  @media (min-width: 768px) {
-    #cards {
-      font-size: 2rem;
-    }
   }
 
   .card {
@@ -286,6 +280,7 @@
     border: none;
     box-shadow: 0 0 3px 0px hsl(0, 0%, 50%);
     height: 100%;
+    font-size: 1.3em;
   }
   .stamp {
     position: absolute;
