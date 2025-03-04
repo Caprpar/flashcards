@@ -102,6 +102,10 @@
           cardNr: cardNr.value
         }
       });
+      // Removes focus from arrow, so that when user press space it wont flip to next card
+      document.querySelectorAll(".arrow-button").forEach((button) => {
+        button.blur();
+      });
     }
   }
 
@@ -116,6 +120,10 @@
           deckId,
           cardNr: cardNr.value
         }
+      });
+      // Removes focus from arrow, so that when user press space it wont flip to next card
+      document.querySelectorAll(".arrow-button").forEach((button) => {
+        button.blur();
       });
     }
   }
@@ -191,20 +199,21 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-size: 1em;
   }
   #count {
     position: absolute;
     top: 15px;
     right: 20px;
     color: var(--grey);
-    font-size: 1.3rem;
+    font-size: 1.1em;
   }
 
   .arrow-button {
     background-color: var(--light);
     color: var(--grey);
     border: none;
-    padding: 1.5em;
+    padding: 0.5em;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 24px;
@@ -217,6 +226,9 @@
     #front,
     #back {
       padding: 0 4rem;
+    }
+    .flashcard-content {
+      font-size: 1.3em;
     }
   }
 </style>
