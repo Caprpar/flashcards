@@ -46,11 +46,14 @@
    * @param cardIndex - current card index
    */
   function updateCurrentCard(deckId, cardIndex) {
-    currentDeck.value = flashcard.decks[deckId - 1];
+    deckId = Number(deckId);
+    cardIndex = Number(cardIndex);
+    currentDeck.value = flashcard.decks.filter((deck) => deck.id === deckId)[0];
+    console.log(currentDeck.value.cards);
     // currentDeck.value = JSON.parse(localStorage.getItem("decks"))[deckId];
 
     currentCard.value = currentDeck.value.cards[cardIndex];
-    updateCount(flashcard.decks[deckId], cardIndex);
+    updateCount(currentDeck.value, cardIndex);
   }
 
   function updateCount(deck, cardNumber) {
@@ -81,6 +84,7 @@
   onBeforeRouteUpdate(async (to, from) => {
     // Hides answer when player press next or previous button
     hideAnswer.value = true;
+    console.log("change");
 
     deckId = to.params.deckId;
     const cardNr = to.params.cardNr - 1;

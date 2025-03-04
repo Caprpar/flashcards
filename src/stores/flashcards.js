@@ -118,7 +118,7 @@ export const useFlashcard = defineStore("flashcard", {
           cardCopy.hasAnswer = true;
           // 25% to answer wrong
           cardCopy.needsPractice =
-            Math.floor(Math.random() * 4) + 1 === 1 ? true : false;
+            Math.floor(Math.random() * 2) + 1 === 1 ? true : false;
           session.push(cardCopy);
         }
         sessions.push(session);
@@ -220,8 +220,8 @@ export const useFlashcard = defineStore("flashcard", {
     getDecks() {
       return this.decks;
     },
-    getDeck(deckId) {
-      return this.decks.filter((deck) => deck.id === deckId);
+    getDeck: (state) => {
+      (deckId) => this.decks.filter((deck) => deck.id === deckId);
     }
   }
 });
