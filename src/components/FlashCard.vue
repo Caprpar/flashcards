@@ -67,12 +67,10 @@
     }
     cardNr.value = 1;
 
-    router.push({
+    router.replace({
       name: "/collection",
-      params: {
-        deckId,
-        cardNr: cardNr.value
-      }
+      params: { deckId, cardNr: cardNr.value },
+      query: { refresh: Math.random() }
     });
   }
 
