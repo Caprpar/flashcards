@@ -3,7 +3,7 @@
 
   const props = defineProps({
     color: { required: true, type: String },
-    text: { type: String }
+    text: { required: true, type: String }
   });
 </script>
 
