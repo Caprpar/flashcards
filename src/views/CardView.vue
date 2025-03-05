@@ -60,12 +60,30 @@
         />
       </div>
       <div id="button-style">
+        <!-- Show answer button -->
         <b-button
+          v-if="hideAnswer"
           @click="toggleAnswer"
           style="background-color: var(--secondary)"
         >
           Show answer
         </b-button>
+
+        <!-- Correct/practice buttons -->
+        <div v-else class="answer-buttons">
+          <b-button
+            @click="markAsCorrect"
+            style="background-color: var(--success)"
+          >
+            Correct
+          </b-button>
+          <b-button
+            @click="markAsPractice"
+            style="background-color: var(--danger)"
+          >
+            Practice
+          </b-button>
+        </div>
       </div>
     </div>
   </main>
@@ -113,6 +131,18 @@
 
   #button-style {
     margin-top: 1em;
+  }
+
+  #button-style button {
+    min-width: 200px !important;
+    padding: 0.5em 1.5em;
+    font-size: 1.1em;
+    text-align: center;
+  }
+
+  .answer-buttons {
+    display: flex;
+    gap: 2em;
   }
 
   @media (max-width: 375px) {
