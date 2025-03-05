@@ -130,7 +130,7 @@
     if (cardNr.value > 1) {
       cardNr.value--;
       // change url to collection/deckId/cardNr.value
-      router.push({
+      router.replace({
         name: "/collection",
         params: {
           deckId,
@@ -149,7 +149,7 @@
     if (cardNr.value < cardAmount) {
       cardNr.value++;
       // change url to collection/deckId/cardNr.value
-      router.push({
+      router.replace({
         name: "/collection",
         params: {
           deckId,
