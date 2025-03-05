@@ -11,7 +11,11 @@
 
   import { useFlashcard } from "../stores/flashcards";
 
-  const emit = defineEmits(["on-deck-update"]);
+  const emit = defineEmits([
+    "on-deck-update",
+    "toggle-answer",
+    "on-reset-answer"
+  ]);
 
   const flashcard = useFlashcard();
   // console.table(flashcard.decks);
@@ -20,7 +24,6 @@
   const route = useRoute();
   const currentDeck = ref([]);
   const currentCard = ref([]);
-  const hideAnswer = ref(true);
   const cardNr = ref(route.params.cardNr - 1);
   let deckId = route.params.deckId;
 
@@ -32,7 +35,7 @@
 
   function handleKeyDown(event) {
     if (event.code === "space" || event.key === " ") {
-      hideAnswer.value = !hideAnswer.value; // toggle
+      emit("toggle-answer");
     }
     if (event.code === "ArrowLeft" || event.key === "ArrowLeft") {
       goPrevious();
@@ -115,7 +118,7 @@
   // Update deckId and cardId when url changes
   onBeforeRouteUpdate(async (to, from) => {
     // Hides answer when player press next or previous button
-    hideAnswer.value = true;
+    emit("on-reset-answer");
 
     deckId = to.params.deckId;
     const cardNr = to.params.cardNr - 1;
@@ -162,6 +165,11 @@
       });
     }
   }
+
+  // Props show/hide buttons
+  defineProps({
+    hideAnswer: Boolean
+  });
 </script>
 <template>
   <h1>{{ currentDeck.title }}</h1>
