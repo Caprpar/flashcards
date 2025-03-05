@@ -15,6 +15,7 @@
 
   const flashcard = useFlashcard();
   // console.table(flashcard.decks);
+  const debug = ref(false); // When true, reveal all debug features
   const router = useRouter();
   const route = useRoute();
   const currentDeck = ref([]);
@@ -22,6 +23,8 @@
   const hideAnswer = ref(true);
   const cardNr = ref(route.params.cardNr - 1);
   let deckId = route.params.deckId;
+
+  let show = ref(true);
 
   // Variables for count
   const cardIndex = ref(0);
@@ -130,7 +133,27 @@
 </script>
 <template>
   <h1>{{ currentDeck.title }}</h1>
+  <button v-if="debug" @click="show = !show">toggle</button>
+  <!-- Reveal button to toggle animation on stats button -->
   <div class="flashcard">
+    <transition name="show-stats">
+      <div v-show="show" id="stats">
+        <router-link :to="`/statistics/${deckId}`">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-bar-chart-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"
+            />
+          </svg>
+        </router-link>
+      </div>
+    </transition>
     <router-link :to="`${cardNr}`" tabindex="-1">
       <button class="arrow-button left-arrow" @click="goPrevious(cardNr)">
         <svg
@@ -200,6 +223,28 @@
     align-items: center;
     text-align: center;
     font-size: 1em;
+  }
+  .show-stats-enter-active {
+    transition: all 0.3s ease;
+  }
+  .show-stats-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+  .show-stats-enter, .show-stats-leave-to
+/* .show-stats-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  #stats > a:hover {
+    color: var(--dark);
+  }
+  #stats > a {
+    color: var(--grey);
+  }
+  #stats {
+    position: absolute;
+    top: 15px;
+    left: 20px;
   }
   #count {
     position: absolute;
