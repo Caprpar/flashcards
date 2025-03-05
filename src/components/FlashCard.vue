@@ -52,8 +52,6 @@
       }
     }
 
-    console.log("shuffledDeck before shuffle: ", shuffledDeck.cards);
-
     for (let i = shuffledDeck.cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffledDeck.cards[i], shuffledDeck.cards[j]] = [
@@ -62,13 +60,20 @@
       ];
     }
 
-    console.log("shuffledDeck after shuffle: ", shuffledDeck.cards);
-
     for (const deck in flashcard.decks) {
       if (deck.id === deckId) {
         deck = shuffledDeck;
       }
     }
+    cardNr.value = 1;
+
+    router.push({
+      name: "/collection",
+      params: {
+        deckId,
+        cardNr: cardNr.value
+      }
+    });
   }
 
   /** When page reloads or new url is given, use this to update current card
@@ -166,7 +171,7 @@
   <!-- Reveal button to toggle animation on stats button -->
   <div class="flashcard">
     <transition name="show-stats">
-      <div v-show="show" id="stats">
+      <div v-show="show" id="stats" title="Stats">
         <router-link :to="`/statistics/${deckId}`">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +188,7 @@
         </router-link>
       </div>
     </transition>
-    <div @click="shuffleDeck" id="shuffle">
+    <div @click="shuffleDeck" id="shuffle" title="Shuffle Deck">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -202,7 +207,11 @@
       </svg>
     </div>
     <router-link :to="`${cardNr}`" tabindex="-1">
-      <button class="arrow-button left-arrow" @click="goPrevious(cardNr)">
+      <button
+        class="arrow-button left-arrow"
+        @click="goPrevious(cardNr)"
+        title="Previous Card"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="36"
@@ -228,7 +237,7 @@
     <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
 
     <router-link :to="`${cardNr}`" tabindex="-1">
-      <button class="arrow-button" @click="goNext">
+      <button class="arrow-button" @click="goNext" title="Next Card">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="36"
@@ -282,10 +291,15 @@
     transform: translateX(10px);
     opacity: 0;
   }
-  #stats > a:hover {
+  #stats > a:hover,
+  #shuffle:hover,
+  .arrow-button:hover {
     color: var(--dark);
   }
-  #stats > a {
+  #stats > a,
+  #shuffle,
+  .arrow-button,
+  #count {
     color: var(--grey);
   }
   #stats {
@@ -302,13 +316,11 @@
     position: absolute;
     top: 15px;
     right: 20px;
-    color: var(--grey);
     font-size: 1.1em;
   }
 
   .arrow-button {
     background-color: var(--light);
-    color: var(--grey);
     border: none;
     padding: 0.5em;
     cursor: pointer;
@@ -316,9 +328,6 @@
     font-size: 24px;
   }
 
-  .arrow-button:hover {
-    color: var(--grey-hover);
-  }
   @media (min-width: 768px) {
     #front,
     #back {
