@@ -32,14 +32,30 @@
     return styleSettings;
   }
 
+  // Question first when going between cards
+  function resetAnswer() {
+    hideAnswer.value = true;
+  }
+
   // Toggle answer button
   function toggleAnswer() {
     hideAnswer.value = !hideAnswer.value;
   }
 
-  // Question first when going between cards
-  function resetAnswer() {
-    hideAnswer.value = true;
+  // Correct and practice toggle
+  function markAsCorrect(card) {
+    card.hasAnswer = true;
+    card.needsPractice = false;
+  }
+
+  function markAsPractice(card) {
+    card.hasAnswer = true;
+    card.needsPractice = true;
+  }
+
+  // Show question toggle
+  function showQuestion() {
+    hideAnswer.value = true;// Göm svaret och visa frågan igen
   }
 </script>
 <template>
@@ -66,19 +82,25 @@
           @click="toggleAnswer"
           style="background-color: var(--secondary)"
         >
-          Show answer
+          Show Answer
         </b-button>
 
         <!-- Correct/practice buttons -->
         <div v-else class="answer-buttons">
           <b-button
-            @click="markAsCorrect"
+            @click="markAsCorrect(currentDeck.cards[route.params.cardNr - 1])"
             style="background-color: var(--success)"
           >
             Correct
           </b-button>
           <b-button
-            @click="markAsPractice"
+            @click="showQuestion"
+            style="background-color: var(--secondary)"
+          >
+            Show Question
+          </b-button>
+          <b-button
+            @click="markAsPractice(currentDeck.cards[route.params.cardNr - 1])"
             style="background-color: var(--danger)"
           >
             Practice
@@ -129,6 +151,13 @@
     height: 15px;
   }
 
+  .correct {
+    background-color: var(--success);
+  }
+  .wrong {
+    background-color: var(--danger);
+  }
+
   #button-style {
     margin-top: 1em;
   }
@@ -142,7 +171,7 @@
 
   .answer-buttons {
     display: flex;
-    gap: 2em;
+    gap: 1em;
   }
 
   @media (max-width: 375px) {
