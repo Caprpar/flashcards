@@ -1,24 +1,25 @@
 <script setup>
   import FlashCard from "../components/FlashCard.vue";
-  import FlashcardButton from "../components/FlashcardButton.vue";
   import { ref, watchEffect } from "vue";
   import { useRoute } from "vue-router";
   import { useFlashcard } from "../stores/flashcards";
 
   const route = useRoute();
-  const cardNr = ref(1);
+  const cardNr = ref(1); // Används? Se rad 21.
   const flashcard = useFlashcard();
   const currentDeck = ref(flashcard.decks);
+  const hideAnswer = ref(true);
 
   function updateDeck(deck) {
     currentDeck.value = deck;
   }
 
+  // Dots under flashcard
   function dotStyle(currentCard) {
     const cardIndex = 1 + currentDeck.value.cards.indexOf(currentCard);
     let styleSettings = "dot ";
     watchEffect(() => {
-      const cardNr = parseInt(route.params.cardNr);
+      const cardNr = parseInt(route.params.cardNr); // cardNr igen?
       if (cardIndex === cardNr) {
         styleSettings += "current ";
       }
@@ -30,11 +31,26 @@
     }
     return styleSettings;
   }
+
+  // Toggle answer button
+  function toggleAnswer() {
+    hideAnswer.value = !hideAnswer.value;
+  }
+
+  // Question first when going between cards
+  function resetAnswer() {
+    hideAnswer.value = true;
+  }
 </script>
 <template>
   <main>
     <div class="card-view-container">
-      <FlashCard @on-deck-update="updateDeck" />
+      <FlashCard
+        @on-deck-update="updateDeck"
+        :hide-answer="hideAnswer"
+        @toggle-answer="toggleAnswer"
+        @on-reset-answer="resetAnswer"
+      />
       <div id="answer-indicator">
         <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
         <div
@@ -43,9 +59,13 @@
           :class="dotStyle(card)"
         />
       </div>
-      <div class="buttons-container">
-        <FlashcardButton color="var(--success)" text="Rätt" />
-        <FlashcardButton color="var(--danger)" text="Fel" />
+      <div id="button-style">
+        <b-button
+          @click="toggleAnswer"
+          style="background-color: var(--secondary)"
+        >
+          Show answer
+        </b-button>
       </div>
     </div>
   </main>
@@ -70,15 +90,6 @@
     width: clamp(9em, 95%, 43em);
     font: Arial, sans-serif;
   }
-  .buttons-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
-    gap: 10px; /* Adds space between buttons */
-    width: 100%; /* Ensures it fills the container */
-    max-width: 700px; /* Adjust this as needed */
-  }
 
   #answer-indicator {
     margin-top: 1em;
@@ -99,11 +110,9 @@
     width: 15px;
     height: 15px;
   }
-  .correct {
-    background-color: var(--success);
-  }
-  .wrong {
-    background-color: var(--danger);
+
+  #button-style {
+    margin-top: 1em;
   }
 
   @media (max-width: 375px) {
