@@ -1,6 +1,6 @@
 <script></script>
 <template>
-  <div class="cardcollection"></div>
+  <div class="cardcollection" />
 </template>
 <style scoped>
   .cardcollection:hover {

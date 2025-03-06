@@ -1,14 +1,16 @@
 <script setup>
   import FlashCard from "../components/FlashCard.vue";
   import { ref, watchEffect } from "vue";
-  import { useRoute } from "vue-router";
+  import { useRoute, useRouter } from "vue-router";
   import { useFlashcard } from "../stores/flashcards";
 
+  const router = useRouter();
   const route = useRoute();
-  const cardNr = ref(1); // Används? Se rad 21.
   const flashcard = useFlashcard();
   const currentDeck = ref(flashcard.decks);
   const hideAnswer = ref(true);
+  let deckId = route.params.deckId;
+  const cardNr = ref(route.params.cardNr - 1);
 
   function updateDeck(deck) {
     currentDeck.value = deck;
@@ -30,6 +32,10 @@
       styleSettings += "wrong ";
     }
     return styleSettings;
+  }
+
+  function goToCard(cardIndex) {
+    router.push(`/collection/${deckId}/${cardIndex + 1}`);
   }
 
   // Question first when going between cards
@@ -95,11 +101,15 @@
           v-for="card in currentDeck.cards"
           :key="card.id"
           :class="dotStyle(card)"
+          @click="goToCard(currentDeck.cards.indexOf(card))"
+          :title="card.question"
         />
       </div>
+      <!-- Button -->
       <div id="button-style">
         <!-- Correct button -->
         <b-button
+          :disabled="currentDeck?.cards?.[route.params.cardNr - 1]?.hasAnswer"
           @click="markAsCorrect(currentDeck.cards[route.params.cardNr - 1])"
           style="background-color: var(--success)"
         >
@@ -123,6 +133,7 @@
         </b-button>
         <!-- Practice button -->
         <b-button
+          :disabled="currentDeck?.cards?.[route.params.cardNr - 1]?.hasAnswer"
           @click="markAsPractice(currentDeck.cards[route.params.cardNr - 1])"
           style="background-color: var(--danger)"
         >
@@ -159,6 +170,7 @@
     align-items: center;
     display: flex;
     width: 100%;
+    cursor: pointer;
   }
 
   .dot {
@@ -194,10 +206,10 @@
     padding: 0.5em 0.1em;
     font-size: 1em;
     text-align: center;
-    border: none !important;
+    border: none;
   }
 
-  @media (max-width: 375px) {
+  @media (min-width: 375px) {
     .card-view-container {
       display: flex;
       flex-direction: column;
@@ -206,26 +218,6 @@
       height: 90vh;
       padding-top: 2em;
       width: clamp(9em, 95%, 43em);
-      font: 1em Arial, sans-serif;
-    }
-  }
-
-  @media (min-width: 600px) {
-    #button-style {
-      margin-top: 1em;
-      width: clamp(9em, 95%, 43em);
-      display: flex;
-      justify-content: center;
-      gap: 0.5em;
-      width: 100%;
-    }
-
-    #button-style button {
-      flex: 1;
-      padding: 0.5em 1.5em;
-      font-size: 1.1em;
-      text-align: center;
-      border: none !important;
     }
   }
 </style>

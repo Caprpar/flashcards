@@ -4,6 +4,7 @@
   import CreateDeck from "../components/CreateDeck.vue";
   import { useFlashcard } from "../stores/flashcards";
   import { onMounted, ref } from "vue";
+  import folderImg from "../assets/folder.svg";
 
   const flashcard = useFlashcard();
   // Gives deck a dummyDeck with multiplication 1-12
@@ -36,10 +37,10 @@
     <router-link
       :key="deck.id"
       id="nodeco"
-      v-for="(deck, index) in decks"
-      :to="`/collection/${index + 1}/1`"
+      v-for="deck in decks"
+      :to="`/collection/${deck.id}/1`"
     >
-      <CardCollection :image="'../assets/folder.svg'" :deck="deck" />
+      <CardCollection :image="folderImg" :deck="deck" />
     </router-link>
   </div>
 </template>
