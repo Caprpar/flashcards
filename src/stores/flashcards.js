@@ -46,10 +46,13 @@ export const useFlashcard = defineStore("flashcard", {
      * @returns deck object.
      */
     createDeck(title, cards = []) {
+      const highestId = this.decks.length > 0 
+      ? Math.max(...this.decks.map(deck => deck.id)) 
+      : 0;
       const deck = {
         title,
         cards,
-        id: this.decks.length + 1,
+        id: highestId + 1,
         stats: {
           average: 0, // Total average score 1-100%
           mastered: null, // mastered cards
