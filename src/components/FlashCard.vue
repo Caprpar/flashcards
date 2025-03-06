@@ -47,10 +47,14 @@
       goNext();
     }
     if (event.code === "KeyA" || event.key === "a") {
-      emit("mark-as-correct", currentCard.value);
+      if (!currentCard.value.hasAnswer) {
+        emit("mark-as-correct", currentCard.value);
+      }
     }
     if (event.code === "KeyS" || event.key === "s") {
-      emit("mark-as-practice", currentCard.value);
+      if (!currentCard.value.hasAnswer) {
+        emit("mark-as-practice", currentCard.value);
+      }
     }
   }
 
