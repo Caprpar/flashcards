@@ -42,16 +42,39 @@
     hideAnswer.value = !hideAnswer.value;
   }
 
+  function uploadSession() {}
+
+  function allIsAnswerd() {
+    let allIsAnswer = true;
+    currentDeck.value.cards.forEach((card) => {
+      if (!card.hasAnswer) {
+        allIsAnswer = false;
+      }
+    });
+    // Push current session to decks session
+    if (allIsAnswer) {
+      console.log(currentDeck.value.cards);
+      console.log(currentDeck.value.cards);
+      currentDeck.value.stats.sessions.push([...currentDeck.value.cards]);
+      console.table(currentDeck.value.stats.sessions);
+      flashcard.updateStats(currentDeck.value);
+      currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
+    }
+    return allIsAnswer;
+  }
+
   // Correct toggle
   function markAsCorrect(card) {
     card.hasAnswer = true;
     card.needsPractice = false;
+    console.log(allIsAnswerd());
   }
 
   // Practice toggle
   function markAsPractice(card) {
     card.hasAnswer = true;
     card.needsPractice = true;
+    console.log(allIsAnswerd());
   }
 
   // Show question toggle
@@ -112,7 +135,7 @@
   </main>
 </template>
 
-<style>
+<style scoped>
   main {
     display: flex;
     justify-content: center;
