@@ -1,14 +1,16 @@
 <script setup>
   import FlashCard from "../components/FlashCard.vue";
   import { ref, watchEffect } from "vue";
-  import { useRoute } from "vue-router";
+  import { useRoute, useRouter } from "vue-router";
   import { useFlashcard } from "../stores/flashcards";
 
+  const router = useRouter();
   const route = useRoute();
-  const cardNr = ref(1); // Används? Se rad 21.
   const flashcard = useFlashcard();
   const currentDeck = ref(flashcard.decks);
   const hideAnswer = ref(true);
+  let deckId = route.params.deckId;
+  const cardNr = ref(route.params.cardNr - 1);
 
   function updateDeck(deck) {
     currentDeck.value = deck;
@@ -30,6 +32,10 @@
       styleSettings += "wrong ";
     }
     return styleSettings;
+  }
+
+  function goToCard(cardIndex) {
+    router.push(`/collection/${deckId}/${cardIndex + 1}`);
   }
 
   // Question first when going between cards
@@ -73,6 +79,7 @@
           v-for="card in currentDeck.cards"
           :key="card.id"
           :class="dotStyle(card)"
+          @click="goToCard(currentDeck.cards.indexOf(card))"
         />
       </div>
       <div id="button-style">
@@ -137,6 +144,7 @@
     align-items: center;
     display: flex;
     width: 100%;
+    cursor: pointer;
   }
 
   .dot {
