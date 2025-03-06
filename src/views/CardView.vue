@@ -76,6 +76,7 @@
           :class="dotStyle(card)"
         />
       </div>
+      <!-- Button -->
       <div id="button-style">
         <!-- Correct button -->
         <b-button
