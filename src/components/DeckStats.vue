@@ -52,7 +52,7 @@
       <div id="dots-container" v-if="deck.stats.sessions">
         <p v-if="!deck.stats.sessions[0]">Study this deck to gather data</p>
         <ul v-for="session in dotsGraph" :key="session.id" class="dots">
-          <li v-for="card in session" :key="card.id">
+          <li v-for="card in session" :key="card.id" :title="card.question">
             <div v-if="card.hasAnswer && card.needsPractice" class="dot red" />
             <div
               v-else-if="card.hasAnswer && !card.needsPractice"
