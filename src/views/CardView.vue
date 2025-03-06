@@ -53,11 +53,8 @@
     });
     // Push current session to decks session
     if (allIsAnswer) {
-      console.log(currentDeck.value.cards);
-      console.log(currentDeck.value.cards);
-      const cardsCopy = [...currentDeck.value.cards];
+      const cardsCopy = JSON.parse(JSON.stringify(currentDeck.value.cards));
       currentDeck.value.stats.sessions.push(cardsCopy);
-      console.table(currentDeck.value.stats.sessions);
       flashcard.updateStats(currentDeck.value);
       currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
     }
