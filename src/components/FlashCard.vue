@@ -14,7 +14,9 @@
   const emit = defineEmits([
     "on-deck-update",
     "toggle-answer",
-    "on-reset-answer"
+    "on-reset-answer",
+    "mark-as-correct",
+    "mark-as-practice"
   ]);
 
   const flashcard = useFlashcard();
@@ -33,6 +35,7 @@
   const cardIndex = ref(0);
   const cardAmount = ref(0);
 
+  // Key press event
   function handleKeyDown(event) {
     if (event.code === "space" || event.key === " ") {
       emit("toggle-answer");
@@ -43,7 +46,14 @@
     if (event.code === "ArrowRight" || event.key === "ArrowRight") {
       goNext();
     }
+    if (event.code === "KeyA" || event.key === "a") {
+      emit("mark-as-correct", currentCard.value);
+    }
+    if (event.code === "KeyS" || event.key === "s") {
+      emit("mark-as-practice", currentCard.value);
+    }
   }
+
   function shuffleDeck() {
     // Shuffle the deck using Fisher-Yates algorithm
     // let shuffledDeck = flashcard.decks.filter((deck) => deck.id === deckId)[0];
