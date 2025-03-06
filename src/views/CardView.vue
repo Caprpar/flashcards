@@ -48,8 +48,9 @@
     hideAnswer.value = !hideAnswer.value;
   }
 
-  function uploadSession() {}
-
+  /**
+   * check if all cards hasAnswer = true
+   */
   function allIsAnswerd() {
     let allIsAnswer = true;
     currentDeck.value.cards.forEach((card) => {
@@ -57,28 +58,35 @@
         allIsAnswer = false;
       }
     });
-    // Push current session to decks session
-    if (allIsAnswer) {
-      const cardsCopy = JSON.parse(JSON.stringify(currentDeck.value.cards));
-      currentDeck.value.stats.sessions.push(cardsCopy);
-      flashcard.updateStats(currentDeck.value);
-      currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
-    }
     return allIsAnswer;
+  }
+
+  /**
+   * Push current session to decks session
+   * */
+  function exportDeckToStats() {
+    const cardsCopy = JSON.parse(JSON.stringify(currentDeck.value.cards));
+    currentDeck.value.stats.sessions.push(cardsCopy);
+    flashcard.updateStats(currentDeck.value);
+    currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
   }
 
   // Correct toggle
   function markAsCorrect(card) {
     card.hasAnswer = true;
     card.needsPractice = false;
-    console.log(allIsAnswerd());
+    if (allIsAnswerd()) {
+      exportDeckToStats();
+    }
   }
 
   // Practice toggle
   function markAsPractice(card) {
     card.hasAnswer = true;
     card.needsPractice = true;
-    console.log(allIsAnswerd());
+    if (allIsAnswerd()) {
+      exportDeckToStats();
+    }
   }
 
   // Show question toggle
