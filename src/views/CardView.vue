@@ -48,11 +48,37 @@
     hideAnswer.value = !hideAnswer.value;
   }
 
+  /**
+   * check if all cards hasAnswer = true
+   */
+  function allIsAnswerd() {
+    let allIsAnswer = true;
+    currentDeck.value.cards.forEach((card) => {
+      if (!card.hasAnswer) {
+        allIsAnswer = false;
+      }
+    });
+    return allIsAnswer;
+  }
+
+  /**
+   * Push current session to decks session
+   * */
+  function exportDeckToStats() {
+    const cardsCopy = JSON.parse(JSON.stringify(currentDeck.value.cards));
+    currentDeck.value.stats.sessions.push(cardsCopy);
+    flashcard.updateStats(currentDeck.value);
+    currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
+  }
+
   // Correct toggle
   function markAsCorrect(card) {
     if (!card.hasAnswer) {
       card.hasAnswer = true;
       card.needsPractice = false;
+    }
+    if (allIsAnswerd()) {
+      exportDeckToStats();
     }
   }
 
@@ -60,6 +86,9 @@
     if (!card.hasAnswer) {
       card.hasAnswer = true;
       card.needsPractice = true;
+    }
+    if (allIsAnswerd()) {
+      exportDeckToStats();
     }
   }
 
@@ -128,7 +157,7 @@
   </main>
 </template>
 
-<style>
+<style scoped>
   main {
     display: flex;
     justify-content: center;
