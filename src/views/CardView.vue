@@ -55,7 +55,8 @@
     if (allIsAnswer) {
       console.log(currentDeck.value.cards);
       console.log(currentDeck.value.cards);
-      currentDeck.value.stats.sessions.push([...currentDeck.value.cards]);
+      const cardsCopy = [...currentDeck.value.cards];
+      currentDeck.value.stats.sessions.push(cardsCopy);
       console.table(currentDeck.value.stats.sessions);
       flashcard.updateStats(currentDeck.value);
       currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
