@@ -21,7 +21,7 @@
     const cardIndex = 1 + currentDeck.value.cards.indexOf(currentCard);
     let styleSettings = "dot ";
     watchEffect(() => {
-      const cardNr = parseInt(route.params.cardNr); // cardNr igen?
+      const cardNr = parseInt(route.params.cardNr);
       if (cardIndex === cardNr) {
         styleSettings += "current ";
       }
@@ -73,6 +73,8 @@
         :hide-answer="hideAnswer"
         @toggle-answer="toggleAnswer"
         @on-reset-answer="resetAnswer"
+        @mark-as-correct="markAsCorrect"
+        @mark-as-practice="markAsPractice"
       />
       <div id="answer-indicator">
         <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
