@@ -24,7 +24,7 @@
   const route = useRoute();
   const currentDeck = ref([]);
   const currentCard = ref([]);
-  const cardNr = ref(route.params.cardNr - 1);
+  const cardNr = ref(route.params.cardNr);
   let deckId = route.params.deckId;
 
   let show = ref(true);
