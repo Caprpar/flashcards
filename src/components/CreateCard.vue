@@ -2,6 +2,8 @@
   import { ref } from "vue";
   import { v4 as uuidv4 } from "uuid";
   import { useFlashcard } from "../stores/flashcards";
+  import { useRouter } from "vue-router";
+  const router = useRouter();
 
   const flashcards = useFlashcard();
 
@@ -65,6 +67,7 @@
     decks.push(newDeck.value);
     // localStorage.setItem("decks", JSON.stringify(decks));
     deckCreated.value = false;
+    router.push("/");
   }
 </script>
 
@@ -72,7 +75,7 @@
   <section>
     <div v-if="!deckCreated">
       <div class="flex-container">
-        <input v-model="deckName" placeholder="deck name here" />
+        <input v-model="deckName" placeholder="Deck title" />
         <button @click="nameDeck" :disabled="!deckName">
           Start building deck
         </button>
