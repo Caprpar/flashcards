@@ -317,6 +317,7 @@
     position: absolute;
     top: 15px;
     left: 50px;
+    cursor: pointer;
   }
   #count {
     position: absolute;
