@@ -294,7 +294,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 1em;
+    font-size: 1.4em;
+    font-family: sour gummy;
   }
   .show-stats-enter-active {
     transition: all 0.3s ease;
@@ -351,7 +352,7 @@
       padding: 0 4rem;
     }
     .flashcard-content {
-      font-size: 1.3em;
+      font-size: 1.7em;
     }
   }
 </style>

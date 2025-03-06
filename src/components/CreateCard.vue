@@ -118,6 +118,8 @@
     gap: 20px;
   }
   input {
+    font-family: sour gummy;
+    font-size: 1.2em;
     box-sizing: border-box;
     border: 2px solid var(--secondary);
     border-radius: 10px;
@@ -134,6 +136,7 @@
     text-align: center;
   }
   textarea {
+    font-family: sour gummy;
     width: 300px;
     height: 200px;
     box-sizing: border-box;
