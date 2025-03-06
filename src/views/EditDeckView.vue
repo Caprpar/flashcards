@@ -130,7 +130,7 @@
       // savedDecks();
     }
   }
-
+  // console.log("flashcard.decks:", flashcard.decks);
   function removeDeck(deckIndex) {
     if (flashcard.decks.length > 1) {
       flashcard.decks.splice(deckIndex, 1);

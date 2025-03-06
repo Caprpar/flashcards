@@ -37,8 +37,8 @@
     <router-link
       :key="deck.id"
       id="nodeco"
-      v-for="(deck, index) in decks"
-      :to="`/collection/${index + 1}/1`"
+      v-for="deck in decks"
+      :to="`/collection/${deck.id}/1`"
     >
       <CardCollection :image="folderImg" :deck="deck" />
     </router-link>
