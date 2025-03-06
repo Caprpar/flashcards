@@ -272,6 +272,7 @@
   }
 
   .card {
+    font-family: sour gummy;
     position: relative;
     display: flex;
     justify-content: center;

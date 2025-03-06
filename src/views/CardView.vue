@@ -51,7 +51,7 @@
   /**
    * check if all cards hasAnswer = true
    */
-  function allIsAnswerd() {
+  function allIsAnswered() {
     let allIsAnswer = true;
     currentDeck.value.cards.forEach((card) => {
       if (!card.hasAnswer) {
@@ -77,7 +77,7 @@
       card.hasAnswer = true;
       card.needsPractice = false;
     }
-    if (allIsAnswerd()) {
+    if (allIsAnswered()) {
       exportDeckToStats();
     }
   }
@@ -87,7 +87,7 @@
       card.hasAnswer = true;
       card.needsPractice = true;
     }
-    if (allIsAnswerd()) {
+    if (allIsAnswered()) {
       exportDeckToStats();
     }
   }
