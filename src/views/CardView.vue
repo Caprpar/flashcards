@@ -81,6 +81,7 @@
           :key="card.id"
           :class="dotStyle(card)"
           @click="goToCard(currentDeck.cards.indexOf(card))"
+          :title="card.question"
         />
       </div>
       <!-- Button -->
