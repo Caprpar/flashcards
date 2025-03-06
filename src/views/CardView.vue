@@ -50,14 +50,17 @@
 
   // Correct toggle
   function markAsCorrect(card) {
-    card.hasAnswer = true;
-    card.needsPractice = false;
+    if (!card.hasAnswer) {
+      card.hasAnswer = true;
+      card.needsPractice = false;
+    }
   }
 
-  // Practice toggle
   function markAsPractice(card) {
-    card.hasAnswer = true;
-    card.needsPractice = true;
+    if (!card.hasAnswer) {
+      card.hasAnswer = true;
+      card.needsPractice = true;
+    }
   }
 
   // Show question toggle
