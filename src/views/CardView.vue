@@ -83,9 +83,11 @@
           @click="goToCard(currentDeck.cards.indexOf(card))"
         />
       </div>
+      <!-- Button -->
       <div id="button-style">
         <!-- Correct button -->
         <b-button
+          :disabled="currentDeck?.cards?.[route.params.cardNr - 1]?.hasAnswer"
           @click="markAsCorrect(currentDeck.cards[route.params.cardNr - 1])"
           style="background-color: var(--success)"
         >
@@ -109,6 +111,7 @@
         </b-button>
         <!-- Practice button -->
         <b-button
+          :disabled="currentDeck?.cards?.[route.params.cardNr - 1]?.hasAnswer"
           @click="markAsPractice(currentDeck.cards[route.params.cardNr - 1])"
           style="background-color: var(--danger)"
         >
