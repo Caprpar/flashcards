@@ -173,10 +173,10 @@
     padding: 0.5em 0.1em;
     font-size: 1em;
     text-align: center;
-    border: none !important;
+    border: none;
   }
 
-  @media (max-width: 375px) {
+  @media (min-width: 375px) {
     .card-view-container {
       display: flex;
       flex-direction: column;
@@ -185,26 +185,6 @@
       height: 90vh;
       padding-top: 2em;
       width: clamp(9em, 95%, 43em);
-      font: 1em Arial, sans-serif;
-    }
-  }
-
-  @media (min-width: 600px) {
-    #button-style {
-      margin-top: 1em;
-      width: clamp(9em, 95%, 43em);
-      display: flex;
-      justify-content: center;
-      gap: 0.5em;
-      width: 100%;
-    }
-
-    #button-style button {
-      flex: 1;
-      padding: 0.5em 1.5em;
-      font-size: 1.1em;
-      text-align: center;
-      border: none !important;
     }
   }
 </style>
