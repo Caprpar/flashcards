@@ -28,6 +28,7 @@
   const currentDeck = ref([]);
   const currentCard = ref([]);
   const cardNr = computed(() => route.params.cardNr);
+  const successfulShuffle = ref(false);
 
   let deckId = route.params.deckId;
 
@@ -86,6 +87,11 @@
     }
 
     router.push(`/collection/${deckId}/1`);
+    successfulShuffle.value = true;
+
+    setTimeout(() => {
+      successfulShuffle.value = false;
+    }, 2000);
   }
 
   /** When page reloads or new url is given, use this to update current card
@@ -176,6 +182,13 @@
   });
 </script>
 <template>
+  <div
+    v-if="successfulShuffle"
+    class="shuffle-alert alert alert-success"
+    role="alert"
+  >
+    Deck successfully shuffled!
+  </div>
   <h1>{{ currentDeck.title }}</h1>
   <button v-if="debug" @click="show = !show">toggle</button>
   <!-- Reveal button to toggle animation on stats button -->
@@ -298,7 +311,7 @@
     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
   }
   .show-stats-enter, .show-stats-leave-to
-/* .show-stats-leave-active below version 2.1.8 */ {
+  /* .show-stats-leave-active below version 2.1.8 */ {
     transform: translateX(10px);
     opacity: 0;
   }
@@ -323,6 +336,12 @@
     top: 15px;
     left: 50px;
     cursor: pointer;
+  }
+
+  .shuffle-alert {
+    position: absolute;
+    top: 100px;
+    z-index: 2;
   }
   #count {
     position: absolute;
