@@ -10,7 +10,6 @@
   const currentDeck = ref(flashcard.decks);
   const hideAnswer = ref(true);
   let deckId = route.params.deckId;
-  const cardNr = ref(route.params.cardNr - 1);
 
   function updateDeck(deck) {
     currentDeck.value = deck;
@@ -33,6 +32,8 @@
     }
     return styleSettings;
   }
+
+  function coloredLine() {}
 
   function goToCard(cardIndex) {
     router.push(`/collection/${deckId}/${cardIndex + 1}`);
