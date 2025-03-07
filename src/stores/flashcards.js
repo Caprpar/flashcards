@@ -6,9 +6,9 @@ export const useFlashcard = defineStore("flashcard", {
   state: () => ({
     /** The global variable that contains all current user decks*/
     decks: useLocalStorage("decks", []),
-    dummySessions: true, // fill sessions with dummysessions
-    sessionsRange: { start: 5, end: 20 }, // generates between start to end amounts of sessions
-    cardRange: { start: 5, end: 20 } // generates between start to end amounts of cards when creating deck
+    dummySessions: false, // fill sessions with dummysessions
+    sessionsRange: { start: 10, end: 10 }, // generates between start to end amounts of sessions
+    cardRange: { start: 10, end: 10 } // generates between start to end amounts of cards when creating deck
   }),
   actions: {
     random(start, end) {
@@ -46,10 +46,13 @@ export const useFlashcard = defineStore("flashcard", {
      * @returns deck object.
      */
     createDeck(title, cards = []) {
+      const highestId = this.decks.length > 0 
+      ? Math.max(...this.decks.map(deck => deck.id)) 
+      : 0;
       const deck = {
         title,
         cards,
-        id: this.decks.length + 1,
+        id: highestId + 1,
         stats: {
           average: 0, // Total average score 1-100%
           mastered: null, // mastered cards
@@ -99,7 +102,7 @@ export const useFlashcard = defineStore("flashcard", {
           deck.cards.push(card);
         }
         if (this.dummySessions) {
-          this.fillDummyData(deck);
+          this.updateStats(deck);
         }
         this.decks.push(deck);
       }
@@ -128,11 +131,13 @@ export const useFlashcard = defineStore("flashcard", {
     /** fill deck.stats with information using stats.sessions data
      * @param {Object} deck deck object from createDeck()
      */
-    fillDummyData(deck) {
-      this.fillDummySessions(
-        deck,
-        this.random(this.sessionsRange.start, this.sessionsRange.end)
-      );
+    updateStats(deck, fillWithDummy = false) {
+      if (fillWithDummy) {
+        this.fillDummySessions(
+          deck,
+          this.random(this.sessionsRange.start, this.sessionsRange.end)
+        );
+      }
       deck.stats.practice = this.getFlashcardsByStatus(deck, "practice");
       deck.stats.mastered = this.getFlashcardsByStatus(deck, "mastered");
       deck.stats.practiceAmount = deck.stats.sessions.length;

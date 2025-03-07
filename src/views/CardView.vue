@@ -20,7 +20,7 @@
     const cardIndex = 1 + currentDeck.value.cards.indexOf(currentCard);
     let styleSettings = "dot ";
     watchEffect(() => {
-      const cardNr = parseInt(route.params.cardNr); // cardNr igen?
+      const cardNr = parseInt(route.params.cardNr);
       if (cardIndex === cardNr) {
         styleSettings += "current ";
       }
@@ -49,16 +49,48 @@
     hideAnswer.value = !hideAnswer.value;
   }
 
-  // Correct toggle
-  function markAsCorrect(card) {
-    card.hasAnswer = true;
-    card.needsPractice = false;
+  /**
+   * check if all cards hasAnswer = true
+   */
+  function allIsAnswered() {
+    let allIsAnswer = true;
+    currentDeck.value.cards.forEach((card) => {
+      if (!card.hasAnswer) {
+        allIsAnswer = false;
+      }
+    });
+    return allIsAnswer;
   }
 
-  // Practice toggle
+  /**
+   * Push current session to decks session
+   * */
+  function exportDeckToStats() {
+    const cardsCopy = JSON.parse(JSON.stringify(currentDeck.value.cards));
+    currentDeck.value.stats.sessions.push(cardsCopy);
+    flashcard.updateStats(currentDeck.value);
+    currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
+  }
+
+  // Correct toggle
+  function markAsCorrect(card) {
+    if (!card.hasAnswer) {
+      card.hasAnswer = true;
+      card.needsPractice = false;
+    }
+    if (allIsAnswered()) {
+      exportDeckToStats();
+    }
+  }
+
   function markAsPractice(card) {
-    card.hasAnswer = true;
-    card.needsPractice = true;
+    if (!card.hasAnswer) {
+      card.hasAnswer = true;
+      card.needsPractice = true;
+    }
+    if (allIsAnswered()) {
+      exportDeckToStats();
+    }
   }
 
   // Show question toggle
@@ -74,8 +106,9 @@
         :hide-answer="hideAnswer"
         @toggle-answer="toggleAnswer"
         @on-reset-answer="resetAnswer"
-        ><div :class="coloredLine"
-      /></FlashCard>
+        @mark-as-correct="markAsCorrect"
+        @mark-as-practice="markAsPractice"
+      />
       <div id="answer-indicator">
         <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
         <div
@@ -125,7 +158,7 @@
   </main>
 </template>
 
-<style>
+<style scoped>
   main {
     display: flex;
     justify-content: center;
@@ -180,6 +213,7 @@
     justify-content: center;
     gap: 0.5em;
     width: 100%;
+    padding-bottom: 1.5em;
   }
 
   #button-style button {
