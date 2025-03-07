@@ -9,6 +9,7 @@
   const flashcard = useFlashcard();
   const currentDeck = ref(flashcard.decks);
   const hideAnswer = ref(true);
+  const showAlert = ref(false);
   let deckId = route.params.deckId;
 
   function updateDeck(deck) {
@@ -32,8 +33,6 @@
     }
     return styleSettings;
   }
-
-  function coloredLine() {}
 
   function goToCard(cardIndex) {
     router.push(`/collection/${deckId}/${cardIndex + 1}`);
@@ -70,6 +69,7 @@
     currentDeck.value.stats.sessions.push(cardsCopy);
     flashcard.updateStats(currentDeck.value);
     currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
+    showAlert.value = false;
   }
 
   // Correct toggle
@@ -79,7 +79,7 @@
       card.needsPractice = false;
     }
     if (allIsAnswered()) {
-      exportDeckToStats();
+      showAlert.value = true;
     }
   }
 
@@ -89,8 +89,17 @@
       card.needsPractice = true;
     }
     if (allIsAnswered()) {
-      exportDeckToStats();
+      showAlert.value = true;
     }
+  }
+
+  function showStats() {
+    exportDeckToStats();
+    router.push(`/statistics/${deckId}`);
+  }
+  function goToCollection() {
+    exportDeckToStats();
+    router.push(`/`);
   }
 
   // Show question toggle
@@ -100,6 +109,31 @@
 </script>
 <template>
   <main>
+    <div v-if="showAlert" class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Well done!</h4>
+      <p>You completed your deck</p>
+      <hr />
+      <div class="button-style">
+        <b-button
+          style="background-color: var(--success)"
+          @click="exportDeckToStats()"
+        >
+          Play Again
+        </b-button>
+        <b-button
+          style="background-color: var(--secondary)"
+          @click="showStats()"
+        >
+          Go to Stats
+        </b-button>
+        <b-button
+          style="background-color: var(--danger)"
+          @click="goToCollection()"
+        >
+          Collection
+        </b-button>
+      </div>
+    </div>
     <div class="card-view-container">
       <FlashCard
         @on-deck-update="updateDeck"
@@ -109,6 +143,7 @@
         @mark-as-correct="markAsCorrect"
         @mark-as-practice="markAsPractice"
       />
+
       <div id="answer-indicator">
         <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
         <div
@@ -120,7 +155,7 @@
         />
       </div>
       <!-- Button -->
-      <div id="button-style">
+      <div class="button-style">
         <!-- Correct button -->
         <b-button
           :disabled="currentDeck?.cards?.[route.params.cardNr - 1]?.hasAnswer"
@@ -174,8 +209,15 @@
     justify-content: center;
     height: 90vh;
     padding-top: 2em;
-    width: clamp(9em, 95%, 43em);
+    width: clamp(9em, 92%, 43em);
     font: Arial, sans-serif;
+    padding-bottom: 1.5em;
+  }
+
+  .alert {
+    width: clamp(9em, 98%, 50em);
+    position: fixed;
+    z-index: 2;
   }
 
   #answer-indicator {
@@ -206,33 +248,20 @@
     background-color: var(--danger);
   }
 
-  #button-style {
+  .button-style {
     margin-top: 1em;
     width: clamp(9em, 95%, 43em);
     display: flex;
     justify-content: center;
     gap: 0.5em;
     width: 100%;
-    padding-bottom: 1.5em;
   }
 
-  #button-style button {
+  .button-style button {
     flex: 1;
     padding: 0.5em 0.1em;
     font-size: 1em;
     text-align: center;
     border: none;
-  }
-
-  @media (min-width: 375px) {
-    .card-view-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 90vh;
-      padding-top: 2em;
-      width: clamp(9em, 95%, 43em);
-    }
   }
 </style>
