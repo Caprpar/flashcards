@@ -212,6 +212,7 @@
     justify-content: center;
     gap: 0.5em;
     width: 100%;
+    padding-bottom: 1.5em;
   }
 
   #button-style button {
