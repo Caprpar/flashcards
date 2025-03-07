@@ -5,7 +5,8 @@
     watchEffect,
     onMounted,
     onBeforeUnmount,
-    defineEmits
+    defineEmits,
+    computed
   } from "vue";
   import { onBeforeRouteUpdate } from "vue-router";
 
@@ -24,7 +25,8 @@
   const route = useRoute();
   const currentDeck = ref([]);
   const currentCard = ref([]);
-  const cardNr = ref(route.params.cardNr);
+  const cardNr = computed(() => route.params.cardNr);
+
   let deckId = route.params.deckId;
 
   let show = ref(true);
@@ -68,13 +70,8 @@
         deck = shuffledDeck;
       }
     }
-    cardNr.value = 1;
 
-    router.replace({
-      name: "/collection",
-      params: { deckId, cardNr: cardNr.value },
-      query: { refresh: Math.random() }
-    });
+    router.push(`/collection/${deckId}/1`);
   }
 
   /** When page reloads or new url is given, use this to update current card
@@ -85,9 +82,12 @@
   function updateCurrentCard(deckId, cardIndex) {
     deckId = Number(deckId);
     cardIndex = Number(cardIndex);
+
     currentDeck.value = flashcard.decks.filter((deck) => deck.id === deckId)[0];
     // currentDeck.value = JSON.parse(localStorage.getItem("decks"))[deckId];
+
     currentCard.value = currentDeck.value.cards[cardIndex];
+
     updateCount(currentDeck.value, cardIndex);
   }
 
@@ -120,26 +120,21 @@
     // Hides answer when player press next or previous button
     emit("on-reset-answer");
 
-    deckId = to.params.deckId;
-    const cardNr = to.params.cardNr - 1;
-    updateCurrentCard(deckId, cardNr);
+    const deckId = to.params.deckId;
+    const cardIndex = to.params.cardNr - 1;
+
+    updateCurrentCard(deckId, cardIndex);
 
     // Send current deck to parrent
     emit("on-deck-update", currentDeck.value);
   });
 
   // Switch between cards
-  function goPrevious(previous) {
+  function goPrevious() {
     if (cardNr.value > 1) {
-      cardNr.value--;
       // change url to collection/deckId/cardNr.value
-      router.replace({
-        name: "/collection",
-        params: {
-          deckId,
-          cardNr: cardNr.value
-        }
-      });
+      router.push(`/collection/${deckId}/${Number(cardNr.value) - 1}`);
+
       // Removes focus from arrow, so that when user press space it wont flip to next card
       document.querySelectorAll(".arrow-button").forEach((button) => {
         button.blur();
@@ -149,16 +144,11 @@
 
   function goNext() {
     const cardAmount = currentDeck.value.cards.length;
+
     if (cardNr.value < cardAmount) {
-      cardNr.value++;
       // change url to collection/deckId/cardNr.value
-      router.replace({
-        name: "/collection",
-        params: {
-          deckId,
-          cardNr: cardNr.value
-        }
-      });
+      router.push(`/collection/${deckId}/${Number(cardNr.value) + 1}`);
+
       // Removes focus from arrow, so that when user press space it wont flip to next card
       document.querySelectorAll(".arrow-button").forEach((button) => {
         button.blur();
@@ -215,7 +205,7 @@
     <router-link :to="`${cardNr}`" tabindex="-1">
       <button
         class="arrow-button left-arrow"
-        @click="goPrevious(cardNr)"
+        @click="goPrevious()"
         title="Previous Card"
       >
         <svg
