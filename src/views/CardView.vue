@@ -12,19 +12,18 @@
   const showAlert = ref(false);
   // Check if device is a phone to determen if buttons shall contain keybind tooltip
   const isMobile = () => {
-    const regex =
-      /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-    return regex.test(navigator.userAgent);
+    return window.innerWidth < 768;
   };
 
-  const correctButtonText = isMobile.value
+  console.log(isMobile());
+  const correctButtonText = isMobile()
     ? "I know this one"
     : "I know this one (a)";
-  const practiceButtonText = isMobile.value
+  const practiceButtonText = isMobile()
     ? "Practice needed"
     : "Practice needed (s)";
-  const showAnswerText = isMobile.value ? "Show answer" : "Show answer (space)";
-  const showQuestionText = isMobile.value
+  const showAnswerText = isMobile() ? "Show answer" : "Show answer (space)";
+  const showQuestionText = isMobile()
     ? "Show question"
     : "Show question (space)";
   let deckId = route.params.deckId;
