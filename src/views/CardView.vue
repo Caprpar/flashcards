@@ -15,7 +15,6 @@
     return window.innerWidth < 768;
   };
 
-  console.log(isMobile());
   const correctButtonText = isMobile()
     ? "I know this one"
     : "I know this one (a)";
