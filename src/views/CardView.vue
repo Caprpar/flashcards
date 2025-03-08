@@ -47,6 +47,9 @@
     } else if (currentCard.hasAnswer && currentCard.needsPractice) {
       styleSettings += "wrong ";
     }
+    if (currentCard.isClone) {
+      styleSettings += "clone ";
+    }
     return styleSettings;
   }
 
@@ -271,16 +274,20 @@
     border-radius: 100px;
   }
 
-  .current {
-    width: 15px;
-    height: 15px;
-  }
-
   .correct {
     background-color: var(--success);
   }
   .wrong {
     background-color: var(--danger);
+  }
+
+  .clone {
+    opacity: 0.5;
+    border: solid 2px var(--grey);
+  }
+  .current {
+    width: 15px;
+    height: 15px;
   }
 
   .button-style {
