@@ -7,14 +7,6 @@
   import folderImg from "../assets/folder.svg";
 
   const flashcard = useFlashcard();
-  // Gives deck a dummyDeck with multiplication 1-12
-  // flashcard.decks = flashcard.dummyDeck();
-
-  // const decks = ref(flashcard.decks);
-  // if (!localStorage.getItem("decks")) {
-  //   localStorage.setItem("decks", JSON.stringify(flashcard.dummyDeck()));
-  //   alert("Gave localstorage dummydeck");
-  // }
   const decks = ref(JSON.parse(localStorage.getItem("decks")));
 
   onMounted(() => {
@@ -30,6 +22,7 @@
 
 <template>
   <div class="container">
+    <h1>Your Flashcard collection</h1>
     <!-- <FlashCard /> -->
     <router-link to="/createDeck">
       <CreateDeck />
@@ -46,6 +39,12 @@
 </template>
 
 <style scoped>
+  h1 {
+    font-family: sour gummy;
+    color: var(--dark);
+    padding-top: 0.5em;
+    border-bottom: solid;
+  }
   #nodeco {
     text-decoration: none;
   }
