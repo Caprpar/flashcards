@@ -8,7 +8,8 @@ export const useFlashcard = defineStore("flashcard", {
     decks: useLocalStorage("decks", []),
     dummySessions: false, // fill sessions with dummysessions
     sessionsRange: { start: 10, end: 10 }, // generates between start to end amounts of sessions
-    cardRange: { start: 10, end: 10 } // generates between start to end amounts of cards when creating deck
+    collections: 12,
+    cardRange: { start: 9, end: 10 } // generates between start to end amounts of cards when creating deck
   }),
   actions: {
     random(start, end) {
@@ -23,10 +24,11 @@ export const useFlashcard = defineStore("flashcard", {
      * @param {String} answer - Flashcards answer
      * @returns Card object containing keys: question, answer, needsPractice, id
      * */
-    createCard(question, answer) {
+    createCard(question, answer, isClone = false) {
       return {
         question,
         answer,
+        isClone,
         needsPractice: true,
         hasAnswer: false,
         id: uuidv4()
@@ -46,9 +48,10 @@ export const useFlashcard = defineStore("flashcard", {
      * @returns deck object.
      */
     createDeck(title, cards = []) {
-      const highestId = this.decks.length > 0 
-      ? Math.max(...this.decks.map(deck => deck.id)) 
-      : 0;
+      const highestId =
+        this.decks.length > 0
+          ? Math.max(...this.decks.map((deck) => deck.id))
+          : 0;
       const deck = {
         title,
         cards,
@@ -83,11 +86,7 @@ export const useFlashcard = defineStore("flashcard", {
       const tableAmounts = 10;
       const tableLimit = 12;
 
-      for (
-        let x = 1;
-        x <= this.random(this.cardRange.start, this.cardRange.end);
-        x++
-      ) {
+      for (let x = 1; x <= this.collections; x++) {
         const deckTitle = `${x}:ans multiplikationstabell`;
         const deck = this.createDeck(deckTitle);
 
