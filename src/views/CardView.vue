@@ -10,6 +10,7 @@
   const currentDeck = ref(flashcard.decks);
   const hideAnswer = ref(true);
   const showAlert = ref(false);
+  const maxPracticeRepeat = 3;
   // Check if device is a phone to determen if buttons shall contain keybind tooltip
   const isMobile = () => {
     return window.innerWidth < 768;
@@ -46,6 +47,9 @@
     } else if (currentCard.hasAnswer && currentCard.needsPractice) {
       styleSettings += "wrong ";
     }
+    if (currentCard.isClone) {
+      styleSettings += "clone ";
+    }
     return styleSettings;
   }
 
@@ -76,13 +80,24 @@
     return allIsAnswer;
   }
 
+  // if session is filled and user happens to cancel alert, deck will be frozen and user will be unalbed to save the current session. so if a deck is filled when page is loaded, automaticly save that session to stats.
+  onMounted(() => {
+    if (allIsAnswered()) {
+      exportDeckToStats();
+    }
+  });
   /**
    * Push current session to decks session
    * */
   function exportDeckToStats() {
-    const cardsCopy = JSON.parse(JSON.stringify(currentDeck.value.cards));
+    const cardsCopy = JSON.parse(
+      JSON.stringify(currentDeck.value.cards.filter((card) => !card.isClone))
+    );
     currentDeck.value.stats.sessions.push(cardsCopy);
     flashcard.updateStats(currentDeck.value);
+    currentDeck.value.cards = currentDeck.value.cards.filter(
+      (card) => !card.isClone
+    );
     currentDeck.value.cards.forEach((card) => (card.hasAnswer = false));
     showAlert.value = false;
   }
@@ -100,6 +115,14 @@
 
   function markAsPractice(card) {
     if (!card.hasAnswer) {
+      const copy = JSON.parse(JSON.stringify(card));
+      copy.isClone = true;
+      if (
+        currentDeck.value.cards.filter((card) => card.id === copy.id).length <
+        maxPracticeRepeat
+      ) {
+        currentDeck.value.cards.push(copy);
+      }
       card.hasAnswer = true;
       card.needsPractice = true;
     }
@@ -251,16 +274,20 @@
     border-radius: 100px;
   }
 
-  .current {
-    width: 15px;
-    height: 15px;
-  }
-
   .correct {
     background-color: var(--success);
   }
   .wrong {
     background-color: var(--danger);
+  }
+
+  .clone {
+    opacity: 0.5;
+    border: solid 2px var(--grey);
+  }
+  .current {
+    width: 15px;
+    height: 15px;
   }
 
   .button-style {
