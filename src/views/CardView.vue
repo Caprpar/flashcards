@@ -1,6 +1,6 @@
 <script setup>
   import FlashCard from "../components/FlashCard.vue";
-  import { ref, watchEffect } from "vue";
+  import { onMounted, ref, watchEffect } from "vue";
   import { useRoute, useRouter } from "vue-router";
   import { useFlashcard } from "../stores/flashcards";
 
@@ -10,6 +10,23 @@
   const currentDeck = ref(flashcard.decks);
   const hideAnswer = ref(true);
   const showAlert = ref(false);
+  // Check if device is a phone to determen if buttons shall contain keybind tooltip
+  const isMobile = () => {
+    const regex =
+      /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    return regex.test(navigator.userAgent);
+  };
+
+  const correctButtonText = isMobile.value
+    ? "I know this one"
+    : "I know this one (a)";
+  const practiceButtonText = isMobile.value
+    ? "Practice needed"
+    : "Practice needed (s)";
+  const showAnswerText = isMobile.value ? "Show answer" : "Show answer (space)";
+  const showQuestionText = isMobile.value
+    ? "Show question"
+    : "Show question (space)";
   let deckId = route.params.deckId;
 
   function updateDeck(deck) {
@@ -162,7 +179,7 @@
           @click="markAsCorrect(currentDeck.cards[route.params.cardNr - 1])"
           style="background-color: var(--success)"
         >
-          Correct
+          {{ correctButtonText }}
         </b-button>
         <!-- Show answer button -->
         <b-button
@@ -170,7 +187,7 @@
           @click="toggleAnswer"
           style="background-color: var(--secondary); min-width: 125px"
         >
-          Show Answer
+          {{ showAnswerText }}
         </b-button>
         <!-- Show question button -->
         <b-button
@@ -178,7 +195,7 @@
           @click="showQuestion"
           style="background-color: var(--secondary); min-width: 125px"
         >
-          Show Question
+          {{ showQuestionText }}
         </b-button>
         <!-- Practice button -->
         <b-button
@@ -186,7 +203,7 @@
           @click="markAsPractice(currentDeck.cards[route.params.cardNr - 1])"
           style="background-color: var(--danger)"
         >
-          Practice
+          {{ practiceButtonText }}
         </b-button>
       </div>
     </div>
