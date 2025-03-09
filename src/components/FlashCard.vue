@@ -276,6 +276,7 @@
         </svg>
       </button>
     </router-link>
+    <div class="result-color"></div>
   </div>
 </template>
 
@@ -358,7 +359,15 @@
     transition: background-color 0.3s ease;
     font-size: 24px;
   }
-
+  .result-color {
+    position: absolute;
+    bottom: 0px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 100%;
+    padding: 3px;
+    background-color: red;
+  }
   @media (min-width: 768px) {
     #front,
     #back {
