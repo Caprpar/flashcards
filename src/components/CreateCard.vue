@@ -117,6 +117,7 @@
   }
   .flex-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
   }
@@ -127,6 +128,7 @@
     border: 2px solid var(--secondary);
     border-radius: 10px;
     background-color: var(--light);
+    padding-left: 20px;
   }
   input:focus {
     outline: none;
@@ -148,6 +150,7 @@
     background-color: var(--light);
     resize: none;
     text-align: center;
+    padding-top: 10px;
   }
   textarea:focus {
     outline: none;
@@ -178,5 +181,16 @@
     color: var(--dark);
     border-radius: 2px;
     padding: 0 5px;
+  }
+  @media (max-width: 550px) {
+    section {
+      margin-top: 10px;
+    }
+    .flex-container {
+      gap: 0px;
+    }
+    p {
+      margin-bottom: 0px;
+    }
   }
 </style>
