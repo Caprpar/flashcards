@@ -86,7 +86,10 @@
       }
     }
 
-    router.push(`/collection/${deckId}/1`);
+    router.replace({
+      path: `/collection/${deckId}/1`,
+      query: { refresh: Math.random() }
+    });
     successfulShuffle.value = true;
 
     setTimeout(() => {
@@ -153,7 +156,7 @@
   function goPrevious() {
     if (cardNr.value > 1) {
       // change url to collection/deckId/cardNr.value
-      router.push(`/collection/${deckId}/${Number(cardNr.value) - 1}`);
+      router.replace(`/collection/${deckId}/${Number(cardNr.value) - 1}`);
 
       // Removes focus from arrow, so that when user press space it wont flip to next card
       document.querySelectorAll(".arrow-button").forEach((button) => {
@@ -167,7 +170,7 @@
 
     if (cardNr.value < cardAmount) {
       // change url to collection/deckId/cardNr.value
-      router.push(`/collection/${deckId}/${Number(cardNr.value) + 1}`);
+      router.replace(`/collection/${deckId}/${Number(cardNr.value) + 1}`);
 
       // Removes focus from arrow, so that when user press space it wont flip to next card
       document.querySelectorAll(".arrow-button").forEach((button) => {
