@@ -183,8 +183,7 @@
         @mark-as-correct="markAsCorrect"
         @mark-as-practice="markAsPractice"
       />
-
-      <div id="answer-indicator">
+      <div class="answer-indicator">
         <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
         <div
           v-for="card in currentDeck.cards"
@@ -260,7 +259,7 @@
     z-index: 2;
   }
 
-  #answer-indicator {
+  .answer-indicator {
     margin-top: 1em;
     justify-content: space-around;
     align-items: center;

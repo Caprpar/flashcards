@@ -288,6 +288,15 @@
         </svg>
       </button>
     </router-link>
+    <div
+      v-if="currentCard.hasAnswer && currentCard.needsPractice"
+      class="result-color red-bar"
+    />
+    <div
+      v-else-if="currentCard.hasAnswer && !currentCard.needsPractice"
+      class="result-color green-bar"
+    />
+    <div v-else class="result-color" />
   </div>
 </template>
 
@@ -353,7 +362,6 @@
     left: 50px;
     cursor: pointer;
   }
-
   .shuffle-alert {
     position: absolute;
     top: 100px;
@@ -374,7 +382,22 @@
     transition: background-color 0.3s ease;
     font-size: 24px;
   }
-
+  .result-color {
+    position: absolute;
+    bottom: 0px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 100%;
+    padding: 3px;
+    background-color: none;
+    opacity: 0.7;
+  }
+  .red-bar {
+    background-color: var(--danger);
+  }
+  .green-bar {
+    background-color: var(--success);
+  }
   @media (min-width: 768px) {
     #front,
     #back {
