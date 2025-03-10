@@ -61,6 +61,10 @@
     }
   }
 
+  function toggleAnswer() {
+    emit("toggle-answer");
+  }
+
   function shuffleDeck() {
     // Shuffle the deck using Fisher-Yates algorithm
     // let shuffledDeck = flashcard.decks.filter((deck) => deck.id === deckId)[0];
@@ -253,11 +257,16 @@
         </svg>
       </button>
     </router-link>
-    <div v-if="hideAnswer" class="flashcard-content" id="front">
+    <div
+      v-if="hideAnswer"
+      class="flashcard-content"
+      id="front"
+      @click="toggleAnswer"
+    >
       {{ currentCard.question }}
     </div>
 
-    <div v-else class="flashcard-content" id="back">
+    <div v-else class="flashcard-content" id="back" @click="toggleAnswer">
       {{ currentCard.answer }}
     </div>
     <span id="count">{{ cardIndex }}/{{ cardAmount }}</span>
@@ -306,6 +315,10 @@
     text-align: center;
     font-size: 1.4em;
     font-family: sour gummy;
+    /* border: solid; */
+    height: 100%;
+    width: 50%;
+    user-select: none;
   }
   .show-stats-enter-active {
     transition: all 0.3s ease;

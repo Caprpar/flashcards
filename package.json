@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "republish": "npm run build && rm -r ../glare/* && cp -r dist/* ../glare/ && cd ../glare/ && git commit -am \"latest updates\" && git push && cd ../flashcards/",
     "preview": "vite preview"
   },
   "dependencies": {
