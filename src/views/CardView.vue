@@ -102,6 +102,10 @@
     showAlert.value = false;
   }
 
+  function playAgain() {
+    exportDeckToStats();
+  }
+
   // Correct toggle
   function markAsCorrect(card) {
     if (!card.hasAnswer) {
@@ -152,10 +156,7 @@
       <p>You completed your deck</p>
       <hr />
       <div class="button-style">
-        <b-button
-          style="background-color: var(--success)"
-          @click="exportDeckToStats()"
-        >
+        <b-button style="background-color: var(--success)" @click="playAgain()">
           Play Again
         </b-button>
         <b-button
