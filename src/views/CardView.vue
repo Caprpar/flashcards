@@ -104,6 +104,7 @@
 
   function playAgain() {
     exportDeckToStats();
+    goToCard(0);
   }
 
   // Correct toggle
