@@ -307,6 +307,7 @@
     /* border: solid; */
     top: 0em;
     right: 0em;
+    left: 0;
     opacity: 0.7;
     font-family: tourney;
     font-size: 1.5em;
