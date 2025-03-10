@@ -40,10 +40,13 @@
 
 <style scoped>
   h1 {
+    display: flex;
     font-family: sour gummy;
     color: var(--dark);
     padding-top: 0.5em;
     border-bottom: solid;
+    width: 100%;
+    justify-content: center;
   }
   #nodeco {
     text-decoration: none;
