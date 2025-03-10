@@ -147,17 +147,6 @@
       >
         <p class="stamp thumbs-down">PRACTICE NEEDED..</p>
         {{ deck.stats.practice[0].question }}
-<<<<<<< HEAD
-      </div>
-      <div
-        class="card"
-        @click="toggleAnswer('worst')"
-        v-if="deck.stats.practice[0] && !hideCardAnswer.worst"
-      >
-        <p class="stamp thumbs-down">PRACTICE NEEDED..</p>
-        {{ deck.stats.practice[0].answer }}
-=======
->>>>>>> 3d2d90c (replace thumbs up and down with text 'bravo' and 'practice needed')
       </div>
       <div
         class="card"
