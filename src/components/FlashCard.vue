@@ -390,12 +390,15 @@
     width: 100%;
     padding: 3px;
     background-color: none;
-    opacity: 0.7;
+    opacity: 0.5;
+    background-color: var(--grey);
   }
   .red-bar {
+    opacity: 0.7;
     background-color: var(--danger);
   }
   .green-bar {
+    opacity: 0.7;
     background-color: var(--success);
   }
   @media (min-width: 768px) {
