@@ -10,6 +10,7 @@
   const currentDeck = ref(flashcard.decks);
   const hideAnswer = ref(true);
   const showAlert = ref(false);
+  const flashCardRef = ref(null);
   const maxPracticeRepeat = 3;
   // Check if device is a phone to determen if buttons shall contain keybind tooltip
   const isMobile = () => {
@@ -136,6 +137,13 @@
     }
   }
 
+  // Answered card goes to next card
+  function goToNextCard() {
+    if (flashCardRef.value) {
+      flashCardRef.value.goNext();
+    }
+  }
+
   function showStats() {
     exportDeckToStats();
     router.push(`/statistics/${deckId}`);
@@ -182,6 +190,7 @@
         @on-reset-answer="resetAnswer"
         @mark-as-correct="markAsCorrect"
         @mark-as-practice="markAsPractice"
+        ref="flashCardRef"
       />
       <div class="answer-indicator">
         <!-- <div v-for="card in currentDeck.cards" :class="card.hasAnswer == true ? 'dot wrong' : 'dot current'"></div> -->
@@ -198,7 +207,10 @@
         <!-- Correct button -->
         <b-button
           :disabled="currentDeck?.cards?.[route.params.cardNr - 1]?.hasAnswer"
-          @click="markAsCorrect(currentDeck.cards[route.params.cardNr - 1])"
+          @click="
+            markAsCorrect(currentDeck.cards[route.params.cardNr - 1]);
+            goToNextCard();
+          "
           style="background-color: var(--success)"
         >
           {{ correctButtonText }}
@@ -222,7 +234,10 @@
         <!-- Practice button -->
         <b-button
           :disabled="currentDeck?.cards?.[route.params.cardNr - 1]?.hasAnswer"
-          @click="markAsPractice(currentDeck.cards[route.params.cardNr - 1])"
+          @click="
+            markAsPractice(currentDeck.cards[route.params.cardNr - 1]);
+            goToNextCard();
+          "
           style="background-color: var(--danger)"
         >
           {{ practiceButtonText }}

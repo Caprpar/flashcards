@@ -183,6 +183,8 @@
     }
   }
 
+  defineExpose({ goNext });
+
   // Props show/hide buttons
   defineProps({
     hideAnswer: Boolean
