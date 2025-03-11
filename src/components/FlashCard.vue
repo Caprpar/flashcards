@@ -50,11 +50,13 @@
       goNext();
     }
     if (event.code === "KeyA" || event.key === "a") {
+      goNext();
       if (!currentCard.value.hasAnswer) {
         emit("mark-as-correct", currentCard.value);
       }
     }
     if (event.code === "KeyS" || event.key === "s") {
+      goNext();
       if (!currentCard.value.hasAnswer) {
         emit("mark-as-practice", currentCard.value);
       }
