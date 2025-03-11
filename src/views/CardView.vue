@@ -152,6 +152,9 @@
 </script>
 <template>
   <main>
+    <!-- Dark overlay around "Well Done" alert -->
+    <!-- eslint-disable-next-line vue/html-self-closing -->
+    <div v-if="showAlert" class="alert-overlay"></div>
     <div v-if="showAlert" class="alert alert-success" role="alert">
       <h4 class="alert-heading">Well done!</h4>
       <p>You completed your deck</p>
@@ -253,6 +256,15 @@
     padding-bottom: 1.5em;
   }
 
+  .alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
   .alert {
     width: clamp(9em, 98%, 50em);
     position: fixed;
