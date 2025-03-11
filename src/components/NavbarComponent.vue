@@ -1,3 +1,41 @@
+<script setup>
+  import { ref, watch } from "vue";
+  import {
+    BNavbar,
+    BContainer,
+    BNavbarBrand,
+    BNavbarToggle,
+    BNav,
+    BNavItem
+  } from "bootstrap-vue-next";
+
+  // Hamburgermenu toggle logic
+  const isMenuOpen = ref(false);
+
+  function toggleMenu() {
+    isMenuOpen.value = !isMenuOpen.value;
+  }
+
+  function closeMenu() {
+    isMenuOpen.value = false;
+  }
+
+  // Watch to not scroll with hamburgermenu open
+  watch(isMenuOpen, (newValue) => {
+    if (newValue) {
+      scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
+    }
+  });
+</script>
+
 <template>
   <b-navbar type="dark" class="custom-navbar">
     <b-container
@@ -25,43 +63,22 @@
   <transition name="slide">
     <div v-if="isMenuOpen" class="mobile-menu custom-navbar">
       <b-nav vertical>
-        <b-nav-item :to="'/'" class="text-white">Home</b-nav-item>
-        <b-nav-item :to="'/createDeck'" class="text-white">
+        <b-nav-item :to="'/'" class="text-white" @click="closeMenu"
+          >Home</b-nav-item
+        >
+        <b-nav-item :to="'/createDeck'" class="text-white" @click="closeMenu">
           Add Deck</b-nav-item
         >
-        <b-nav-item :to="'/edit'" class="text-white"
+        <b-nav-item :to="'/edit'" class="text-white" @click="closeMenu"
           >Customize Decks</b-nav-item
         >
-        <b-nav-item :to="'/statistics/1'" class="text-white"
+        <b-nav-item :to="'/statistics/1'" class="text-white" @click="closeMenu"
           >Statistics</b-nav-item
         >
       </b-nav>
     </div>
   </transition>
 </template>
-
-<script setup>
-  import { ref } from "vue";
-  import {
-    BNavbar,
-    BContainer,
-    BNavbarBrand,
-    BNavbarToggle,
-    BNav,
-    BNavItem
-  } from "bootstrap-vue-next";
-
-  // Hamburgermenu toggle logic
-  const isMenuOpen = ref(false);
-
-  function toggleMenu() {
-    isMenuOpen.value = !isMenuOpen.value;
-  }
-
-  function closeMenu() {
-    isMenuOpen.value = false;
-  }
-</script>
 
 <style scoped>
   /* Navbar backgroundcolor */
