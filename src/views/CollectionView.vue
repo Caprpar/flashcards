@@ -22,7 +22,7 @@
 
 <template>
   <div class="container">
-    <h1>Your Flashcard collection</h1>
+    <h1>Your Flashcard Collection</h1>
     <!-- <FlashCard /> -->
     <router-link to="/createDeck">
       <CreateDeck />

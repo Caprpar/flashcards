@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-use-v-if-with-v-for -->
 <template>
   <div class="container my-4">
-    <h1 class="text-center mb-4">Customize Your decks</h1>
+    <h1 class="text-center mb-4">Customize Your Decks</h1>
     <div
       style="background-color: var(--primary)"
       class="deck mb-5 p-3 border rounded shadow-sm"
